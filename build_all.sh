@@ -9,6 +9,10 @@ installDir="$ROOT_DIR/install"
 if [ -d "$installDir" ]; then rm -rf "$installDir"; fi
 mkdir -p "$installDir"
 
+# Set paths for pkg-config to find our built libraries
+export PKG_CONFIG_PATH="$installDir/lib/pkgconfig:$PKG_CONFIG_PATH"
+export LD_LIBRARY_PATH="$installDir/lib:$LD_LIBRARY_PATH"
+
 build_lib() {
     local name=$1
     local dirName=$2
@@ -24,28 +28,35 @@ build_lib() {
         exit 1
     fi
 
-    if [ ! -f "$ROOT_DIR/$dirName/CMakeLists.txt" ]; then
-        echo "Error: $ROOT_DIR/$dirName/CMakeLists.txt not found!"
+    if [ -f "$ROOT_DIR/$dirName/CMakeLists.txt" ]; then
+        echo "Using CMake for $name..."
+        buildDir="$ROOT_DIR/$dirName/build"
+        if [ -d "$buildDir" ]; then rm -rf "$buildDir"; fi
+        mkdir -p "$buildDir"
+        pushd "$buildDir"
+        cmake .. \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DBUILD_SHARED_LIBS=ON \
+            -DCMAKE_INSTALL_PREFIX="$installDir" \
+            "${extraArgs[@]}"
+        cmake --build . --config Release
+        cmake --install . --config Release
+        popd
+    elif [ -f "$ROOT_DIR/$dirName/autogen.sh" ] || [ -f "$ROOT_DIR/$dirName/configure" ]; then
+        echo "Using Autotools for $name..."
+        pushd "$ROOT_DIR/$dirName"
+        if [ -f "autogen.sh" ]; then
+            bash autogen.sh
+        fi
+        ./configure --prefix="$installDir" --enable-shared "${extraArgs[@]}"
+        make
+        make install
+        popd
+    else
+        echo "Error: No CMakeLists.txt or configure script found in $ROOT_DIR/$dirName!"
         ls -la "$ROOT_DIR/$dirName"
         exit 1
     fi
-
-    buildDir="$ROOT_DIR/$dirName/build"
-    if [ -d "$buildDir" ]; then rm -rf "$buildDir"; fi
-    mkdir -p "$buildDir"
-
-    pushd "$buildDir"
-    
-    cmake .. \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DBUILD_SHARED_LIBS=ON \
-        -DCMAKE_INSTALL_PREFIX="$installDir" \
-        "${extraArgs[@]}"
-
-    cmake --build . --config Release
-    cmake --install . --config Release
-
-    popd
 }
 
 # 1. Build libogg
@@ -54,25 +65,19 @@ build_lib "libogg" "ogg"
 # 2. Build libopus
 build_lib "libopus" "opus-1.6.1" \
     -DOPUS_BUILD_TESTING=OFF \
-    -DOPUS_BUILD_PROGRAMS=OFF
+    -DOPUS_BUILD_PROGRAMS=OFF \
+    --disable-extra-programs
 
 # 3. Build libopusenc
-build_lib "libopusenc" "libopusenc" \
-    -DCMAKE_PREFIX_PATH="$installDir" \
-    -DOPUS_INCLUDE_DIR="$installDir/include" \
-    -DOPUS_LIBRARY="$installDir/lib/libopus.so" \
-    -DOGG_INCLUDE_DIR="$installDir/include" \
-    -DOGG_LIBRARY="$installDir/lib/libogg.so"
+build_lib "libopusenc" "libopusenc"
 
 # 4. Build opusfile
 build_lib "opusfile" "opusfile" \
-    -DCMAKE_PREFIX_PATH="$installDir" \
-    -DOPUS_INCLUDE_DIR="$installDir/include" \
-    -DOPUS_LIBRARY="$installDir/lib/libopus.so" \
-    -DOGG_INCLUDE_DIR="$installDir/include" \
-    -DOGG_LIBRARY="$installDir/lib/libogg.so" \
-    -DOP_DISABLE_HTTP=ON \
-    -DOP_DISABLE_DOCS=ON
+    --disable-http \
+    -DOP_DISABLE_HTTP=ON
+
+# 5. Build opus-tools
+build_lib "opus-tools" "opus-tools"
 
 # Copy all .so files to root
 echo "Copying share libraries to project root..."

@@ -12,7 +12,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake build-essential
+          sudo apt-get install -y cmake build-essential autoconf automake libtool pkg-config
       - name: Init Dependencies
         run: bash init_deps.sh
       - name: Build Natives

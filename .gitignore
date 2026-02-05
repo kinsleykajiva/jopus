@@ -37,8 +37,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
-opus-1.6.1/
-libopusenc/
-ogg/
-opus-tools/
-opusfile/
+

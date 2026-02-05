@@ -1,19 +1,28 @@
 $ErrorActionPreference = "Stop"
 
 # Use absolute path for install prefix to avoid CMake finding issues
-$rootDir = Get-Location
-$installDir = "$rootDir/install"
+$ROOT_DIR = Get-Location
+$installDir = "$ROOT_DIR/install"
 
 # Ensure clean install dir
 if (Test-Path $installDir) { Remove-Item -Recurse -Force $installDir }
 New-Item -ItemType Directory -Path $installDir | Out-Null
 
-function Build-Lib ($name, $dir, $extraArgs) {
+function Build-Lib ($name, $dirName, $extraArgs) {
     Write-Host "------------------------------------------------"
-    Write-Host "Building $name..."
+    Write-Host "Building $name in $ROOT_DIR/$dirName..."
     Write-Host "------------------------------------------------"
     
-    $buildDir = "$dir/build"
+    if (!(Test-Path "$ROOT_DIR/$dirName")) {
+        throw "Error: Directory $ROOT_DIR/$dirName does not exist!"
+    }
+
+    if (!(Test-Path "$ROOT_DIR/$dirName/CMakeLists.txt")) {
+        Get-ChildItem "$ROOT_DIR/$dirName"
+        throw "Error: $ROOT_DIR/$dirName/CMakeLists.txt not found!"
+    }
+
+    $buildDir = "$ROOT_DIR/$dirName/build"
     if (Test-Path $buildDir) { Remove-Item -Recurse -Force $buildDir }
     New-Item -ItemType Directory -Path $buildDir | Out-Null
 
@@ -73,6 +82,6 @@ Build-Lib "opusfile" "opusfile" @(
 
 # Copy all DLLs to root
 Write-Host "Copying DLLs to project root..."
-Get-ChildItem -Path "$installDir/bin" -Filter "*.dll" | Copy-Item -Destination $rootDir -Force
+Get-ChildItem -Path "$installDir/bin" -Filter "*.dll" | Copy-Item -Destination $ROOT_DIR -Force
 
 Write-Host "Build Complete!"

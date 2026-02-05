@@ -2,8 +2,8 @@
 set -e
 
 # Use absolute path for install prefix
-rootDir=$(pwd)
-installDir="$rootDir/install"
+ROOT_DIR=$(pwd)
+installDir="$ROOT_DIR/install"
 
 # Ensure clean install dir
 if [ -d "$installDir" ]; then rm -rf "$installDir"; fi
@@ -11,15 +11,26 @@ mkdir -p "$installDir"
 
 build_lib() {
     local name=$1
-    local dir=$2
+    local dirName=$2
     shift 2
     local extraArgs=("$@")
 
     echo "------------------------------------------------"
-    echo "Building $name..."
+    echo "Building $name in $ROOT_DIR/$dirName..."
     echo "------------------------------------------------"
     
-    buildDir="$dir/build"
+    if [ ! -d "$ROOT_DIR/$dirName" ]; then
+        echo "Error: Directory $ROOT_DIR/$dirName does not exist!"
+        exit 1
+    fi
+
+    if [ ! -f "$ROOT_DIR/$dirName/CMakeLists.txt" ]; then
+        echo "Error: $ROOT_DIR/$dirName/CMakeLists.txt not found!"
+        ls -la "$ROOT_DIR/$dirName"
+        exit 1
+    fi
+
+    buildDir="$ROOT_DIR/$dirName/build"
     if [ -d "$buildDir" ]; then rm -rf "$buildDir"; fi
     mkdir -p "$buildDir"
 
@@ -65,6 +76,6 @@ build_lib "opusfile" "opusfile" \
 
 # Copy all .so files to root
 echo "Copying share libraries to project root..."
-find "$installDir/lib" -name "*.so*" -exec cp {} "$rootDir" \;
+find "$installDir/lib" -name "*.so*" -exec cp -L {} "$ROOT_DIR" \;
 
 echo "Build Complete!"

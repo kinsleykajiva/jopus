@@ -1,17 +1,38 @@
 package io.github.kinsleykajiva;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Base64;
+
 public class Main {
-	static void main() {
-		//TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-		// to see how IntelliJ IDEA suggests fixing it.
-		IO.println(String.format("Hello and welcome!"));
-		
-		for (int i = 1 ; i <= 5 ; i++) {
-			//TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-			// for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-			IO.println("i = " + i);
+	public static void main(String[] args) {
+		System.out.println("--- Jopus Library Test ---");
+
+		try {
+			// Create dummy A-law data (silence-like)
+			byte[] alawData = new byte[160 * 600]; // 20ms at 8kHz
+			Arrays.fill(alawData, (byte) 0xD5);
+			String base64Alaw = Base64.getEncoder().encodeToString(alawData);
+
+			System.out.println("Converting G.711 A-law to Opus...");
+			
+			String opusBase64 = AudioLib.convert(base64Alaw) .fromUlaw()
+					                    .withSampleRate(8000)
+					                    .asBase64();
+			System.out.println("Success! Opus Base64 length: " + opusBase64.length());
+			System.out.println("Opus Base64: " + opusBase64);
+
+			// Test file output
+			AudioLib.convert(alawData)
+					.fromAlaw()
+					.withSampleRate(8000)
+					.asFile("test_output223.opus");
+			System.out.println("Saved test_output223.opus");
+
+		} catch (Exception e) {
+			System.err.println("Test failed!");
+			e.printStackTrace();
 		}
 	}
 }

@@ -1,0 +1,16 @@
+# Opus codec reference implementation pkg-config file
+
+prefix=C:/xampp/htdocs/voip-app-project/jopus/install
+exec_prefix=C:/xampp/htdocs/voip-app-project/jopus/install
+libdir=C:/xampp/htdocs/voip-app-project/jopus/install/lib
+includedir=C:/xampp/htdocs/voip-app-project/jopus/install/include
+
+Name: Opus
+Description: Opus IETF audio codec ( build)
+URL: https://opus-codec.org/
+Version: 1.6.1
+Requires:
+Conflicts:
+Libs: -LC:/xampp/htdocs/voip-app-project/jopus/install/lib -lopus
+Libs.private: 
+Cflags: -IC:/xampp/htdocs/voip-app-project/jopus/install/include/opus

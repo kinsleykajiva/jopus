@@ -1,0 +1,19 @@
+MSBuild version 17.14.19+164abd434 for .NET Framework
+
+  opusenc.c
+  opus_header.c
+  picture.c
+C:\xampp\htdocs\voip-app-project\jopus\libopusenc\include\opusenc.h(58,10): error C1083: Cannot open include file: 'opus.h': No such file or directory [C:\xampp\htdocs\voip-app-project\jopus\libopusenc\build\opusenc.vcxproj]
+  (compiling source file '../src/opusenc.c')
+  
+C:\xampp\htdocs\voip-app-project\jopus\libopusenc\src\opus_header.h(32,10): error C1083: Cannot open include file: 'opus.h': No such file or directory [C:\xampp\htdocs\voip-app-project\jopus\libopusenc\build\opusenc.vcxproj]
+  (compiling source file '../src/opus_header.c')
+  
+C:\xampp\htdocs\voip-app-project\jopus\libopusenc\src\picture.h(31,10): error C1083: Cannot open include file: 'opus.h': No such file or directory [C:\xampp\htdocs\voip-app-project\jopus\libopusenc\build\opusenc.vcxproj]
+  (compiling source file '../src/picture.c')
+  
+  resample.c
+C:\xampp\htdocs\voip-app-project\jopus\libopusenc\src\speex_resampler.h(51,1): error C1189: #error:  "Please define RANDOM_PREFIX (above) to something specific to your project to prevent symbol name clashes" [C:\xampp\htdocs\voip-app-project\jopus\libopusenc\build\opusenc.vcxproj]
+  (compiling source file '../src/resample.c')
+  
+  Generating Code...

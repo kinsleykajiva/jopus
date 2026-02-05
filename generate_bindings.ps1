@@ -6,16 +6,33 @@ if (!(Test-Path -Path $outputDir)) {
     New-Item -ItemType Directory -Path $outputDir | Out-Null
 }
 
-# Jextract command
-# -I: include directory
-# -t: target package
-# -l: library name (opus)
-# --output: source root
-Write-Host "Generating bindings..."
-jextract --output src/main/java `
-    --target-package io.github.kinsleykajiva.opus `
-    -I opus-1.6.1/include `
-    -l opus `
-    opus-1.6.1/include/opus.h
+# Jextract commands for each library
+function Generate-Binding ($name, $header, $pkg, $libs) {
+    Write-Host "Generating bindings for $name in $pkg..."
+    
+    # Construct arguments array
+    $args = @(
+        "--output", "src/main/java",
+        "--target-package", "io.github.kinsleykajiva.$pkg",
+        "-I", "install/include",
+        "-I", "install/include/opus"
+    )
+    
+    foreach ($lib in $libs) {
+        $args += "-l"
+        $args += $lib
+    }
+    
+    $args += $header
+    
+    # Run jextract with splatted arguments
+    # Using & to run the command with the array of arguments
+    & jextract @args
+}
 
-Write-Host "Bindings generated in src/main/java/io/github/kinsleykajiva/opus"
+Generate-Binding "Ogg" "install/include/ogg/ogg.h" "ogg" @("ogg")
+Generate-Binding "Opus" "install/include/opus/opus.h" "opus" @("opus")
+Generate-Binding "OpusEnc" "install/include/opus/opusenc.h" "opusenc" @("opusenc")
+Generate-Binding "OpusFile" "install/include/opus/opusfile.h" "opusfile" @("opusfile")
+
+Write-Host "All bindings generated!"

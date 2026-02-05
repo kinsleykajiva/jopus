@@ -2,5 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libopusenc" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ogg" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/opus-tools" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/opusfile" vcs="Git" />
   </component>
 </project>

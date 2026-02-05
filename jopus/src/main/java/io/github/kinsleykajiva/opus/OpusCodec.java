@@ -22,24 +22,58 @@ public class OpusCodec {
     private static final short[] ULAW_TO_PCM = new short[256];
 
     static {
-        // Load native library
-        try {
-            // Try loading from local directory first
-            String path = new File("opus.dll").getAbsolutePath();
-            System.load(path);
-        } catch (UnsatisfiedLinkError e) {
-            try {
-                // Fallback to system path
-                System.loadLibrary("opus");
-            } catch (UnsatisfiedLinkError e2) {
-                System.err.println(
-                        "Failed to load opus.dll. Ensure it is in the working directory or java.library.path.");
-                throw e2;
-            }
-        }
-
+        loadNativeLibraries();
         generateALawTable();
         generateULawTable();
+    }
+
+    private static void loadNativeLibraries() {
+        boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+        String extension = isWindows ? ".dll" : ".so";
+        String[] libs = { "ogg", "opus", "opusenc", "opusfile" };
+
+        File tempDir = new File(System.getProperty("java.io.tmpdir"), "jopus-natives-" + System.nanoTime());
+        if (!tempDir.mkdirs()) {
+            // Ignore if exists
+        }
+        tempDir.deleteOnExit();
+
+        for (String libName : libs) {
+            String fullLibName = (isWindows ? "" : "lib") + libName + extension;
+            try {
+                // Try loading from local directory first
+                File localFile = new File(fullLibName);
+                if (localFile.exists()) {
+                    System.load(localFile.getAbsolutePath());
+                    continue;
+                }
+
+                // Fallback: Extract from JAR
+                File tempFile = new File(tempDir, fullLibName);
+                try (java.io.InputStream is = OpusCodec.class.getResourceAsStream("/" + fullLibName)) {
+                    if (is == null) {
+                        try {
+                            System.loadLibrary(libName);
+                            continue;
+                        } catch (UnsatisfiedLinkError e) {
+                            if (libName.equals("opus")) {
+                                throw new RuntimeException("Critical failure: Could not find " + fullLibName
+                                        + " in resources or system path", e);
+                            }
+                            continue;
+                        }
+                    }
+                    java.nio.file.Files.copy(is, tempFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                }
+                System.load(tempFile.getAbsolutePath());
+                tempFile.deleteOnExit();
+            } catch (Exception e) {
+                System.err.println("Failed to load/extract native library: " + fullLibName + " - " + e.getMessage());
+                if (libName.equals("opus")) {
+                    throw new RuntimeException("Critical failure: Could not load " + fullLibName, e);
+                }
+            }
+        }
     }
 
     private static void generateALawTable() {

@@ -6,7 +6,7 @@
 
 This is a multi-module Maven project:
 
-- **jopus-core** - Core library with Opus bindings and audio utilities
+- **jopus** - Core library with Opus bindings and audio utilities
 - **jopus-demo-app** - Demo application showing library usage
 
 ## Prerequisites
@@ -37,8 +37,8 @@ mvn clean install
 ```
 
 This builds:
-- `jopus-core/target/jopus-1.0.jar` - Core library
-- `jopus-demo-app/target/jopus-demo-app-1.0.jar` - Demo application
+- `jopus/target/jopus-1.0.2.jar` - Core library (with bundled native libs)
+- `jopus-demo-app/target/jopus-demo-app-1.0.2.jar` - Demo application
 
 ### 3. Generate Bindings (Optional)
 
@@ -59,7 +59,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>io.github.kinsleykajiva</groupId>
     <artifactId>jopus</artifactId>
-    <version>1.0</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
@@ -87,11 +87,11 @@ AudioLib.convert(ulawData)
 From the project root:
 
 ```bash
-cd jopus-demo-app
-java "-Djava.library.path=.." -cp "target/jopus-demo-app-1.0.jar;../jopus-core/target/jopus-1.0.jar" io.github.kinsleykajiva.demo.Main
+# From project root after build
+java -cp "jopus-demo-app/target/jopus-demo-app-1.0.2.jar;jopus/target/jopus-1.0.2.jar" io.github.kinsleykajiva.demo.Main
 ```
 
-**Important**: Native DLLs must be in the library path or working directory.
+**Note**: Starting from version 1.0.2, native DLLs are bundled within the JAR and extracted automatically at runtime. Manual setup of the library path is no longer strictly required.
 
 ## API Reference
 
@@ -130,14 +130,12 @@ short[] pcm = G711Utils.alawToPcm(alawBytes);
 short[] pcm = G711Utils.ulawToPcm(ulawBytes);
 ```
 
-## Native Library Dependencies
-
 The following native libraries must be available at runtime:
 
-- `ogg.dll` / `libogg.so` - Ogg container format
-- `opus.dll` / `libopus.so` - Opus codec
-- `opusenc.dll` / `libopusenc.so` - High-level Opus encoding
-- `opusfile.dll` / `libopusfile.so` - Opus file reading
+- **Windows**: `ogg.dll`, `opus.dll`, `opusenc.dll`, `opusfile.dll`
+- **Linux**: `libogg.so`, `libopus.so`, `libopusenc.so`, `libopusfile.so`
+
+Jopus 1.1.0+ automatically bundles and loads these from the JAR for both platforms.
 
 Place these in:
 - Project root directory, or

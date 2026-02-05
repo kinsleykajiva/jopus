@@ -2,79 +2,71 @@
 
 **Jopus** provides high-performance Java bindings for the [Opus Interactive Audio Codec](https://opus-codec.org/) using [Project Panama](https://openjdk.org/projects/panama/) (Foreign Function & Memory API). It includes utilities for efficient G.711 (A-law/U-law) to Opus conversion, designed for VoIP and real-time audio applications.
 
+## Project Structure
+
+This is a multi-module Maven project:
+
+- **jopus-core** - Core library with Opus bindings and audio utilities
+- **jopus-demo-app** - Demo application showing library usage
+
 ## Prerequisites
 
-- **Java**: JDK 22 or later (Currently using JDK 25 with Preview Features enabled).
-- **CMake**: Version 3.10+ for building the native library.
-- **Compiler**: MSVC (Windows), GCC, or Clang (Linux/macOS).
-- **Maven**: For building the Java project.
-- **jextract** (Optional): Required only if you intend to regenerate the Java bindings.
+- **Java**: JDK 25 or later with Project Panama support
+- **CMake**: Version 3.10+ for building native libraries
+- **Compiler**: MSVC (Windows), GCC, or Clang (Linux/macOS)
+- **Maven**: For building the Java project
+- **jextract** (Optional): Required only if regenerating Java bindings
 
 ## Setup & Build
 
-### 1. Build the Native Library
-You must compile the Opus native library (`opus.dll` / `libopus.so`) before running the application.
+### 1. Build Native Libraries
+
+Build all required native libraries (ogg, opus, opusenc, opusfile):
 
 **Windows (PowerShell):**
 ```powershell
-./build_opus.ps1
+./build_all.ps1
 ```
-This script configures CMake, builds the shared library, and copies `opus.dll` to the project root.
 
-### 2. Compile the Java Project
+This creates: `ogg.dll`, `opus.dll`, `opusenc.dll`, `opusfile.dll` in the project root.
+
+### 2. Build the Java Project
+
 ```bash
-mvn clean compile
+mvn clean install
 ```
+
+This builds:
+- `jopus-core/target/jopus-1.0.jar` - Core library
+- `jopus-demo-app/target/jopus-demo-app-1.0.jar` - Demo application
 
 ### 3. Generate Bindings (Optional)
-If you need to regenerate the Java bindings from `opus.h`:
+
+To regenerate Java bindings from C headers:
 ```powershell
 ./generate_bindings.ps1
 ```
-*Note: This requires `jextract` to be installed and available in your PATH.*
 
-## Running the Application
+*Note: Requires `jextract` in your PATH.*
 
-Since this library uses Project Panama (Preview Feature in current JDKs) and native access, you **must** provide specific VM arguments when running.
+## Using the Library
 
-**Run the Verification/Test Class:**
-```bash
-java --enable-preview --enable-native-access=ALL-UNNAMED -cp target/classes io.github.kinsleykajiva.opus.Main
+### As a Maven Dependency
+
+Add to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>io.github.kinsleykajiva</groupId>
+    <artifactId>jopus</artifactId>
+    <version>1.0</version>
+</dependency>
 ```
 
-## Usage
+### Fluent API Usage
 
-### G.711 to Opus Conversion
-The `OpusCodec` class provides static utilities for converting Base64-encoded G.711 audio directly to Opus.
-
-```java
-import io.github.kinsleykajiva.opus.OpusCodec;
-
-public class AudioConverter {
-    public void processAudio(String g711Base64) {
-        // Convert G.711 A-law to Opus
-        boolean isALaw = true;
-        String opusBase64 = OpusCodec.convertG711ToOpus(g711Base64, isALaw);
-        
-        System.out.println("Opus Output: " + opusBase64);
-    }
-}
-```
-
-### Native Opus API
-You can also access the raw Opus C API via the generated bindings in `io.github.kinsleykajiva.opus.opus_h`.
-
-```java
-try (Arena arena = Arena.ofConfined()) {
-    MemorySegment errorPtr = arena.allocate(C_INT);
-    MemorySegment encoder = opus_encoder_create(48000, 2, OPUS_APPLICATION_AUDIO(), errorPtr);
-    // ... usage ...
-    opus_encoder_destroy(encoder);
-}
-```
 ```java
 import io.github.kinsleykajiva.AudioLib;
-import java.io.File;
 
 // Convert A-law Base64 to Opus Base64
 String opusBase64 = AudioLib.convert(base64Alaw)
@@ -82,27 +74,117 @@ String opusBase64 = AudioLib.convert(base64Alaw)
     .withSampleRate(8000)
     .asBase64();
 
-// Convert PCM file to Opus file
-AudioLib.convert(new File("input.pcm"))
-    .withSampleRate(48000)
-    .withBitrate(128000)
+// Convert U-law to Opus file
+AudioLib.convert(ulawData)
+    .fromUlaw()
+    .withSampleRate(8000)
+    .withBitrate(16000)
     .asFile("output.opus");
 ```
 
-## Build Requirements
+### Running the Demo
 
-- JDK 25+ (for Panama / Jextract)
-- CMake (to build native libraries)
-- Native libraries: `ogg.dll`, `opus.dll`, `opusenc.dll`, `opusfile.dll` must be in the library path.
+From the project root:
 
-## Building
+```bash
+cd jopus-demo-app
+java "-Djava.library.path=.." -cp "target/jopus-demo-app-1.0.jar;../jopus-core/target/jopus-1.0.jar" io.github.kinsleykajiva.demo.Main
+```
 
-Run `pwsh build_all.ps1` to build all dependencies.
-Run `pwsh generate_bindings.ps1` to generate Java bindings.
+**Important**: Native DLLs must be in the library path or working directory.
 
-## Project Structure
+## API Reference
 
-- `src/main/java/io/github/kinsleykajiva/opus/` - Generated bindings and utility classes.
-- `opus-1.6.1/` - Native Opus source code.
-- `build_opus.ps1` - Script to build the native Opus library.
-- `generate_bindings.ps1` - Script to generate
+### AudioLib (Entry Point)
+
+- `AudioLib.convert(String base64)` - Convert from Base64 string
+- `AudioLib.convert(byte[] data)` - Convert from byte array
+- `AudioLib.convert(File file)` - Convert from file
+
+### AudioBuilder (Fluent Interface)
+
+**Input Formats:**
+- `.fromAlaw()` - G.711 A-law input
+- `.fromUlaw()` - G.711 U-law input
+- `.fromPcm(int sampleRate, int channels)` - Raw PCM input
+
+**Configuration:**
+- `.withSampleRate(int rate)` - Set sample rate (default: 8000)
+- `.withBitrate(int bitrate)` - Set bitrate (default: 16000)
+
+**Output:**
+- `.asBase64()` - Returns Base64 encoded Opus
+- `.asFile(String path)` - Writes to Opus file
+
+### G711Utils
+
+Low-level utilities for G.711 conversion:
+
+```java
+import io.github.kinsleykajiva.G711Utils;
+
+// A-law to PCM
+short[] pcm = G711Utils.alawToPcm(alawBytes);
+
+// U-law to PCM
+short[] pcm = G711Utils.ulawToPcm(ulawBytes);
+```
+
+## Native Library Dependencies
+
+The following native libraries must be available at runtime:
+
+- `ogg.dll` / `libogg.so` - Ogg container format
+- `opus.dll` / `libopus.so` - Opus codec
+- `opusenc.dll` / `libopusenc.so` - High-level Opus encoding
+- `opusfile.dll` / `libopusfile.so` - Opus file reading
+
+Place these in:
+- Project root directory, or
+- System library path, or
+- Specify with `-Djava.library.path=<path>`
+
+## Building from Source
+
+### Complete Build
+
+```bash
+# 1. Build native libraries
+pwsh build_all.ps1
+
+# 2. Generate Java bindings (optional)
+pwsh generate_bindings.ps1
+
+# 3. Build Java modules
+mvn clean install
+```
+
+### Module Structure
+
+```
+jopus/
+├── pom.xml (parent)
+├── jopus-core/
+│   ├── pom.xml
+│   └── src/main/java/io/github/kinsleykajiva/
+│       ├── AudioLib.java
+│       ├── AudioBuilder.java
+│       ├── G711Utils.java
+│       └── [generated bindings]
+├── jopus-demo-app/
+│   ├── pom.xml
+│   └── src/main/java/io/github/kinsleykajiva/demo/
+│       └── Main.java
+├── install/ (native libs output)
+└── [build scripts]
+```
+
+## License
+
+This project uses the Opus codec libraries which are licensed under BSD.
+
+## Credits
+
+- [Opus Codec](https://opus-codec.org/)
+- [Xiph.Org Foundation](https://xiph.org/)
+- Native libraries: ogg, opus, libopusenc, opusfile

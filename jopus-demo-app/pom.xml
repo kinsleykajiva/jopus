@@ -11,7 +11,6 @@
     </parent>
 
     <artifactId>jopus-demo-app</artifactId>
-    <packaging>jar</packaging>
 
     <name>Jopus Demo Application</name>
     <description>Demo application for Jopus library</description>

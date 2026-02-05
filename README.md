@@ -11,7 +11,7 @@ This is a multi-module Maven project:
 
 ## Prerequisites
 
-- **Java**: JDK 25 or later with Project Panama support
+- **Java**: JDK 24 or later with Project Panama support
 - **CMake**: Version 3.10+ for building native libraries
 - **Compiler**: MSVC (Windows), GCC, or Clang (Linux/macOS)
 - **Maven**: For building the Java project

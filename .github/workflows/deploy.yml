@@ -66,10 +66,10 @@ jobs:
           java-version: "24"
           distribution: "temurin"
           server-id: central
-          server-username: GPG_USERNAME
-          server-password: GPG_PASSWORD
+          server-username: ${{ secrets.GPG_USERNAME }}
+          server-password: ${{ secrets.GPG_PASSWORD }}
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg-passphrase: GPG_PASSPHRASE
+          gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Publish to Maven Central
         run: |

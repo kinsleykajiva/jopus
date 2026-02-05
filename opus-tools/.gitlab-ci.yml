@@ -1,0 +1,16 @@
+default:
+  tags:
+  - docker
+  image: debian:bookworm
+
+autoconf:
+  stage: build
+  before_script:
+  - apt-get update &&
+    apt-get install -y autoconf gcc libtool make libogg-dev libopus-dev libopusenc-dev libopusfile-dev libflac-dev libpcap-dev xz-utils zip
+  script:
+  # build opus-tools
+  - ./autogen.sh
+  - ./configure || cat config.log
+  - make check
+  - make distcheck

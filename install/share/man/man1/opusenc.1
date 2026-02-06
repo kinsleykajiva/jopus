@@ -1,0 +1,383 @@
+.\" Process this file with
+.\" groff -man -Tascii opusenc.1
+.\"
+.TH opusenc 1 2019-09-07 "Xiph.Org Foundation" "opus-tools"
+.SH NAME
+opusenc \(en encode audio into the Opus format
+.SH SYNOPSIS
+.B opusenc
+[
+.I options
+]
+.I input_file
+.I output.opus
+.SH DESCRIPTION
+.B opusenc
+reads audio data in Wave, AIFF, FLAC, Ogg/FLAC,
+or raw PCM (integer or floating point) format
+and encodes it into an Ogg Opus stream.
+If the input file is "\fB\-\fR" audio data is read from stdin.
+Likewise, if the output file is "\fB\-\fR" the Ogg Opus stream
+is written to stdout.
+.PP
+Unless quieted
+.B opusenc
+displays statistics about the encoding progress.
+.SH OPTIONS
+.SS "General options"
+.TP
+.BR -h ", " --help
+Show command help.
+.TP
+.BR -V ", " --version
+Show version information.
+.TP
+.B --help-picture
+Show help on attaching album art.
+.TP
+.B --quiet
+Enable quiet mode.
+No messages are displayed.
+.SS "Encoding options"
+.TP
+.BI --bitrate " N"
+Set target bitrate in kbit/s (6\(en256 per channel).
+.IP
+In VBR mode this specifies the average rate for a large and diverse
+collection of audio.
+In CVBR and Hard-CBR mode it specifies the specific output bitrate.
+.IP
+The default for input with a sample rate of 44.1 kHz or higher is
+64 kbit/s per mono stream and 96 kbit/s per coupled pair.
+.TP
+.B --vbr
+Use variable bitrate encoding (default).
+In VBR mode the bitrate may go up and down freely depending on the content
+to achieve more consistent quality.
+.TP
+.B --cvbr
+Use constrained variable bitrate encoding.
+Outputs a specific bitrate.
+This mode is analogous to CBR in AAC and MP3 encoders and managed mode in
+Vorbis coders.
+This delivers less consistent quality than VBR mode but consistent bitrate.
+.TP
+.B --hard-cbr
+Use hard constant bitrate encoding.
+With hard-cbr every frame will be exactly the same size, similar to how
+speech codecs work.
+This delivers lower overall quality but is useful where bitrate changes
+might leak data in encrypted channels or on synchronous transports.
+.TP
+.B --music
+Override automatic detection and tune low bitrate encoding for music.
+By default, music is detected automatically and the classification
+may vary over time.
+.IP
+Tuning impacts lower bitrates that involve tradeoffs between speech
+clarity and musical accuracy, and has no impact at bitrates typically
+used for high quality music encoding.
+.TP
+.B --speech
+Override automatic detection and tune low bitrate encoding for speech.
+By default, speech is detected automatically and the classification
+may vary over time.
+.IP
+Tuning impacts lower bitrates that involve tradeoffs between speech
+clarity and musical accuracy, and has no impact at bitrates typically
+used for high quality music encoding.
+.TP
+.BI --comp " N"
+Set encoding computational complexity (0\(en10, default: 10).
+Zero gives the fastest encodes but lower quality, while 10 gives the
+highest quality but slower encoding.
+.TP
+.BI --framesize " N"
+Set maximum frame size in milliseconds (2.5, 5, 10, 20, 40, 60, default: 20).
+Smaller framesizes achieve lower latency but less quality at a given bitrate.
+Sizes greater than 20\ ms are only interesting at fairly low bitrates.
+.TP
+.BI --expect-loss " N"
+Set expected packet loss in percent (default: 0).
+.TP
+.B --downmix-mono
+Downmix stereo, surround, ambisonics, or discrete audio channels to mono.
+Audio that is already mono is unchanged.
+Ambisonic downmixes include a downmix of any non-diegetic channels.
+Independent discrete channels are downmixed by weighting each channel equally.
+.TP
+.B --downmix-stereo
+Downmix surround or ambisonics to stereo.  Mono and stereo audio is unchanged.
+Ambisonic downmixes include any non-diegetic channels.
+Independent discrete channels are downmixed to mono.
+.TP
+.B --no-phase-inv
+Disable use of phase inversion for intensity stereo.
+This trades some stereo quality for a higher quality mono downmix,
+and is useful when encoding stereo audio that is likely to be downmixed
+to mono after decoding.
+.TP
+.BI --max-delay " N"
+Set maximum container delay in milliseconds (0\(en1000, default: 1000).
+.SS "Metadata options"
+.TP
+.BI --title " TITLE"
+Set the track title comment field to
+.IR TITLE .
+.TP
+.BI --artist " ARTIST"
+Set the artist comment field to
+.IR ARTIST .
+This may be used multiple times to list contributing artists individually.
+Note that some playback software does not display multiple artists gracefully.
+.TP
+.BI --album " ALBUM"
+Set the album or collection title field to
+.IR ALBUM .
+.TP
+.BI --genre " GENRE"
+Set the genre comment field to
+.IR GENRE .
+This option may be used multiple times to tag a track with
+multiple overlapping genres.
+.TP
+.BI --date " YYYY-MM-DD"
+Set the date comment field to
+.IR YYYY-MM-DD .
+This may be shortened to
+.I YYYY-MM
+or
+.IR YYYY .
+.TP
+.BI --tracknumber " N"
+Set the track number comment field to
+.IR N .
+.TP
+.BI --comment " TAG" = VALUE
+Add an extra comment.
+This may be used multiple times.
+The argument should be in the form
+.IR TAG = VALUE .
+See the vorbis-comment specification
+<https://\:www.\:xiph.\:org/\:vorbis/\:doc/v-\:comment.\:html>
+for well known tag names.
+.TP
+\fB--picture\fR \fIFILENAME\fR | \fISPECIFICATION\fR
+Attach album art for the track.
+JPEG and PNG image formats are accepted.
+Either a
+.I FILENAME
+for the artwork or a more complete
+.I SPECIFICATION
+form can be used.
+The picture is added to a
+.B METADATA_BLOCK_PICTURE
+comment field similar to what is used in FLAC.
+.IP
+The
+.I SPECIFICATION
+is a string whose parts are separated by
+.B |
+(pipe) characters.
+Except for the filename all parts are optional.
+A plain
+.I FILENAME
+is equivalent to a
+.BI |||| FILENAME
+specification.
+.IP
+The format of
+.I SPECIFICATION
+is:
+\%[\,\fITYPE\/\fR]\|\fB|\fR\|[\,\fIMEDIATYPE\/\fR]\|\fB|\fR\|[\,\fIDESCRIPTION\/\fR]\|\fB|\fR\|[\,\fIDIMENSIONS\/\fR]\|\fB|\|\fIFILENAME\fR
+.IP
+.PD 0
+.I TYPE
+is a number denoting the nature of the picture (default 3):
+.RS
+.RS 4
+.TP
+.B 0
+Other
+.TP
+.B 1
+32x32 pixel 'file icon' (PNG only)
+.TP
+.B 2
+Other file icon
+.TP
+.B 3
+Cover (front)
+.TP
+.B 4
+Cover (back)
+.TP
+.B 5
+Leaflet page
+.TP
+.B 6
+Media (e.g., label side of a CD)
+.TP
+.B 7
+Lead artist/lead performer/soloist
+.TP
+.B 8
+Artist/performer
+.TP
+.B 9
+Conductor
+.TP
+.B 10
+Band/Orchestra
+.TP
+.B 11
+Composer
+.TP
+.B 12
+Lyricist/text writer
+.TP
+.B 13
+Recording location
+.TP
+.B 14
+During recording
+.TP
+.B 15
+During performance
+.TP
+.B 16
+Movie/video screen capture
+.TP
+.B 17
+A bright colored fish
+.TP
+.B 18
+Illustration
+.TP
+.B 19
+Band/artist logotype
+.TP
+.B 20
+Publisher/studio logotype
+.RE
+.RE
+.IP
+There may only be one picture each of type 1 and 2 in a file.
+.PD
+.IP
+The default
+.I DESCRIPTION
+is an empty string.
+.I FILENAME
+is the path to the picture file to be imported.
+.I MEDIATYPE
+and
+.I DIMENSIONS
+are obtained from the file and any specified values are ignored.
+.IP
+More than one
+.B --picture
+option can be specified to attach multiple pictures.
+.TP
+.BI --padding " N"
+Reserve
+.I N
+extra bytes for metadata tags.
+This can make later tag editing more efficient.
+Defaults to 512.
+.TP
+.B --discard-comments
+Don't propagate metadata tags from the input file.
+.TP
+.B --discard-pictures
+Don't propagate pictures or art from the input file.
+.SS "Input options"
+.TP
+.B --raw
+Interpret input as raw PCM data without headers.
+.TP
+.B --raw-float
+Interpret input as raw floating point data without headers.
+.TP
+.BI --raw-bits " N"
+Set bits/sample for raw input (default: 16; 32 for floating point).
+May be 8, 16, or 24 for integer PCM or 32 for floating point.
+.TP
+.BI --raw-rate " N"
+Set sampling rate for raw input (default: 48000).
+.TP
+.BI --raw-chan " N"
+Set number of channels for raw input (default: 2).
+.TP
+.BR --raw-endianness " " 0 | 1
+Set the endianness for raw input: 1 for big endian, 0 for little (default: 0).
+.TP
+.B --ignorelength
+Ignore the data length in Wave headers.
+The length will always be ignored when it is implausible (very small or very
+large), but some stdin usage may still need this option to avoid truncation.
+.TP
+.BR --channels " " ambix | discrete
+Override the format of the input channels.
+.IP
+"ambix" indicates that the input is ambisonics using ACN channel
+ordering with SN3D normalization. All channels in a full ambisonics order must
+be included. A pair of non-diegetic stereo channels can be optionally placed
+after the ambisonics channels.
+.IP
+"discrete" indicates that the input channels are independent discrete channels
+with no assigned meaning or speaker position.
+.SS "Diagnostic options"
+.TP
+.BI --serial " N"
+Force use of a specific stream serial number, rather than one that is
+randomly generated.
+This is used to make the encoder deterministic for testing and is not
+generally recommended.
+.TP
+.BI --save-range " FILENAME"
+Save check values for every frame to a file.
+.TP
+\fB--set-ctl-int\fR [\,\fIS\/\fB:\fR]\,\fIX\/\fR=\,\fIY\fR
+Pass the encoder control
+.I X
+with value
+.I Y
+(advanced).
+Preface with
+.IR S :
+to direct the ctl to multistream stream number
+.IR S .
+This may be used multiple times.
+.SH EXAMPLES
+Simplest usage.
+Take input as input.wav and produce output as output.opus:
+.RS 5
+opusenc input.wav output.opus
+.RE
+.PP
+Produce a very high quality encode with a target rate of 160 kbit/s:
+.RS 5
+opusenc --bitrate 160 input.wav output.opus
+.RE
+.PP
+Record and send a live stream to an Icecast HTTP streaming server using oggfwd:
+.RS 5
+arecord -c 2 -r 48000 -twav - | opusenc --bitrate 96 - - | oggfwd icecast.somewhere.org 8000 password /stream.opus
+.RE
+.SH NOTES
+While it is possible to use opusenc for low latency streaming (e.g. with
+.B "--max-delay 0"
+and netcat instead of Icecast) it's not really designed for this, and the
+Ogg container and TCP transport aren't the best tools for that application.
+Shell pipelines themselves will often have high buffering.
+The ability to set framesizes as low as 2.5\ ms in opusenc mostly exists
+to try out the quality of the format with low latency settings, but not
+really for actual low latency usage.
+Interactive usage should use UDP/RTP directly.
+.SH AUTHORS
+Gregory Maxwell <greg@xiph.org>
+.SH SEE ALSO
+.BR opusdec (1),
+.BR opusinfo (1),
+.BR oggfwd (1)

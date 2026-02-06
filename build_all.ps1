@@ -80,8 +80,11 @@ Build-Lib "opusfile" "opusfile" @(
     "-DOP_DISABLE_DOCS=ON"
 )
 
-# Copy all DLLs to root
-Write-Host "Copying DLLs to project root..."
-Get-ChildItem -Path "$installDir/bin" -Filter "*.dll" | Copy-Item -Destination $ROOT_DIR -Force
+# Copy all DLLs to resources
+$TARGET_DIR = "$ROOT_DIR/jopus/src/main/resources"
+if (!(Test-Path $TARGET_DIR)) { New-Item -ItemType Directory -Path $TARGET_DIR | Out-Null }
+
+Write-Host "Copying DLLs to $TARGET_DIR..."
+Get-ChildItem -Path "$installDir/bin" -Filter "*.dll" | Copy-Item -Destination $TARGET_DIR -Force
 
 Write-Host "Build Complete!"

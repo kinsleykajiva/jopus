@@ -2,69 +2,19 @@ name: Deploy Jopus to Maven Central
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
-  build-linux-natives:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake build-essential autoconf automake libtool pkg-config
-      - name: Init Dependencies
-        run: bash init_deps.sh
-      - name: Build Natives
-        run: bash build_all.sh
-      - name: Upload Linux Natives
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux-natives
-          path: |
-            libogg.so*
-            libopus.so*
-            libopusenc.so*
-            libopusfile.so*
-
-  build-windows-natives:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Init Dependencies
-        run: ./init_deps.sh
-        shell: bash
-      - name: Build Natives
-        run: ./build_all.ps1
-        shell: powershell
-      - name: Upload Windows Natives
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows-natives
-          path: |
-            *.dll
-
   deploy:
-    needs: [build-linux-natives, build-windows-natives]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download Linux Natives
-        uses: actions/download-artifact@v4
-        with:
-          name: linux-natives
-          path: jopus/src/main/resources/
-      - name: Download Windows Natives
-        uses: actions/download-artifact@v4
-        with:
-          name: windows-natives
-          path: jopus/src/main/resources/
-
+      
       - name: Set up JDK 24
         uses: actions/setup-java@v4
         with:
-          java-version: "24"
-          distribution: "temurin"
+          java-version: '24'
+          distribution: 'temurin'
           server-id: central
           server-username: ${{ secrets.GPG_USERNAME }}
           server-password: ${{ secrets.GPG_PASSWORD }}
@@ -78,8 +28,3 @@ jobs:
             -Dcentral.password=${{ secrets.GPG_PASSWORD }} \
             -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} \
             -Dgpg.keyname=${{ secrets.SETTINGS_KEY }}
-        env:
-          GPG_USERNAME: ${{ secrets.GPG_USERNAME }}
-          GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-          SETTINGS_KEY: ${{ secrets.SETTINGS_KEY }}

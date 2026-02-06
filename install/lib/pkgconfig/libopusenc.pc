@@ -1,16 +1,16 @@
-# Opus codec reference implementation pkg-config file
+# libopusenc installed pkg-config file
 
 prefix=/mnt/c/xampp/htdocs/voip-app-project/jopus/install
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
 
-Name: Opus
-Description: Opus IETF audio codec (floating-point build)
+Name: libopusenc
+Description: High-level Opus encoding library
 URL: https://opus-codec.org/
-Version: 1.6.1
-Requires:
+Version: unknown
+Requires.private: opus >= 1.1
 Conflicts:
-Libs: -L${libdir} -lopus
+Libs: -L${libdir} -lopusenc
 Libs.private: -lm
 Cflags: -I${includedir}/opus

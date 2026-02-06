@@ -37,8 +37,8 @@ mvn clean install
 ```
 
 This builds:
-- `jopus/target/jopus-1.0.2.jar` - Core library (with bundled native libs)
-- `jopus-demo-app/target/jopus-demo-app-1.0.2.jar` - Demo application
+- `jopus/target/jopus-1.1.6.jar` - Core library (with bundled native libs)
+- `jopus-demo-app/target/jopus-demo-app-1.1.6.jar` - Demo application
 
 ### 3. Generate Bindings (Optional)
 
@@ -59,7 +59,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>io.github.kinsleykajiva</groupId>
     <artifactId>jopus</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.6</version>
 </dependency>
 ```
 
@@ -88,7 +88,7 @@ From the project root:
 
 ```bash
 # From project root after build
-java -cp "jopus-demo-app/target/jopus-demo-app-1.0.2.jar;jopus/target/jopus-1.0.2.jar" io.github.kinsleykajiva.demo.Main
+java -cp "jopus-demo-app/target/jopus-demo-app-1.1.6.jar;jopus/target/jopus-1.1.6.jar" io.github.kinsleykajiva.demo.Main
 ```
 
 **Note**: Starting from version 1.0.2, native DLLs are bundled within the JAR and extracted automatically at runtime. Manual setup of the library path is no longer strictly required.
@@ -142,9 +142,9 @@ Place these in:
 - System library path, or
 - Specify with `-Djava.library.path=<path>`
 
-## Performance & Streaming (v1.1.4+)
+## Performance & Streaming (v1.1.6+)
 
-To support high-frequency VoIP usage (processing thousands of audio chunks per second), Jopus v1.1.4 introduces a **Streaming API** and **OpusEncoderPool**.
+To support high-frequency VoIP usage (processing thousands of audio chunks per second), Jopus v1.1.6 introduces a **Streaming API** and **OpusEncoderPool**.
 
 ### Why use the Streaming API?
 

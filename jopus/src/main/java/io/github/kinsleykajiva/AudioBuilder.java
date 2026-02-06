@@ -250,4 +250,69 @@ public class AudioBuilder {
             throw new RuntimeException("Failed to write Opus file: " + e.getMessage(), e);
         }
     }
+    // --- Streaming API ---
+
+    private static OpusCodec.OpusEncoderPool encoderPool;
+
+    /**
+     * Initialize the global encoder pool.
+     * 
+     * @param capacity Maximum number of encoders to keep in the pool.
+     */
+    public static synchronized void initializePool(int capacity) {
+        if (encoderPool == null) {
+            OpusCodec.loadNativeLibraries();
+            encoderPool = new OpusCodec.OpusEncoderPool(capacity);
+        }
+    }
+
+    /**
+     * Start a new streaming session.
+     * Use this for high-frequency chunk processing.
+     * The returned encoder must be closed to return the native resource to the
+     * pool.
+     * 
+     * @return AudioStreamEncoder for processing chunks
+     */
+    public static AudioStreamEncoder stream() {
+        if (encoderPool == null) {
+            initializePool(10); // Default pool size
+        }
+        return new AudioStreamEncoder(encoderPool.borrowEncoder());
+    }
+
+    public static class AudioStreamEncoder implements AutoCloseable {
+        private final MemorySegment encoder;
+        private final byte[] outBuffer;
+
+        AudioStreamEncoder(MemorySegment encoder) {
+            this.encoder = encoder;
+            this.outBuffer = new byte[4000]; // sample for 20ms frames
+        }
+
+        /**
+         * Encodes a G.711 A-law chunk to Opus.
+         * 
+         * @param alawData The G.711 A-law bytes
+         * @return The encoded Opus bytes (copied from internal buffer)
+         */
+        public byte[] encodeAlaw(byte[] alawData) {
+            int len = OpusCodec.convertG711Chunk(encoder, alawData, true, outBuffer);
+            if (len < 0) {
+                throw new RuntimeException("Opus encoding failed: " + len);
+            }
+            byte[] copy = new byte[len];
+            System.arraycopy(outBuffer, 0, copy, 0, len);
+            return copy;
+        }
+
+        @Override
+        public void close() {
+            if (encoderPool != null) {
+                encoderPool.returnEncoder(encoder);
+            } else {
+                OpusCodec.destroyEncoder(encoder);
+            }
+        }
+    }
 }

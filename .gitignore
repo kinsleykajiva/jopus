@@ -38,3 +38,13 @@ build/
 ### Mac OS ###
 .DS_Store
 
+
+### Native Dependencies (managed by init_deps.sh) ###
+opus-*/
+ogg/
+libopusenc/
+opusfile/
+opus-tools/
+install/
+jopus-natives-*/
+*.opus

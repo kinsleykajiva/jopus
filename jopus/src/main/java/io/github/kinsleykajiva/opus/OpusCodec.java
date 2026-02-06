@@ -27,8 +27,10 @@ public class OpusCodec {
         generateULawTable();
     }
 
-    private static void loadNativeLibraries() {
-        boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+    public static void loadNativeLibraries() {
+        String osName = System.getProperty("os.name").toLowerCase();
+        boolean isWindows = osName.contains("win");
+        boolean isLinux = osName.contains("linux") || osName.contains("nix") || osName.contains("nux");
         String extension = isWindows ? ".dll" : ".so";
 
         // Define library list based on OS
@@ -37,47 +39,51 @@ public class OpusCodec {
                 : new String[] { "ogg", "opus", "opusenc", "opusfile", "opusurl" };
 
         File tempDir = new File(System.getProperty("java.io.tmpdir"), "jopus-natives-" + System.nanoTime());
-        if (!tempDir.mkdirs()) {
-            // Ignore if exists
+        if (!tempDir.exists() && !tempDir.mkdirs()) {
+            System.err.println("Warning: Could not create temp directory for natives: " + tempDir.getAbsolutePath());
         }
         tempDir.deleteOnExit();
 
         for (String libName : libs) {
             String fullLibName = (isWindows ? "" : "lib") + libName + extension;
             try {
-                // Try loading from local directory first
+                // 1. Try loading from local file system (working directory)
                 File localFile = new File(fullLibName);
                 if (localFile.exists()) {
+                    System.out.println("Loading native library from local path: " + localFile.getAbsolutePath());
                     System.load(localFile.getAbsolutePath());
                     continue;
                 }
 
-                // Fallback: Extract from JAR
-                File tempFile = new File(tempDir, fullLibName);
+                // 2. Try loading from classpath (resources)
                 try (java.io.InputStream is = OpusCodec.class.getResourceAsStream("/" + fullLibName)) {
-                    if (is == null) {
-                        try {
-                            System.loadLibrary(libName);
-                            continue;
-                        } catch (UnsatisfiedLinkError e) {
-                            // Critical failure if core opus is missing
-                            if (libName.equals("opus")) {
-                                throw new RuntimeException("Critical failure: Could not find " + fullLibName
-                                        + " in resources or system path", e);
-                            }
-                            // Other libs might be optional or already loaded as dependencies
-                            System.err.println("Warning: Could not find " + fullLibName
-                                    + " in resources, attempting to proceed...");
-                            continue;
-                        }
+                    if (is != null) {
+                        File tempFile = new File(tempDir, fullLibName);
+                        java.nio.file.Files.copy(is, tempFile.toPath(),
+                                java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                        System.out.println("Loading native library from resources: " + tempFile.getAbsolutePath());
+                        System.load(tempFile.getAbsolutePath());
+                        tempFile.deleteOnExit();
+                        continue;
                     }
-                    java.nio.file.Files.copy(is, tempFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
                 }
-                System.load(tempFile.getAbsolutePath());
-                tempFile.deleteOnExit();
+
+                // 3. Fallback: Try loading from system library path (LD_LIBRARY_PATH or
+                // java.library.path)
+                try {
+                    System.out.println("Attempting to load library from system path: " + libName);
+                    System.loadLibrary(libName);
+                    continue;
+                } catch (UnsatisfiedLinkError e) {
+                    if (libName.equals("opus") || libName.equals("opusenc")) {
+                        throw new RuntimeException("Critical failure: Could not find or load " + fullLibName
+                                + " from local path, resources, or system path.", e);
+                    }
+                    System.err.println("Warning: Could not load " + fullLibName + " (Optional or dependency)");
+                }
             } catch (Exception e) {
-                System.err.println("Failed to load/extract native library: " + fullLibName + " - " + e.getMessage());
-                if (libName.equals("opus")) {
+                System.err.println("Error processing library " + libName + ": " + e.getMessage());
+                if (libName.equals("opus") || libName.equals("opusenc")) {
                     throw new RuntimeException("Critical failure: Could not load " + fullLibName, e);
                 }
             }

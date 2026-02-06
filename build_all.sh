@@ -62,6 +62,8 @@ build_lib() {
             -DCMAKE_BUILD_TYPE=Release \
             -DBUILD_SHARED_LIBS=ON \
             -DCMAKE_INSTALL_PREFIX="$installDir" \
+            -DCMAKE_EXE_LINKER_FLAGS="-Wl,-z,noexecstack" \
+            -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-z,noexecstack" \
             "${cmakeArgs[@]}"
         cmake --build . --config Release
         cmake --install . --config Release

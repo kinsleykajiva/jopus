@@ -132,8 +132,8 @@ public class AudioBuilder {
 
     private String encodeToOpusBase64(byte[] pcmData) {
         try (Arena arena = Arena.ofConfined()) {
-            // Load opusenc library
-            loadOpusencLibrary();
+            // Load native libraries using cross-platform loader
+            OpusCodec.loadNativeLibraries();
 
             // Create comments
             MemorySegment comments = ope_comments_create();
@@ -195,7 +195,7 @@ public class AudioBuilder {
 
     private void writeOpusFile(String outputPath, byte[] opusData) {
         try (Arena arena = Arena.ofConfined()) {
-            loadOpusencLibrary();
+            OpusCodec.loadNativeLibraries();
 
             // Get input PCM data
             byte[] data = getInputData();
@@ -248,21 +248,6 @@ public class AudioBuilder {
 
         } catch (Exception e) {
             throw new RuntimeException("Failed to write Opus file: " + e.getMessage(), e);
-        }
-    }
-
-    private static void loadOpusencLibrary() {
-        try {
-            String path = new File("opusenc.dll").getAbsolutePath();
-            System.load(path);
-        } catch (UnsatisfiedLinkError e) {
-            try {
-                System.loadLibrary("opusenc");
-            } catch (UnsatisfiedLinkError e2) {
-                System.err.println(
-                        "Failed to load opusenc.dll. Ensure it is in the working directory or java.library.path.");
-                throw e2;
-            }
         }
     }
 }

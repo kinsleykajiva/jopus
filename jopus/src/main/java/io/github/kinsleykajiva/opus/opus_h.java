@@ -20,697 +20,764 @@ public class opus_h extends opus_h$shared {
 
     static final Arena LIBRARY_ARENA = Arena.ofAuto();
 
-    static final SymbolLookup SYMBOL_LOOKUP = SymbolLookup.libraryLookup(System.mapLibraryName("opus"), LIBRARY_ARENA)
-            .or(SymbolLookup.loaderLookup())
+    static final SymbolLookup SYMBOL_LOOKUP = SymbolLookup.loaderLookup()
             .or(Linker.nativeLinker().defaultLookup());
 
-    private static final int OPUS_OK = (int)0L;
+    private static final int OPUS_OK = (int) 0L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_OK 0
+     * {@snippet lang = c : * #define OPUS_OK 0
      * }
      */
     public static int OPUS_OK() {
         return OPUS_OK;
     }
-    private static final int OPUS_SET_APPLICATION_REQUEST = (int)4000L;
+
+    private static final int OPUS_SET_APPLICATION_REQUEST = (int) 4000L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_APPLICATION_REQUEST 4000
+     * {@snippet lang = c : * #define OPUS_SET_APPLICATION_REQUEST 4000
      * }
      */
     public static int OPUS_SET_APPLICATION_REQUEST() {
         return OPUS_SET_APPLICATION_REQUEST;
     }
-    private static final int OPUS_GET_APPLICATION_REQUEST = (int)4001L;
+
+    private static final int OPUS_GET_APPLICATION_REQUEST = (int) 4001L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_APPLICATION_REQUEST 4001
+     * {@snippet lang = c : * #define OPUS_GET_APPLICATION_REQUEST 4001
      * }
      */
     public static int OPUS_GET_APPLICATION_REQUEST() {
         return OPUS_GET_APPLICATION_REQUEST;
     }
-    private static final int OPUS_SET_BITRATE_REQUEST = (int)4002L;
+
+    private static final int OPUS_SET_BITRATE_REQUEST = (int) 4002L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_BITRATE_REQUEST 4002
+     * {@snippet lang = c : * #define OPUS_SET_BITRATE_REQUEST 4002
      * }
      */
     public static int OPUS_SET_BITRATE_REQUEST() {
         return OPUS_SET_BITRATE_REQUEST;
     }
-    private static final int OPUS_GET_BITRATE_REQUEST = (int)4003L;
+
+    private static final int OPUS_GET_BITRATE_REQUEST = (int) 4003L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_BITRATE_REQUEST 4003
+     * {@snippet lang = c : * #define OPUS_GET_BITRATE_REQUEST 4003
      * }
      */
     public static int OPUS_GET_BITRATE_REQUEST() {
         return OPUS_GET_BITRATE_REQUEST;
     }
-    private static final int OPUS_SET_MAX_BANDWIDTH_REQUEST = (int)4004L;
+
+    private static final int OPUS_SET_MAX_BANDWIDTH_REQUEST = (int) 4004L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_MAX_BANDWIDTH_REQUEST 4004
+     * {@snippet lang = c : * #define OPUS_SET_MAX_BANDWIDTH_REQUEST 4004
      * }
      */
     public static int OPUS_SET_MAX_BANDWIDTH_REQUEST() {
         return OPUS_SET_MAX_BANDWIDTH_REQUEST;
     }
-    private static final int OPUS_GET_MAX_BANDWIDTH_REQUEST = (int)4005L;
+
+    private static final int OPUS_GET_MAX_BANDWIDTH_REQUEST = (int) 4005L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_MAX_BANDWIDTH_REQUEST 4005
+     * {@snippet lang = c : * #define OPUS_GET_MAX_BANDWIDTH_REQUEST 4005
      * }
      */
     public static int OPUS_GET_MAX_BANDWIDTH_REQUEST() {
         return OPUS_GET_MAX_BANDWIDTH_REQUEST;
     }
-    private static final int OPUS_SET_VBR_REQUEST = (int)4006L;
+
+    private static final int OPUS_SET_VBR_REQUEST = (int) 4006L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_VBR_REQUEST 4006
+     * {@snippet lang = c : * #define OPUS_SET_VBR_REQUEST 4006
      * }
      */
     public static int OPUS_SET_VBR_REQUEST() {
         return OPUS_SET_VBR_REQUEST;
     }
-    private static final int OPUS_GET_VBR_REQUEST = (int)4007L;
+
+    private static final int OPUS_GET_VBR_REQUEST = (int) 4007L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_VBR_REQUEST 4007
+     * {@snippet lang = c : * #define OPUS_GET_VBR_REQUEST 4007
      * }
      */
     public static int OPUS_GET_VBR_REQUEST() {
         return OPUS_GET_VBR_REQUEST;
     }
-    private static final int OPUS_SET_BANDWIDTH_REQUEST = (int)4008L;
+
+    private static final int OPUS_SET_BANDWIDTH_REQUEST = (int) 4008L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_BANDWIDTH_REQUEST 4008
+     * {@snippet lang = c : * #define OPUS_SET_BANDWIDTH_REQUEST 4008
      * }
      */
     public static int OPUS_SET_BANDWIDTH_REQUEST() {
         return OPUS_SET_BANDWIDTH_REQUEST;
     }
-    private static final int OPUS_GET_BANDWIDTH_REQUEST = (int)4009L;
+
+    private static final int OPUS_GET_BANDWIDTH_REQUEST = (int) 4009L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_BANDWIDTH_REQUEST 4009
+     * {@snippet lang = c : * #define OPUS_GET_BANDWIDTH_REQUEST 4009
      * }
      */
     public static int OPUS_GET_BANDWIDTH_REQUEST() {
         return OPUS_GET_BANDWIDTH_REQUEST;
     }
-    private static final int OPUS_SET_COMPLEXITY_REQUEST = (int)4010L;
+
+    private static final int OPUS_SET_COMPLEXITY_REQUEST = (int) 4010L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_COMPLEXITY_REQUEST 4010
+     * {@snippet lang = c : * #define OPUS_SET_COMPLEXITY_REQUEST 4010
      * }
      */
     public static int OPUS_SET_COMPLEXITY_REQUEST() {
         return OPUS_SET_COMPLEXITY_REQUEST;
     }
-    private static final int OPUS_GET_COMPLEXITY_REQUEST = (int)4011L;
+
+    private static final int OPUS_GET_COMPLEXITY_REQUEST = (int) 4011L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_COMPLEXITY_REQUEST 4011
+     * {@snippet lang = c : * #define OPUS_GET_COMPLEXITY_REQUEST 4011
      * }
      */
     public static int OPUS_GET_COMPLEXITY_REQUEST() {
         return OPUS_GET_COMPLEXITY_REQUEST;
     }
-    private static final int OPUS_SET_INBAND_FEC_REQUEST = (int)4012L;
+
+    private static final int OPUS_SET_INBAND_FEC_REQUEST = (int) 4012L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_INBAND_FEC_REQUEST 4012
+     * {@snippet lang = c : * #define OPUS_SET_INBAND_FEC_REQUEST 4012
      * }
      */
     public static int OPUS_SET_INBAND_FEC_REQUEST() {
         return OPUS_SET_INBAND_FEC_REQUEST;
     }
-    private static final int OPUS_GET_INBAND_FEC_REQUEST = (int)4013L;
+
+    private static final int OPUS_GET_INBAND_FEC_REQUEST = (int) 4013L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_INBAND_FEC_REQUEST 4013
+     * {@snippet lang = c : * #define OPUS_GET_INBAND_FEC_REQUEST 4013
      * }
      */
     public static int OPUS_GET_INBAND_FEC_REQUEST() {
         return OPUS_GET_INBAND_FEC_REQUEST;
     }
-    private static final int OPUS_SET_PACKET_LOSS_PERC_REQUEST = (int)4014L;
+
+    private static final int OPUS_SET_PACKET_LOSS_PERC_REQUEST = (int) 4014L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_PACKET_LOSS_PERC_REQUEST 4014
+     * {@snippet lang = c : * #define OPUS_SET_PACKET_LOSS_PERC_REQUEST 4014
      * }
      */
     public static int OPUS_SET_PACKET_LOSS_PERC_REQUEST() {
         return OPUS_SET_PACKET_LOSS_PERC_REQUEST;
     }
-    private static final int OPUS_GET_PACKET_LOSS_PERC_REQUEST = (int)4015L;
+
+    private static final int OPUS_GET_PACKET_LOSS_PERC_REQUEST = (int) 4015L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_PACKET_LOSS_PERC_REQUEST 4015
+     * {@snippet lang = c : * #define OPUS_GET_PACKET_LOSS_PERC_REQUEST 4015
      * }
      */
     public static int OPUS_GET_PACKET_LOSS_PERC_REQUEST() {
         return OPUS_GET_PACKET_LOSS_PERC_REQUEST;
     }
-    private static final int OPUS_SET_DTX_REQUEST = (int)4016L;
+
+    private static final int OPUS_SET_DTX_REQUEST = (int) 4016L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_DTX_REQUEST 4016
+     * {@snippet lang = c : * #define OPUS_SET_DTX_REQUEST 4016
      * }
      */
     public static int OPUS_SET_DTX_REQUEST() {
         return OPUS_SET_DTX_REQUEST;
     }
-    private static final int OPUS_GET_DTX_REQUEST = (int)4017L;
+
+    private static final int OPUS_GET_DTX_REQUEST = (int) 4017L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_DTX_REQUEST 4017
+     * {@snippet lang = c : * #define OPUS_GET_DTX_REQUEST 4017
      * }
      */
     public static int OPUS_GET_DTX_REQUEST() {
         return OPUS_GET_DTX_REQUEST;
     }
-    private static final int OPUS_SET_VBR_CONSTRAINT_REQUEST = (int)4020L;
+
+    private static final int OPUS_SET_VBR_CONSTRAINT_REQUEST = (int) 4020L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_VBR_CONSTRAINT_REQUEST 4020
+     * {@snippet lang = c : * #define OPUS_SET_VBR_CONSTRAINT_REQUEST 4020
      * }
      */
     public static int OPUS_SET_VBR_CONSTRAINT_REQUEST() {
         return OPUS_SET_VBR_CONSTRAINT_REQUEST;
     }
-    private static final int OPUS_GET_VBR_CONSTRAINT_REQUEST = (int)4021L;
+
+    private static final int OPUS_GET_VBR_CONSTRAINT_REQUEST = (int) 4021L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_VBR_CONSTRAINT_REQUEST 4021
+     * {@snippet lang = c : * #define OPUS_GET_VBR_CONSTRAINT_REQUEST 4021
      * }
      */
     public static int OPUS_GET_VBR_CONSTRAINT_REQUEST() {
         return OPUS_GET_VBR_CONSTRAINT_REQUEST;
     }
-    private static final int OPUS_SET_FORCE_CHANNELS_REQUEST = (int)4022L;
+
+    private static final int OPUS_SET_FORCE_CHANNELS_REQUEST = (int) 4022L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_FORCE_CHANNELS_REQUEST 4022
+     * {@snippet lang = c : * #define OPUS_SET_FORCE_CHANNELS_REQUEST 4022
      * }
      */
     public static int OPUS_SET_FORCE_CHANNELS_REQUEST() {
         return OPUS_SET_FORCE_CHANNELS_REQUEST;
     }
-    private static final int OPUS_GET_FORCE_CHANNELS_REQUEST = (int)4023L;
+
+    private static final int OPUS_GET_FORCE_CHANNELS_REQUEST = (int) 4023L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_FORCE_CHANNELS_REQUEST 4023
+     * {@snippet lang = c : * #define OPUS_GET_FORCE_CHANNELS_REQUEST 4023
      * }
      */
     public static int OPUS_GET_FORCE_CHANNELS_REQUEST() {
         return OPUS_GET_FORCE_CHANNELS_REQUEST;
     }
-    private static final int OPUS_SET_SIGNAL_REQUEST = (int)4024L;
+
+    private static final int OPUS_SET_SIGNAL_REQUEST = (int) 4024L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_SIGNAL_REQUEST 4024
+     * {@snippet lang = c : * #define OPUS_SET_SIGNAL_REQUEST 4024
      * }
      */
     public static int OPUS_SET_SIGNAL_REQUEST() {
         return OPUS_SET_SIGNAL_REQUEST;
     }
-    private static final int OPUS_GET_SIGNAL_REQUEST = (int)4025L;
+
+    private static final int OPUS_GET_SIGNAL_REQUEST = (int) 4025L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_SIGNAL_REQUEST 4025
+     * {@snippet lang = c : * #define OPUS_GET_SIGNAL_REQUEST 4025
      * }
      */
     public static int OPUS_GET_SIGNAL_REQUEST() {
         return OPUS_GET_SIGNAL_REQUEST;
     }
-    private static final int OPUS_GET_LOOKAHEAD_REQUEST = (int)4027L;
+
+    private static final int OPUS_GET_LOOKAHEAD_REQUEST = (int) 4027L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_LOOKAHEAD_REQUEST 4027
+     * {@snippet lang = c : * #define OPUS_GET_LOOKAHEAD_REQUEST 4027
      * }
      */
     public static int OPUS_GET_LOOKAHEAD_REQUEST() {
         return OPUS_GET_LOOKAHEAD_REQUEST;
     }
-    private static final int OPUS_GET_SAMPLE_RATE_REQUEST = (int)4029L;
+
+    private static final int OPUS_GET_SAMPLE_RATE_REQUEST = (int) 4029L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_SAMPLE_RATE_REQUEST 4029
+     * {@snippet lang = c : * #define OPUS_GET_SAMPLE_RATE_REQUEST 4029
      * }
      */
     public static int OPUS_GET_SAMPLE_RATE_REQUEST() {
         return OPUS_GET_SAMPLE_RATE_REQUEST;
     }
-    private static final int OPUS_GET_FINAL_RANGE_REQUEST = (int)4031L;
+
+    private static final int OPUS_GET_FINAL_RANGE_REQUEST = (int) 4031L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_FINAL_RANGE_REQUEST 4031
+     * {@snippet lang = c : * #define OPUS_GET_FINAL_RANGE_REQUEST 4031
      * }
      */
     public static int OPUS_GET_FINAL_RANGE_REQUEST() {
         return OPUS_GET_FINAL_RANGE_REQUEST;
     }
-    private static final int OPUS_GET_PITCH_REQUEST = (int)4033L;
+
+    private static final int OPUS_GET_PITCH_REQUEST = (int) 4033L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_PITCH_REQUEST 4033
+     * {@snippet lang = c : * #define OPUS_GET_PITCH_REQUEST 4033
      * }
      */
     public static int OPUS_GET_PITCH_REQUEST() {
         return OPUS_GET_PITCH_REQUEST;
     }
-    private static final int OPUS_SET_GAIN_REQUEST = (int)4034L;
+
+    private static final int OPUS_SET_GAIN_REQUEST = (int) 4034L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_GAIN_REQUEST 4034
+     * {@snippet lang = c : * #define OPUS_SET_GAIN_REQUEST 4034
      * }
      */
     public static int OPUS_SET_GAIN_REQUEST() {
         return OPUS_SET_GAIN_REQUEST;
     }
-    private static final int OPUS_GET_GAIN_REQUEST = (int)4045L;
+
+    private static final int OPUS_GET_GAIN_REQUEST = (int) 4045L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_GAIN_REQUEST 4045
+     * {@snippet lang = c : * #define OPUS_GET_GAIN_REQUEST 4045
      * }
      */
     public static int OPUS_GET_GAIN_REQUEST() {
         return OPUS_GET_GAIN_REQUEST;
     }
-    private static final int OPUS_SET_LSB_DEPTH_REQUEST = (int)4036L;
+
+    private static final int OPUS_SET_LSB_DEPTH_REQUEST = (int) 4036L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_LSB_DEPTH_REQUEST 4036
+     * {@snippet lang = c : * #define OPUS_SET_LSB_DEPTH_REQUEST 4036
      * }
      */
     public static int OPUS_SET_LSB_DEPTH_REQUEST() {
         return OPUS_SET_LSB_DEPTH_REQUEST;
     }
-    private static final int OPUS_GET_LSB_DEPTH_REQUEST = (int)4037L;
+
+    private static final int OPUS_GET_LSB_DEPTH_REQUEST = (int) 4037L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_LSB_DEPTH_REQUEST 4037
+     * {@snippet lang = c : * #define OPUS_GET_LSB_DEPTH_REQUEST 4037
      * }
      */
     public static int OPUS_GET_LSB_DEPTH_REQUEST() {
         return OPUS_GET_LSB_DEPTH_REQUEST;
     }
-    private static final int OPUS_GET_LAST_PACKET_DURATION_REQUEST = (int)4039L;
+
+    private static final int OPUS_GET_LAST_PACKET_DURATION_REQUEST = (int) 4039L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_LAST_PACKET_DURATION_REQUEST 4039
+     * {@snippet lang = c : * #define OPUS_GET_LAST_PACKET_DURATION_REQUEST 4039
      * }
      */
     public static int OPUS_GET_LAST_PACKET_DURATION_REQUEST() {
         return OPUS_GET_LAST_PACKET_DURATION_REQUEST;
     }
-    private static final int OPUS_SET_EXPERT_FRAME_DURATION_REQUEST = (int)4040L;
+
+    private static final int OPUS_SET_EXPERT_FRAME_DURATION_REQUEST = (int) 4040L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_EXPERT_FRAME_DURATION_REQUEST 4040
+     * {@snippet lang = c : * #define OPUS_SET_EXPERT_FRAME_DURATION_REQUEST 4040
      * }
      */
     public static int OPUS_SET_EXPERT_FRAME_DURATION_REQUEST() {
         return OPUS_SET_EXPERT_FRAME_DURATION_REQUEST;
     }
-    private static final int OPUS_GET_EXPERT_FRAME_DURATION_REQUEST = (int)4041L;
+
+    private static final int OPUS_GET_EXPERT_FRAME_DURATION_REQUEST = (int) 4041L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_EXPERT_FRAME_DURATION_REQUEST 4041
+     * {@snippet lang = c : * #define OPUS_GET_EXPERT_FRAME_DURATION_REQUEST 4041
      * }
      */
     public static int OPUS_GET_EXPERT_FRAME_DURATION_REQUEST() {
         return OPUS_GET_EXPERT_FRAME_DURATION_REQUEST;
     }
-    private static final int OPUS_SET_PREDICTION_DISABLED_REQUEST = (int)4042L;
+
+    private static final int OPUS_SET_PREDICTION_DISABLED_REQUEST = (int) 4042L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_PREDICTION_DISABLED_REQUEST 4042
+     * {@snippet lang = c : * #define OPUS_SET_PREDICTION_DISABLED_REQUEST 4042
      * }
      */
     public static int OPUS_SET_PREDICTION_DISABLED_REQUEST() {
         return OPUS_SET_PREDICTION_DISABLED_REQUEST;
     }
-    private static final int OPUS_GET_PREDICTION_DISABLED_REQUEST = (int)4043L;
+
+    private static final int OPUS_GET_PREDICTION_DISABLED_REQUEST = (int) 4043L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_PREDICTION_DISABLED_REQUEST 4043
+     * {@snippet lang = c : * #define OPUS_GET_PREDICTION_DISABLED_REQUEST 4043
      * }
      */
     public static int OPUS_GET_PREDICTION_DISABLED_REQUEST() {
         return OPUS_GET_PREDICTION_DISABLED_REQUEST;
     }
-    private static final int OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST = (int)4046L;
+
+    private static final int OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST = (int) 4046L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST 4046
+     * {@snippet lang = c : * #define OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST 4046
      * }
      */
     public static int OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST() {
         return OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST;
     }
-    private static final int OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST = (int)4047L;
+
+    private static final int OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST = (int) 4047L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST 4047
+     * {@snippet lang = c : * #define OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST 4047
      * }
      */
     public static int OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST() {
         return OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST;
     }
-    private static final int OPUS_GET_IN_DTX_REQUEST = (int)4049L;
+
+    private static final int OPUS_GET_IN_DTX_REQUEST = (int) 4049L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_IN_DTX_REQUEST 4049
+     * {@snippet lang = c : * #define OPUS_GET_IN_DTX_REQUEST 4049
      * }
      */
     public static int OPUS_GET_IN_DTX_REQUEST() {
         return OPUS_GET_IN_DTX_REQUEST;
     }
-    private static final int OPUS_SET_DRED_DURATION_REQUEST = (int)4050L;
+
+    private static final int OPUS_SET_DRED_DURATION_REQUEST = (int) 4050L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_DRED_DURATION_REQUEST 4050
+     * {@snippet lang = c : * #define OPUS_SET_DRED_DURATION_REQUEST 4050
      * }
      */
     public static int OPUS_SET_DRED_DURATION_REQUEST() {
         return OPUS_SET_DRED_DURATION_REQUEST;
     }
-    private static final int OPUS_GET_DRED_DURATION_REQUEST = (int)4051L;
+
+    private static final int OPUS_GET_DRED_DURATION_REQUEST = (int) 4051L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_DRED_DURATION_REQUEST 4051
+     * {@snippet lang = c : * #define OPUS_GET_DRED_DURATION_REQUEST 4051
      * }
      */
     public static int OPUS_GET_DRED_DURATION_REQUEST() {
         return OPUS_GET_DRED_DURATION_REQUEST;
     }
-    private static final int OPUS_SET_DNN_BLOB_REQUEST = (int)4052L;
+
+    private static final int OPUS_SET_DNN_BLOB_REQUEST = (int) 4052L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_DNN_BLOB_REQUEST 4052
+     * {@snippet lang = c : * #define OPUS_SET_DNN_BLOB_REQUEST 4052
      * }
      */
     public static int OPUS_SET_DNN_BLOB_REQUEST() {
         return OPUS_SET_DNN_BLOB_REQUEST;
     }
-    private static final int OPUS_SET_OSCE_BWE_REQUEST = (int)4054L;
+
+    private static final int OPUS_SET_OSCE_BWE_REQUEST = (int) 4054L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_OSCE_BWE_REQUEST 4054
+     * {@snippet lang = c : * #define OPUS_SET_OSCE_BWE_REQUEST 4054
      * }
      */
     public static int OPUS_SET_OSCE_BWE_REQUEST() {
         return OPUS_SET_OSCE_BWE_REQUEST;
     }
-    private static final int OPUS_GET_OSCE_BWE_REQUEST = (int)4055L;
+
+    private static final int OPUS_GET_OSCE_BWE_REQUEST = (int) 4055L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_OSCE_BWE_REQUEST 4055
+     * {@snippet lang = c : * #define OPUS_GET_OSCE_BWE_REQUEST 4055
      * }
      */
     public static int OPUS_GET_OSCE_BWE_REQUEST() {
         return OPUS_GET_OSCE_BWE_REQUEST;
     }
-    private static final int OPUS_SET_QEXT_REQUEST = (int)4056L;
+
+    private static final int OPUS_SET_QEXT_REQUEST = (int) 4056L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_QEXT_REQUEST 4056
+     * {@snippet lang = c : * #define OPUS_SET_QEXT_REQUEST 4056
      * }
      */
     public static int OPUS_SET_QEXT_REQUEST() {
         return OPUS_SET_QEXT_REQUEST;
     }
-    private static final int OPUS_GET_QEXT_REQUEST = (int)4057L;
+
+    private static final int OPUS_GET_QEXT_REQUEST = (int) 4057L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_QEXT_REQUEST 4057
+     * {@snippet lang = c : * #define OPUS_GET_QEXT_REQUEST 4057
      * }
      */
     public static int OPUS_GET_QEXT_REQUEST() {
         return OPUS_GET_QEXT_REQUEST;
     }
-    private static final int OPUS_SET_IGNORE_EXTENSIONS_REQUEST = (int)4058L;
+
+    private static final int OPUS_SET_IGNORE_EXTENSIONS_REQUEST = (int) 4058L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SET_IGNORE_EXTENSIONS_REQUEST 4058
+     * {@snippet lang = c : * #define OPUS_SET_IGNORE_EXTENSIONS_REQUEST 4058
      * }
      */
     public static int OPUS_SET_IGNORE_EXTENSIONS_REQUEST() {
         return OPUS_SET_IGNORE_EXTENSIONS_REQUEST;
     }
-    private static final int OPUS_GET_IGNORE_EXTENSIONS_REQUEST = (int)4059L;
+
+    private static final int OPUS_GET_IGNORE_EXTENSIONS_REQUEST = (int) 4059L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_GET_IGNORE_EXTENSIONS_REQUEST 4059
+     * {@snippet lang = c : * #define OPUS_GET_IGNORE_EXTENSIONS_REQUEST 4059
      * }
      */
     public static int OPUS_GET_IGNORE_EXTENSIONS_REQUEST() {
         return OPUS_GET_IGNORE_EXTENSIONS_REQUEST;
     }
-    private static final int OPUS_APPLICATION_VOIP = (int)2048L;
+
+    private static final int OPUS_APPLICATION_VOIP = (int) 2048L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_APPLICATION_VOIP 2048
+     * {@snippet lang = c : * #define OPUS_APPLICATION_VOIP 2048
      * }
      */
     public static int OPUS_APPLICATION_VOIP() {
         return OPUS_APPLICATION_VOIP;
     }
-    private static final int OPUS_APPLICATION_AUDIO = (int)2049L;
+
+    private static final int OPUS_APPLICATION_AUDIO = (int) 2049L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_APPLICATION_AUDIO 2049
+     * {@snippet lang = c : * #define OPUS_APPLICATION_AUDIO 2049
      * }
      */
     public static int OPUS_APPLICATION_AUDIO() {
         return OPUS_APPLICATION_AUDIO;
     }
-    private static final int OPUS_APPLICATION_RESTRICTED_LOWDELAY = (int)2051L;
+
+    private static final int OPUS_APPLICATION_RESTRICTED_LOWDELAY = (int) 2051L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_APPLICATION_RESTRICTED_LOWDELAY 2051
+     * {@snippet lang = c : * #define OPUS_APPLICATION_RESTRICTED_LOWDELAY 2051
      * }
      */
     public static int OPUS_APPLICATION_RESTRICTED_LOWDELAY() {
         return OPUS_APPLICATION_RESTRICTED_LOWDELAY;
     }
-    private static final int OPUS_APPLICATION_RESTRICTED_SILK = (int)2052L;
+
+    private static final int OPUS_APPLICATION_RESTRICTED_SILK = (int) 2052L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_APPLICATION_RESTRICTED_SILK 2052
+     * {@snippet lang = c : * #define OPUS_APPLICATION_RESTRICTED_SILK 2052
      * }
      */
     public static int OPUS_APPLICATION_RESTRICTED_SILK() {
         return OPUS_APPLICATION_RESTRICTED_SILK;
     }
-    private static final int OPUS_APPLICATION_RESTRICTED_CELT = (int)2053L;
+
+    private static final int OPUS_APPLICATION_RESTRICTED_CELT = (int) 2053L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_APPLICATION_RESTRICTED_CELT 2053
+     * {@snippet lang = c : * #define OPUS_APPLICATION_RESTRICTED_CELT 2053
      * }
      */
     public static int OPUS_APPLICATION_RESTRICTED_CELT() {
         return OPUS_APPLICATION_RESTRICTED_CELT;
     }
-    private static final int OPUS_SIGNAL_VOICE = (int)3001L;
+
+    private static final int OPUS_SIGNAL_VOICE = (int) 3001L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SIGNAL_VOICE 3001
+     * {@snippet lang = c : * #define OPUS_SIGNAL_VOICE 3001
      * }
      */
     public static int OPUS_SIGNAL_VOICE() {
         return OPUS_SIGNAL_VOICE;
     }
-    private static final int OPUS_SIGNAL_MUSIC = (int)3002L;
+
+    private static final int OPUS_SIGNAL_MUSIC = (int) 3002L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_SIGNAL_MUSIC 3002
+     * {@snippet lang = c : * #define OPUS_SIGNAL_MUSIC 3002
      * }
      */
     public static int OPUS_SIGNAL_MUSIC() {
         return OPUS_SIGNAL_MUSIC;
     }
-    private static final int OPUS_BANDWIDTH_NARROWBAND = (int)1101L;
+
+    private static final int OPUS_BANDWIDTH_NARROWBAND = (int) 1101L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_BANDWIDTH_NARROWBAND 1101
+     * {@snippet lang = c : * #define OPUS_BANDWIDTH_NARROWBAND 1101
      * }
      */
     public static int OPUS_BANDWIDTH_NARROWBAND() {
         return OPUS_BANDWIDTH_NARROWBAND;
     }
-    private static final int OPUS_BANDWIDTH_MEDIUMBAND = (int)1102L;
+
+    private static final int OPUS_BANDWIDTH_MEDIUMBAND = (int) 1102L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_BANDWIDTH_MEDIUMBAND 1102
+     * {@snippet lang = c : * #define OPUS_BANDWIDTH_MEDIUMBAND 1102
      * }
      */
     public static int OPUS_BANDWIDTH_MEDIUMBAND() {
         return OPUS_BANDWIDTH_MEDIUMBAND;
     }
-    private static final int OPUS_BANDWIDTH_WIDEBAND = (int)1103L;
+
+    private static final int OPUS_BANDWIDTH_WIDEBAND = (int) 1103L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_BANDWIDTH_WIDEBAND 1103
+     * {@snippet lang = c : * #define OPUS_BANDWIDTH_WIDEBAND 1103
      * }
      */
     public static int OPUS_BANDWIDTH_WIDEBAND() {
         return OPUS_BANDWIDTH_WIDEBAND;
     }
-    private static final int OPUS_BANDWIDTH_SUPERWIDEBAND = (int)1104L;
+
+    private static final int OPUS_BANDWIDTH_SUPERWIDEBAND = (int) 1104L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_BANDWIDTH_SUPERWIDEBAND 1104
+     * {@snippet lang = c : * #define OPUS_BANDWIDTH_SUPERWIDEBAND 1104
      * }
      */
     public static int OPUS_BANDWIDTH_SUPERWIDEBAND() {
         return OPUS_BANDWIDTH_SUPERWIDEBAND;
     }
-    private static final int OPUS_BANDWIDTH_FULLBAND = (int)1105L;
+
+    private static final int OPUS_BANDWIDTH_FULLBAND = (int) 1105L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_BANDWIDTH_FULLBAND 1105
+     * {@snippet lang = c : * #define OPUS_BANDWIDTH_FULLBAND 1105
      * }
      */
     public static int OPUS_BANDWIDTH_FULLBAND() {
         return OPUS_BANDWIDTH_FULLBAND;
     }
-    private static final int OPUS_FRAMESIZE_ARG = (int)5000L;
+
+    private static final int OPUS_FRAMESIZE_ARG = (int) 5000L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_FRAMESIZE_ARG 5000
+     * {@snippet lang = c : * #define OPUS_FRAMESIZE_ARG 5000
      * }
      */
     public static int OPUS_FRAMESIZE_ARG() {
         return OPUS_FRAMESIZE_ARG;
     }
-    private static final int OPUS_FRAMESIZE_2_5_MS = (int)5001L;
+
+    private static final int OPUS_FRAMESIZE_2_5_MS = (int) 5001L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_FRAMESIZE_2_5_MS 5001
+     * {@snippet lang = c : * #define OPUS_FRAMESIZE_2_5_MS 5001
      * }
      */
     public static int OPUS_FRAMESIZE_2_5_MS() {
         return OPUS_FRAMESIZE_2_5_MS;
     }
-    private static final int OPUS_FRAMESIZE_5_MS = (int)5002L;
+
+    private static final int OPUS_FRAMESIZE_5_MS = (int) 5002L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_FRAMESIZE_5_MS 5002
+     * {@snippet lang = c : * #define OPUS_FRAMESIZE_5_MS 5002
      * }
      */
     public static int OPUS_FRAMESIZE_5_MS() {
         return OPUS_FRAMESIZE_5_MS;
     }
-    private static final int OPUS_FRAMESIZE_10_MS = (int)5003L;
+
+    private static final int OPUS_FRAMESIZE_10_MS = (int) 5003L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_FRAMESIZE_10_MS 5003
+     * {@snippet lang = c : * #define OPUS_FRAMESIZE_10_MS 5003
      * }
      */
     public static int OPUS_FRAMESIZE_10_MS() {
         return OPUS_FRAMESIZE_10_MS;
     }
-    private static final int OPUS_FRAMESIZE_20_MS = (int)5004L;
+
+    private static final int OPUS_FRAMESIZE_20_MS = (int) 5004L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_FRAMESIZE_20_MS 5004
+     * {@snippet lang = c : * #define OPUS_FRAMESIZE_20_MS 5004
      * }
      */
     public static int OPUS_FRAMESIZE_20_MS() {
         return OPUS_FRAMESIZE_20_MS;
     }
-    private static final int OPUS_FRAMESIZE_40_MS = (int)5005L;
+
+    private static final int OPUS_FRAMESIZE_40_MS = (int) 5005L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_FRAMESIZE_40_MS 5005
+     * {@snippet lang = c : * #define OPUS_FRAMESIZE_40_MS 5005
      * }
      */
     public static int OPUS_FRAMESIZE_40_MS() {
         return OPUS_FRAMESIZE_40_MS;
     }
-    private static final int OPUS_FRAMESIZE_60_MS = (int)5006L;
+
+    private static final int OPUS_FRAMESIZE_60_MS = (int) 5006L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_FRAMESIZE_60_MS 5006
+     * {@snippet lang = c : * #define OPUS_FRAMESIZE_60_MS 5006
      * }
      */
     public static int OPUS_FRAMESIZE_60_MS() {
         return OPUS_FRAMESIZE_60_MS;
     }
-    private static final int OPUS_FRAMESIZE_80_MS = (int)5007L;
+
+    private static final int OPUS_FRAMESIZE_80_MS = (int) 5007L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_FRAMESIZE_80_MS 5007
+     * {@snippet lang = c : * #define OPUS_FRAMESIZE_80_MS 5007
      * }
      */
     public static int OPUS_FRAMESIZE_80_MS() {
         return OPUS_FRAMESIZE_80_MS;
     }
-    private static final int OPUS_FRAMESIZE_100_MS = (int)5008L;
+
+    private static final int OPUS_FRAMESIZE_100_MS = (int) 5008L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_FRAMESIZE_100_MS 5008
+     * {@snippet lang = c : * #define OPUS_FRAMESIZE_100_MS 5008
      * }
      */
     public static int OPUS_FRAMESIZE_100_MS() {
         return OPUS_FRAMESIZE_100_MS;
     }
-    private static final int OPUS_FRAMESIZE_120_MS = (int)5009L;
+
+    private static final int OPUS_FRAMESIZE_120_MS = (int) 5009L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_FRAMESIZE_120_MS 5009
+     * {@snippet lang = c : * #define OPUS_FRAMESIZE_120_MS 5009
      * }
      */
     public static int OPUS_FRAMESIZE_120_MS() {
         return OPUS_FRAMESIZE_120_MS;
     }
-    private static final int OPUS_RESET_STATE = (int)4028L;
+
+    private static final int OPUS_RESET_STATE = (int) 4028L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_RESET_STATE 4028
+     * {@snippet lang = c : * #define OPUS_RESET_STATE 4028
      * }
      */
     public static int OPUS_RESET_STATE() {
         return OPUS_RESET_STATE;
     }
+
     /**
-     * {@snippet lang=c :
-     * typedef int opus_int32
+     * {@snippet lang = c : * typedef int opus_int32
      * }
      */
     public static final OfInt opus_int32 = opus_h.C_INT;
     /**
-     * {@snippet lang=c :
-     * typedef unsigned int opus_uint32
+     * {@snippet lang = c : * typedef unsigned int opus_uint32
      * }
      */
     public static final OfInt opus_uint32 = opus_h.C_INT;
     /**
-     * {@snippet lang=c :
-     * typedef short opus_int16
+     * {@snippet lang = c : * typedef short opus_int16
      * }
      */
     public static final OfShort opus_int16 = opus_h.C_SHORT;
     /**
-     * {@snippet lang=c :
-     * typedef unsigned short opus_uint16
+     * {@snippet lang = c : * typedef unsigned short opus_uint16
      * }
      */
     public static final OfShort opus_uint16 = opus_h.C_SHORT;
 
     private static class opus_strerror {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_POINTER,
-            opus_h.C_INT
-        );
+                opus_h.C_POINTER,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_strerror");
 
@@ -719,8 +786,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * const char *opus_strerror(int error)
+     * {@snippet lang = c : * const char *opus_strerror(int error)
      * }
      */
     public static FunctionDescriptor opus_strerror$descriptor() {
@@ -729,8 +795,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * const char *opus_strerror(int error)
+     * {@snippet lang = c : * const char *opus_strerror(int error)
      * }
      */
     public static MethodHandle opus_strerror$handle() {
@@ -739,8 +804,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * const char *opus_strerror(int error)
+     * {@snippet lang = c : * const char *opus_strerror(int error)
      * }
      */
     public static MemorySegment opus_strerror$address() {
@@ -748,8 +812,7 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * const char *opus_strerror(int error)
+     * {@snippet lang = c : * const char *opus_strerror(int error)
      * }
      */
     public static MemorySegment opus_strerror(int error) {
@@ -758,17 +821,17 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_strerror", error);
             }
-            return (MemorySegment)mh$.invokeExact(error);
+            return (MemorySegment) mh$.invokeExact(error);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_get_version_string {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_POINTER    );
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_get_version_string");
 
@@ -777,8 +840,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * const char *opus_get_version_string()
+     * {@snippet lang = c : * const char *opus_get_version_string()
      * }
      */
     public static FunctionDescriptor opus_get_version_string$descriptor() {
@@ -787,8 +849,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * const char *opus_get_version_string()
+     * {@snippet lang = c : * const char *opus_get_version_string()
      * }
      */
     public static MethodHandle opus_get_version_string$handle() {
@@ -797,8 +858,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * const char *opus_get_version_string()
+     * {@snippet lang = c : * const char *opus_get_version_string()
      * }
      */
     public static MemorySegment opus_get_version_string$address() {
@@ -806,8 +866,7 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * const char *opus_get_version_string()
+     * {@snippet lang = c : * const char *opus_get_version_string()
      * }
      */
     public static MemorySegment opus_get_version_string() {
@@ -816,19 +875,18 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_get_version_string");
             }
-            return (MemorySegment)mh$.invokeExact();
+            return (MemorySegment) mh$.invokeExact();
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_encoder_get_size {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_encoder_get_size");
 
@@ -837,8 +895,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_encoder_get_size(int channels)
+     * {@snippet lang = c : * int opus_encoder_get_size(int channels)
      * }
      */
     public static FunctionDescriptor opus_encoder_get_size$descriptor() {
@@ -847,8 +904,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_encoder_get_size(int channels)
+     * {@snippet lang = c : * int opus_encoder_get_size(int channels)
      * }
      */
     public static MethodHandle opus_encoder_get_size$handle() {
@@ -857,8 +913,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_encoder_get_size(int channels)
+     * {@snippet lang = c : * int opus_encoder_get_size(int channels)
      * }
      */
     public static MemorySegment opus_encoder_get_size$address() {
@@ -866,8 +921,7 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_encoder_get_size(int channels)
+     * {@snippet lang = c : * int opus_encoder_get_size(int channels)
      * }
      */
     public static int opus_encoder_get_size(int channels) {
@@ -876,22 +930,21 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_encoder_get_size", channels);
             }
-            return (int)mh$.invokeExact(channels);
+            return (int) mh$.invokeExact(channels);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_encoder_create {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_INT,
-            opus_h.C_INT,
-            opus_h.C_POINTER
-        );
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_INT,
+                opus_h.C_INT,
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_encoder_create");
 
@@ -900,8 +953,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * OpusEncoder *opus_encoder_create(opus_int32 Fs, int channels, int application, int *error)
+     * {@snippet lang = c
+     * : * OpusEncoder *opus_encoder_create(opus_int32 Fs, int channels, int application, int *error)
      * }
      */
     public static FunctionDescriptor opus_encoder_create$descriptor() {
@@ -910,8 +963,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * OpusEncoder *opus_encoder_create(opus_int32 Fs, int channels, int application, int *error)
+     * {@snippet lang = c
+     * : * OpusEncoder *opus_encoder_create(opus_int32 Fs, int channels, int application, int *error)
      * }
      */
     public static MethodHandle opus_encoder_create$handle() {
@@ -920,8 +973,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * OpusEncoder *opus_encoder_create(opus_int32 Fs, int channels, int application, int *error)
+     * {@snippet lang = c
+     * : * OpusEncoder *opus_encoder_create(opus_int32 Fs, int channels, int application, int *error)
      * }
      */
     public static MemorySegment opus_encoder_create$address() {
@@ -929,8 +982,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * OpusEncoder *opus_encoder_create(opus_int32 Fs, int channels, int application, int *error)
+     * {@snippet lang = c
+     * : * OpusEncoder *opus_encoder_create(opus_int32 Fs, int channels, int application, int *error)
      * }
      */
     public static MemorySegment opus_encoder_create(int Fs, int channels, int application, MemorySegment error) {
@@ -939,22 +992,21 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_encoder_create", Fs, channels, application, error);
             }
-            return (MemorySegment)mh$.invokeExact(Fs, channels, application, error);
+            return (MemorySegment) mh$.invokeExact(Fs, channels, application, error);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_encoder_init {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_INT,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_INT,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_encoder_init");
 
@@ -963,8 +1015,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_encoder_init(OpusEncoder *st, opus_int32 Fs, int channels, int application)
+     * {@snippet lang = c
+     * : * int opus_encoder_init(OpusEncoder *st, opus_int32 Fs, int channels, int application)
      * }
      */
     public static FunctionDescriptor opus_encoder_init$descriptor() {
@@ -973,8 +1025,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_encoder_init(OpusEncoder *st, opus_int32 Fs, int channels, int application)
+     * {@snippet lang = c
+     * : * int opus_encoder_init(OpusEncoder *st, opus_int32 Fs, int channels, int application)
      * }
      */
     public static MethodHandle opus_encoder_init$handle() {
@@ -983,8 +1035,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_encoder_init(OpusEncoder *st, opus_int32 Fs, int channels, int application)
+     * {@snippet lang = c
+     * : * int opus_encoder_init(OpusEncoder *st, opus_int32 Fs, int channels, int application)
      * }
      */
     public static MemorySegment opus_encoder_init$address() {
@@ -992,8 +1044,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_encoder_init(OpusEncoder *st, opus_int32 Fs, int channels, int application)
+     * {@snippet lang = c
+     * : * int opus_encoder_init(OpusEncoder *st, opus_int32 Fs, int channels, int application)
      * }
      */
     public static int opus_encoder_init(MemorySegment st, int Fs, int channels, int application) {
@@ -1002,23 +1054,22 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_encoder_init", st, Fs, channels, application);
             }
-            return (int)mh$.invokeExact(st, Fs, channels, application);
+            return (int) mh$.invokeExact(st, Fs, channels, application);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_encode {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_encode");
 
@@ -1027,8 +1078,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * opus_int32 opus_encode(OpusEncoder *st, const opus_int16 *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
+     * {@snippet lang = c
+     * : * opus_int32 opus_encode(OpusEncoder *st, const opus_int16 *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
      * }
      */
     public static FunctionDescriptor opus_encode$descriptor() {
@@ -1037,8 +1088,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * opus_int32 opus_encode(OpusEncoder *st, const opus_int16 *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
+     * {@snippet lang = c
+     * : * opus_int32 opus_encode(OpusEncoder *st, const opus_int16 *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
      * }
      */
     public static MethodHandle opus_encode$handle() {
@@ -1047,8 +1098,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * opus_int32 opus_encode(OpusEncoder *st, const opus_int16 *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
+     * {@snippet lang = c
+     * : * opus_int32 opus_encode(OpusEncoder *st, const opus_int16 *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
      * }
      */
     public static MemorySegment opus_encode$address() {
@@ -1056,33 +1107,33 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * opus_int32 opus_encode(OpusEncoder *st, const opus_int16 *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
+     * {@snippet lang = c
+     * : * opus_int32 opus_encode(OpusEncoder *st, const opus_int16 *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
      * }
      */
-    public static int opus_encode(MemorySegment st, MemorySegment pcm, int frame_size, MemorySegment data, int max_data_bytes) {
+    public static int opus_encode(MemorySegment st, MemorySegment pcm, int frame_size, MemorySegment data,
+            int max_data_bytes) {
         var mh$ = opus_encode.HANDLE;
         try {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_encode", st, pcm, frame_size, data, max_data_bytes);
             }
-            return (int)mh$.invokeExact(st, pcm, frame_size, data, max_data_bytes);
+            return (int) mh$.invokeExact(st, pcm, frame_size, data, max_data_bytes);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_encode24 {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_encode24");
 
@@ -1091,8 +1142,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * opus_int32 opus_encode24(OpusEncoder *st, const opus_int32 *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
+     * {@snippet lang = c
+     * : * opus_int32 opus_encode24(OpusEncoder *st, const opus_int32 *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
      * }
      */
     public static FunctionDescriptor opus_encode24$descriptor() {
@@ -1101,8 +1152,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * opus_int32 opus_encode24(OpusEncoder *st, const opus_int32 *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
+     * {@snippet lang = c
+     * : * opus_int32 opus_encode24(OpusEncoder *st, const opus_int32 *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
      * }
      */
     public static MethodHandle opus_encode24$handle() {
@@ -1111,8 +1162,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * opus_int32 opus_encode24(OpusEncoder *st, const opus_int32 *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
+     * {@snippet lang = c
+     * : * opus_int32 opus_encode24(OpusEncoder *st, const opus_int32 *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
      * }
      */
     public static MemorySegment opus_encode24$address() {
@@ -1120,33 +1171,33 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * opus_int32 opus_encode24(OpusEncoder *st, const opus_int32 *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
+     * {@snippet lang = c
+     * : * opus_int32 opus_encode24(OpusEncoder *st, const opus_int32 *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
      * }
      */
-    public static int opus_encode24(MemorySegment st, MemorySegment pcm, int frame_size, MemorySegment data, int max_data_bytes) {
+    public static int opus_encode24(MemorySegment st, MemorySegment pcm, int frame_size, MemorySegment data,
+            int max_data_bytes) {
         var mh$ = opus_encode24.HANDLE;
         try {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_encode24", st, pcm, frame_size, data, max_data_bytes);
             }
-            return (int)mh$.invokeExact(st, pcm, frame_size, data, max_data_bytes);
+            return (int) mh$.invokeExact(st, pcm, frame_size, data, max_data_bytes);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_encode_float {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_encode_float");
 
@@ -1155,8 +1206,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * opus_int32 opus_encode_float(OpusEncoder *st, const float *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
+     * {@snippet lang = c
+     * : * opus_int32 opus_encode_float(OpusEncoder *st, const float *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
      * }
      */
     public static FunctionDescriptor opus_encode_float$descriptor() {
@@ -1165,8 +1216,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * opus_int32 opus_encode_float(OpusEncoder *st, const float *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
+     * {@snippet lang = c
+     * : * opus_int32 opus_encode_float(OpusEncoder *st, const float *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
      * }
      */
     public static MethodHandle opus_encode_float$handle() {
@@ -1175,8 +1226,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * opus_int32 opus_encode_float(OpusEncoder *st, const float *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
+     * {@snippet lang = c
+     * : * opus_int32 opus_encode_float(OpusEncoder *st, const float *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
      * }
      */
     public static MemorySegment opus_encode_float$address() {
@@ -1184,28 +1235,28 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * opus_int32 opus_encode_float(OpusEncoder *st, const float *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
+     * {@snippet lang = c
+     * : * opus_int32 opus_encode_float(OpusEncoder *st, const float *pcm, int frame_size, unsigned char *data, opus_int32 max_data_bytes)
      * }
      */
-    public static int opus_encode_float(MemorySegment st, MemorySegment pcm, int frame_size, MemorySegment data, int max_data_bytes) {
+    public static int opus_encode_float(MemorySegment st, MemorySegment pcm, int frame_size, MemorySegment data,
+            int max_data_bytes) {
         var mh$ = opus_encode_float.HANDLE;
         try {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_encode_float", st, pcm, frame_size, data, max_data_bytes);
             }
-            return (int)mh$.invokeExact(st, pcm, frame_size, data, max_data_bytes);
+            return (int) mh$.invokeExact(st, pcm, frame_size, data, max_data_bytes);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_encoder_destroy {
         public static final FunctionDescriptor DESC = FunctionDescriptor.ofVoid(
-            opus_h.C_POINTER
-        );
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_encoder_destroy");
 
@@ -1214,8 +1265,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * void opus_encoder_destroy(OpusEncoder *st)
+     * {@snippet lang = c : * void opus_encoder_destroy(OpusEncoder *st)
      * }
      */
     public static FunctionDescriptor opus_encoder_destroy$descriptor() {
@@ -1224,8 +1274,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * void opus_encoder_destroy(OpusEncoder *st)
+     * {@snippet lang = c : * void opus_encoder_destroy(OpusEncoder *st)
      * }
      */
     public static MethodHandle opus_encoder_destroy$handle() {
@@ -1234,8 +1283,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * void opus_encoder_destroy(OpusEncoder *st)
+     * {@snippet lang = c : * void opus_encoder_destroy(OpusEncoder *st)
      * }
      */
     public static MemorySegment opus_encoder_destroy$address() {
@@ -1243,8 +1291,7 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * void opus_encoder_destroy(OpusEncoder *st)
+     * {@snippet lang = c : * void opus_encoder_destroy(OpusEncoder *st)
      * }
      */
     public static void opus_encoder_destroy(MemorySegment st) {
@@ -1255,24 +1302,23 @@ public class opus_h extends opus_h$shared {
             }
             mh$.invokeExact(st);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     /**
      * Variadic invoker class for:
-     * {@snippet lang=c :
-     * int opus_encoder_ctl(OpusEncoder *st, int request, ...)
+     * {@snippet lang = c
+     * : * int opus_encoder_ctl(OpusEncoder *st, int request, ...)
      * }
      */
     public static class opus_encoder_ctl {
         private static final FunctionDescriptor BASE_DESC = FunctionDescriptor.of(
                 opus_h.C_INT,
                 opus_h.C_POINTER,
-                opus_h.C_INT
-            );
+                opus_h.C_INT);
         private static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_encoder_ctl");
 
         private final MethodHandle handle;
@@ -1287,8 +1333,8 @@ public class opus_h extends opus_h$shared {
 
         /**
          * Variadic invoker factory for:
-         * {@snippet lang=c :
-         * int opus_encoder_ctl(OpusEncoder *st, int request, ...)
+         * {@snippet lang = c
+         * : * int opus_encoder_ctl(OpusEncoder *st, int request, ...)
          * }
          */
         public static opus_encoder_ctl makeInvoker(MemoryLayout... layouts) {
@@ -1326,19 +1372,18 @@ public class opus_h extends opus_h$shared {
                     traceDowncall("opus_encoder_ctl", st, request, x2);
                 }
                 return (int) spreader.invokeExact(st, request, x2);
-            } catch(IllegalArgumentException | ClassCastException ex$)  {
+            } catch (IllegalArgumentException | ClassCastException ex$) {
                 throw ex$; // rethrow IAE from passing wrong number/type of args
             } catch (Throwable ex$) {
-               throw new AssertionError("should not reach here", ex$);
+                throw new AssertionError("should not reach here", ex$);
             }
         }
     }
 
     private static class opus_decoder_get_size {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_decoder_get_size");
 
@@ -1347,8 +1392,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_decoder_get_size(int channels)
+     * {@snippet lang = c : * int opus_decoder_get_size(int channels)
      * }
      */
     public static FunctionDescriptor opus_decoder_get_size$descriptor() {
@@ -1357,8 +1401,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_decoder_get_size(int channels)
+     * {@snippet lang = c : * int opus_decoder_get_size(int channels)
      * }
      */
     public static MethodHandle opus_decoder_get_size$handle() {
@@ -1367,8 +1410,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_decoder_get_size(int channels)
+     * {@snippet lang = c : * int opus_decoder_get_size(int channels)
      * }
      */
     public static MemorySegment opus_decoder_get_size$address() {
@@ -1376,8 +1418,7 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_decoder_get_size(int channels)
+     * {@snippet lang = c : * int opus_decoder_get_size(int channels)
      * }
      */
     public static int opus_decoder_get_size(int channels) {
@@ -1386,21 +1427,20 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_decoder_get_size", channels);
             }
-            return (int)mh$.invokeExact(channels);
+            return (int) mh$.invokeExact(channels);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_decoder_create {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_INT,
-            opus_h.C_POINTER
-        );
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_INT,
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_decoder_create");
 
@@ -1409,8 +1449,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * OpusDecoder *opus_decoder_create(opus_int32 Fs, int channels, int *error)
+     * {@snippet lang = c
+     * : * OpusDecoder *opus_decoder_create(opus_int32 Fs, int channels, int *error)
      * }
      */
     public static FunctionDescriptor opus_decoder_create$descriptor() {
@@ -1419,8 +1459,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * OpusDecoder *opus_decoder_create(opus_int32 Fs, int channels, int *error)
+     * {@snippet lang = c
+     * : * OpusDecoder *opus_decoder_create(opus_int32 Fs, int channels, int *error)
      * }
      */
     public static MethodHandle opus_decoder_create$handle() {
@@ -1429,8 +1469,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * OpusDecoder *opus_decoder_create(opus_int32 Fs, int channels, int *error)
+     * {@snippet lang = c
+     * : * OpusDecoder *opus_decoder_create(opus_int32 Fs, int channels, int *error)
      * }
      */
     public static MemorySegment opus_decoder_create$address() {
@@ -1438,8 +1478,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * OpusDecoder *opus_decoder_create(opus_int32 Fs, int channels, int *error)
+     * {@snippet lang = c
+     * : * OpusDecoder *opus_decoder_create(opus_int32 Fs, int channels, int *error)
      * }
      */
     public static MemorySegment opus_decoder_create(int Fs, int channels, MemorySegment error) {
@@ -1448,21 +1488,20 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_decoder_create", Fs, channels, error);
             }
-            return (MemorySegment)mh$.invokeExact(Fs, channels, error);
+            return (MemorySegment) mh$.invokeExact(Fs, channels, error);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_decoder_init {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_decoder_init");
 
@@ -1471,8 +1510,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_decoder_init(OpusDecoder *st, opus_int32 Fs, int channels)
+     * {@snippet lang = c
+     * : * int opus_decoder_init(OpusDecoder *st, opus_int32 Fs, int channels)
      * }
      */
     public static FunctionDescriptor opus_decoder_init$descriptor() {
@@ -1481,8 +1520,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_decoder_init(OpusDecoder *st, opus_int32 Fs, int channels)
+     * {@snippet lang = c
+     * : * int opus_decoder_init(OpusDecoder *st, opus_int32 Fs, int channels)
      * }
      */
     public static MethodHandle opus_decoder_init$handle() {
@@ -1491,8 +1530,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_decoder_init(OpusDecoder *st, opus_int32 Fs, int channels)
+     * {@snippet lang = c
+     * : * int opus_decoder_init(OpusDecoder *st, opus_int32 Fs, int channels)
      * }
      */
     public static MemorySegment opus_decoder_init$address() {
@@ -1500,8 +1539,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_decoder_init(OpusDecoder *st, opus_int32 Fs, int channels)
+     * {@snippet lang = c
+     * : * int opus_decoder_init(OpusDecoder *st, opus_int32 Fs, int channels)
      * }
      */
     public static int opus_decoder_init(MemorySegment st, int Fs, int channels) {
@@ -1510,24 +1549,23 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_decoder_init", st, Fs, channels);
             }
-            return (int)mh$.invokeExact(st, Fs, channels);
+            return (int) mh$.invokeExact(st, Fs, channels);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_decode {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_decode");
 
@@ -1536,8 +1574,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_decode(OpusDecoder *st, const unsigned char *data, opus_int32 len, opus_int16 *pcm, int frame_size, int decode_fec)
+     * {@snippet lang = c
+     * : * int opus_decode(OpusDecoder *st, const unsigned char *data, opus_int32 len, opus_int16 *pcm, int frame_size, int decode_fec)
      * }
      */
     public static FunctionDescriptor opus_decode$descriptor() {
@@ -1546,8 +1584,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_decode(OpusDecoder *st, const unsigned char *data, opus_int32 len, opus_int16 *pcm, int frame_size, int decode_fec)
+     * {@snippet lang = c
+     * : * int opus_decode(OpusDecoder *st, const unsigned char *data, opus_int32 len, opus_int16 *pcm, int frame_size, int decode_fec)
      * }
      */
     public static MethodHandle opus_decode$handle() {
@@ -1556,8 +1594,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_decode(OpusDecoder *st, const unsigned char *data, opus_int32 len, opus_int16 *pcm, int frame_size, int decode_fec)
+     * {@snippet lang = c
+     * : * int opus_decode(OpusDecoder *st, const unsigned char *data, opus_int32 len, opus_int16 *pcm, int frame_size, int decode_fec)
      * }
      */
     public static MemorySegment opus_decode$address() {
@@ -1565,34 +1603,34 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_decode(OpusDecoder *st, const unsigned char *data, opus_int32 len, opus_int16 *pcm, int frame_size, int decode_fec)
+     * {@snippet lang = c
+     * : * int opus_decode(OpusDecoder *st, const unsigned char *data, opus_int32 len, opus_int16 *pcm, int frame_size, int decode_fec)
      * }
      */
-    public static int opus_decode(MemorySegment st, MemorySegment data, int len, MemorySegment pcm, int frame_size, int decode_fec) {
+    public static int opus_decode(MemorySegment st, MemorySegment data, int len, MemorySegment pcm, int frame_size,
+            int decode_fec) {
         var mh$ = opus_decode.HANDLE;
         try {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_decode", st, data, len, pcm, frame_size, decode_fec);
             }
-            return (int)mh$.invokeExact(st, data, len, pcm, frame_size, decode_fec);
+            return (int) mh$.invokeExact(st, data, len, pcm, frame_size, decode_fec);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_decode24 {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_decode24");
 
@@ -1601,8 +1639,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_decode24(OpusDecoder *st, const unsigned char *data, opus_int32 len, opus_int32 *pcm, int frame_size, int decode_fec)
+     * {@snippet lang = c
+     * : * int opus_decode24(OpusDecoder *st, const unsigned char *data, opus_int32 len, opus_int32 *pcm, int frame_size, int decode_fec)
      * }
      */
     public static FunctionDescriptor opus_decode24$descriptor() {
@@ -1611,8 +1649,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_decode24(OpusDecoder *st, const unsigned char *data, opus_int32 len, opus_int32 *pcm, int frame_size, int decode_fec)
+     * {@snippet lang = c
+     * : * int opus_decode24(OpusDecoder *st, const unsigned char *data, opus_int32 len, opus_int32 *pcm, int frame_size, int decode_fec)
      * }
      */
     public static MethodHandle opus_decode24$handle() {
@@ -1621,8 +1659,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_decode24(OpusDecoder *st, const unsigned char *data, opus_int32 len, opus_int32 *pcm, int frame_size, int decode_fec)
+     * {@snippet lang = c
+     * : * int opus_decode24(OpusDecoder *st, const unsigned char *data, opus_int32 len, opus_int32 *pcm, int frame_size, int decode_fec)
      * }
      */
     public static MemorySegment opus_decode24$address() {
@@ -1630,34 +1668,34 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_decode24(OpusDecoder *st, const unsigned char *data, opus_int32 len, opus_int32 *pcm, int frame_size, int decode_fec)
+     * {@snippet lang = c
+     * : * int opus_decode24(OpusDecoder *st, const unsigned char *data, opus_int32 len, opus_int32 *pcm, int frame_size, int decode_fec)
      * }
      */
-    public static int opus_decode24(MemorySegment st, MemorySegment data, int len, MemorySegment pcm, int frame_size, int decode_fec) {
+    public static int opus_decode24(MemorySegment st, MemorySegment data, int len, MemorySegment pcm, int frame_size,
+            int decode_fec) {
         var mh$ = opus_decode24.HANDLE;
         try {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_decode24", st, data, len, pcm, frame_size, decode_fec);
             }
-            return (int)mh$.invokeExact(st, data, len, pcm, frame_size, decode_fec);
+            return (int) mh$.invokeExact(st, data, len, pcm, frame_size, decode_fec);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_decode_float {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_decode_float");
 
@@ -1666,8 +1704,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_decode_float(OpusDecoder *st, const unsigned char *data, opus_int32 len, float *pcm, int frame_size, int decode_fec)
+     * {@snippet lang = c
+     * : * int opus_decode_float(OpusDecoder *st, const unsigned char *data, opus_int32 len, float *pcm, int frame_size, int decode_fec)
      * }
      */
     public static FunctionDescriptor opus_decode_float$descriptor() {
@@ -1676,8 +1714,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_decode_float(OpusDecoder *st, const unsigned char *data, opus_int32 len, float *pcm, int frame_size, int decode_fec)
+     * {@snippet lang = c
+     * : * int opus_decode_float(OpusDecoder *st, const unsigned char *data, opus_int32 len, float *pcm, int frame_size, int decode_fec)
      * }
      */
     public static MethodHandle opus_decode_float$handle() {
@@ -1686,8 +1724,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_decode_float(OpusDecoder *st, const unsigned char *data, opus_int32 len, float *pcm, int frame_size, int decode_fec)
+     * {@snippet lang = c
+     * : * int opus_decode_float(OpusDecoder *st, const unsigned char *data, opus_int32 len, float *pcm, int frame_size, int decode_fec)
      * }
      */
     public static MemorySegment opus_decode_float$address() {
@@ -1695,36 +1733,36 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_decode_float(OpusDecoder *st, const unsigned char *data, opus_int32 len, float *pcm, int frame_size, int decode_fec)
+     * {@snippet lang = c
+     * : * int opus_decode_float(OpusDecoder *st, const unsigned char *data, opus_int32 len, float *pcm, int frame_size, int decode_fec)
      * }
      */
-    public static int opus_decode_float(MemorySegment st, MemorySegment data, int len, MemorySegment pcm, int frame_size, int decode_fec) {
+    public static int opus_decode_float(MemorySegment st, MemorySegment data, int len, MemorySegment pcm,
+            int frame_size, int decode_fec) {
         var mh$ = opus_decode_float.HANDLE;
         try {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_decode_float", st, data, len, pcm, frame_size, decode_fec);
             }
-            return (int)mh$.invokeExact(st, data, len, pcm, frame_size, decode_fec);
+            return (int) mh$.invokeExact(st, data, len, pcm, frame_size, decode_fec);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     /**
      * Variadic invoker class for:
-     * {@snippet lang=c :
-     * int opus_decoder_ctl(OpusDecoder *st, int request, ...)
+     * {@snippet lang = c
+     * : * int opus_decoder_ctl(OpusDecoder *st, int request, ...)
      * }
      */
     public static class opus_decoder_ctl {
         private static final FunctionDescriptor BASE_DESC = FunctionDescriptor.of(
                 opus_h.C_INT,
                 opus_h.C_POINTER,
-                opus_h.C_INT
-            );
+                opus_h.C_INT);
         private static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_decoder_ctl");
 
         private final MethodHandle handle;
@@ -1739,8 +1777,8 @@ public class opus_h extends opus_h$shared {
 
         /**
          * Variadic invoker factory for:
-         * {@snippet lang=c :
-         * int opus_decoder_ctl(OpusDecoder *st, int request, ...)
+         * {@snippet lang = c
+         * : * int opus_decoder_ctl(OpusDecoder *st, int request, ...)
          * }
          */
         public static opus_decoder_ctl makeInvoker(MemoryLayout... layouts) {
@@ -1778,18 +1816,17 @@ public class opus_h extends opus_h$shared {
                     traceDowncall("opus_decoder_ctl", st, request, x2);
                 }
                 return (int) spreader.invokeExact(st, request, x2);
-            } catch(IllegalArgumentException | ClassCastException ex$)  {
+            } catch (IllegalArgumentException | ClassCastException ex$) {
                 throw ex$; // rethrow IAE from passing wrong number/type of args
             } catch (Throwable ex$) {
-               throw new AssertionError("should not reach here", ex$);
+                throw new AssertionError("should not reach here", ex$);
             }
         }
     }
 
     private static class opus_decoder_destroy {
         public static final FunctionDescriptor DESC = FunctionDescriptor.ofVoid(
-            opus_h.C_POINTER
-        );
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_decoder_destroy");
 
@@ -1798,8 +1835,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * void opus_decoder_destroy(OpusDecoder *st)
+     * {@snippet lang = c : * void opus_decoder_destroy(OpusDecoder *st)
      * }
      */
     public static FunctionDescriptor opus_decoder_destroy$descriptor() {
@@ -1808,8 +1844,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * void opus_decoder_destroy(OpusDecoder *st)
+     * {@snippet lang = c : * void opus_decoder_destroy(OpusDecoder *st)
      * }
      */
     public static MethodHandle opus_decoder_destroy$handle() {
@@ -1818,8 +1853,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * void opus_decoder_destroy(OpusDecoder *st)
+     * {@snippet lang = c : * void opus_decoder_destroy(OpusDecoder *st)
      * }
      */
     public static MemorySegment opus_decoder_destroy$address() {
@@ -1827,8 +1861,7 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * void opus_decoder_destroy(OpusDecoder *st)
+     * {@snippet lang = c : * void opus_decoder_destroy(OpusDecoder *st)
      * }
      */
     public static void opus_decoder_destroy(MemorySegment st) {
@@ -1839,15 +1872,15 @@ public class opus_h extends opus_h$shared {
             }
             mh$.invokeExact(st);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_dred_decoder_get_size {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT    );
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_dred_decoder_get_size");
 
@@ -1856,8 +1889,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_dred_decoder_get_size()
+     * {@snippet lang = c : * int opus_dred_decoder_get_size()
      * }
      */
     public static FunctionDescriptor opus_dred_decoder_get_size$descriptor() {
@@ -1866,8 +1898,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_dred_decoder_get_size()
+     * {@snippet lang = c : * int opus_dred_decoder_get_size()
      * }
      */
     public static MethodHandle opus_dred_decoder_get_size$handle() {
@@ -1876,8 +1907,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_dred_decoder_get_size()
+     * {@snippet lang = c : * int opus_dred_decoder_get_size()
      * }
      */
     public static MemorySegment opus_dred_decoder_get_size$address() {
@@ -1885,8 +1915,7 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_dred_decoder_get_size()
+     * {@snippet lang = c : * int opus_dred_decoder_get_size()
      * }
      */
     public static int opus_dred_decoder_get_size() {
@@ -1895,19 +1924,18 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_dred_decoder_get_size");
             }
-            return (int)mh$.invokeExact();
+            return (int) mh$.invokeExact();
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_dred_decoder_create {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_POINTER,
-            opus_h.C_POINTER
-        );
+                opus_h.C_POINTER,
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_dred_decoder_create");
 
@@ -1916,8 +1944,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * OpusDREDDecoder *opus_dred_decoder_create(int *error)
+     * {@snippet lang = c : * OpusDREDDecoder *opus_dred_decoder_create(int *error)
      * }
      */
     public static FunctionDescriptor opus_dred_decoder_create$descriptor() {
@@ -1926,8 +1953,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * OpusDREDDecoder *opus_dred_decoder_create(int *error)
+     * {@snippet lang = c : * OpusDREDDecoder *opus_dred_decoder_create(int *error)
      * }
      */
     public static MethodHandle opus_dred_decoder_create$handle() {
@@ -1936,8 +1962,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * OpusDREDDecoder *opus_dred_decoder_create(int *error)
+     * {@snippet lang = c : * OpusDREDDecoder *opus_dred_decoder_create(int *error)
      * }
      */
     public static MemorySegment opus_dred_decoder_create$address() {
@@ -1945,8 +1970,7 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * OpusDREDDecoder *opus_dred_decoder_create(int *error)
+     * {@snippet lang = c : * OpusDREDDecoder *opus_dred_decoder_create(int *error)
      * }
      */
     public static MemorySegment opus_dred_decoder_create(MemorySegment error) {
@@ -1955,19 +1979,18 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_dred_decoder_create", error);
             }
-            return (MemorySegment)mh$.invokeExact(error);
+            return (MemorySegment) mh$.invokeExact(error);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_dred_decoder_init {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_dred_decoder_init");
 
@@ -1976,8 +1999,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_dred_decoder_init(OpusDREDDecoder *dec)
+     * {@snippet lang = c : * int opus_dred_decoder_init(OpusDREDDecoder *dec)
      * }
      */
     public static FunctionDescriptor opus_dred_decoder_init$descriptor() {
@@ -1986,8 +2008,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_dred_decoder_init(OpusDREDDecoder *dec)
+     * {@snippet lang = c : * int opus_dred_decoder_init(OpusDREDDecoder *dec)
      * }
      */
     public static MethodHandle opus_dred_decoder_init$handle() {
@@ -1996,8 +2017,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_dred_decoder_init(OpusDREDDecoder *dec)
+     * {@snippet lang = c : * int opus_dred_decoder_init(OpusDREDDecoder *dec)
      * }
      */
     public static MemorySegment opus_dred_decoder_init$address() {
@@ -2005,8 +2025,7 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_dred_decoder_init(OpusDREDDecoder *dec)
+     * {@snippet lang = c : * int opus_dred_decoder_init(OpusDREDDecoder *dec)
      * }
      */
     public static int opus_dred_decoder_init(MemorySegment dec) {
@@ -2015,18 +2034,17 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_dred_decoder_init", dec);
             }
-            return (int)mh$.invokeExact(dec);
+            return (int) mh$.invokeExact(dec);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_dred_decoder_destroy {
         public static final FunctionDescriptor DESC = FunctionDescriptor.ofVoid(
-            opus_h.C_POINTER
-        );
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_dred_decoder_destroy");
 
@@ -2035,8 +2053,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * void opus_dred_decoder_destroy(OpusDREDDecoder *dec)
+     * {@snippet lang = c : * void opus_dred_decoder_destroy(OpusDREDDecoder *dec)
      * }
      */
     public static FunctionDescriptor opus_dred_decoder_destroy$descriptor() {
@@ -2045,8 +2062,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * void opus_dred_decoder_destroy(OpusDREDDecoder *dec)
+     * {@snippet lang = c : * void opus_dred_decoder_destroy(OpusDREDDecoder *dec)
      * }
      */
     public static MethodHandle opus_dred_decoder_destroy$handle() {
@@ -2055,8 +2071,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * void opus_dred_decoder_destroy(OpusDREDDecoder *dec)
+     * {@snippet lang = c : * void opus_dred_decoder_destroy(OpusDREDDecoder *dec)
      * }
      */
     public static MemorySegment opus_dred_decoder_destroy$address() {
@@ -2064,8 +2079,7 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * void opus_dred_decoder_destroy(OpusDREDDecoder *dec)
+     * {@snippet lang = c : * void opus_dred_decoder_destroy(OpusDREDDecoder *dec)
      * }
      */
     public static void opus_dred_decoder_destroy(MemorySegment dec) {
@@ -2076,24 +2090,23 @@ public class opus_h extends opus_h$shared {
             }
             mh$.invokeExact(dec);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     /**
      * Variadic invoker class for:
-     * {@snippet lang=c :
-     * int opus_dred_decoder_ctl(OpusDREDDecoder *dred_dec, int request, ...)
+     * {@snippet lang = c
+     * : * int opus_dred_decoder_ctl(OpusDREDDecoder *dred_dec, int request, ...)
      * }
      */
     public static class opus_dred_decoder_ctl {
         private static final FunctionDescriptor BASE_DESC = FunctionDescriptor.of(
                 opus_h.C_INT,
                 opus_h.C_POINTER,
-                opus_h.C_INT
-            );
+                opus_h.C_INT);
         private static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_dred_decoder_ctl");
 
         private final MethodHandle handle;
@@ -2108,8 +2121,8 @@ public class opus_h extends opus_h$shared {
 
         /**
          * Variadic invoker factory for:
-         * {@snippet lang=c :
-         * int opus_dred_decoder_ctl(OpusDREDDecoder *dred_dec, int request, ...)
+         * {@snippet lang = c
+         * : * int opus_dred_decoder_ctl(OpusDREDDecoder *dred_dec, int request, ...)
          * }
          */
         public static opus_dred_decoder_ctl makeInvoker(MemoryLayout... layouts) {
@@ -2147,17 +2160,17 @@ public class opus_h extends opus_h$shared {
                     traceDowncall("opus_dred_decoder_ctl", dred_dec, request, x2);
                 }
                 return (int) spreader.invokeExact(dred_dec, request, x2);
-            } catch(IllegalArgumentException | ClassCastException ex$)  {
+            } catch (IllegalArgumentException | ClassCastException ex$) {
                 throw ex$; // rethrow IAE from passing wrong number/type of args
             } catch (Throwable ex$) {
-               throw new AssertionError("should not reach here", ex$);
+                throw new AssertionError("should not reach here", ex$);
             }
         }
     }
 
     private static class opus_dred_get_size {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT    );
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_dred_get_size");
 
@@ -2166,8 +2179,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_dred_get_size()
+     * {@snippet lang = c : * int opus_dred_get_size()
      * }
      */
     public static FunctionDescriptor opus_dred_get_size$descriptor() {
@@ -2176,8 +2188,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_dred_get_size()
+     * {@snippet lang = c : * int opus_dred_get_size()
      * }
      */
     public static MethodHandle opus_dred_get_size$handle() {
@@ -2186,8 +2197,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_dred_get_size()
+     * {@snippet lang = c : * int opus_dred_get_size()
      * }
      */
     public static MemorySegment opus_dred_get_size$address() {
@@ -2195,8 +2205,7 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_dred_get_size()
+     * {@snippet lang = c : * int opus_dred_get_size()
      * }
      */
     public static int opus_dred_get_size() {
@@ -2205,19 +2214,18 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_dred_get_size");
             }
-            return (int)mh$.invokeExact();
+            return (int) mh$.invokeExact();
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_dred_alloc {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_POINTER,
-            opus_h.C_POINTER
-        );
+                opus_h.C_POINTER,
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_dred_alloc");
 
@@ -2226,8 +2234,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * OpusDRED *opus_dred_alloc(int *error)
+     * {@snippet lang = c : * OpusDRED *opus_dred_alloc(int *error)
      * }
      */
     public static FunctionDescriptor opus_dred_alloc$descriptor() {
@@ -2236,8 +2243,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * OpusDRED *opus_dred_alloc(int *error)
+     * {@snippet lang = c : * OpusDRED *opus_dred_alloc(int *error)
      * }
      */
     public static MethodHandle opus_dred_alloc$handle() {
@@ -2246,8 +2252,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * OpusDRED *opus_dred_alloc(int *error)
+     * {@snippet lang = c : * OpusDRED *opus_dred_alloc(int *error)
      * }
      */
     public static MemorySegment opus_dred_alloc$address() {
@@ -2255,8 +2260,7 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * OpusDRED *opus_dred_alloc(int *error)
+     * {@snippet lang = c : * OpusDRED *opus_dred_alloc(int *error)
      * }
      */
     public static MemorySegment opus_dred_alloc(MemorySegment error) {
@@ -2265,18 +2269,17 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_dred_alloc", error);
             }
-            return (MemorySegment)mh$.invokeExact(error);
+            return (MemorySegment) mh$.invokeExact(error);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_dred_free {
         public static final FunctionDescriptor DESC = FunctionDescriptor.ofVoid(
-            opus_h.C_POINTER
-        );
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_dred_free");
 
@@ -2285,8 +2288,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * void opus_dred_free(OpusDRED *dec)
+     * {@snippet lang = c : * void opus_dred_free(OpusDRED *dec)
      * }
      */
     public static FunctionDescriptor opus_dred_free$descriptor() {
@@ -2295,8 +2297,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * void opus_dred_free(OpusDRED *dec)
+     * {@snippet lang = c : * void opus_dred_free(OpusDRED *dec)
      * }
      */
     public static MethodHandle opus_dred_free$handle() {
@@ -2305,8 +2306,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * void opus_dred_free(OpusDRED *dec)
+     * {@snippet lang = c : * void opus_dred_free(OpusDRED *dec)
      * }
      */
     public static MemorySegment opus_dred_free$address() {
@@ -2314,8 +2314,7 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * void opus_dred_free(OpusDRED *dec)
+     * {@snippet lang = c : * void opus_dred_free(OpusDRED *dec)
      * }
      */
     public static void opus_dred_free(MemorySegment dec) {
@@ -2326,24 +2325,23 @@ public class opus_h extends opus_h$shared {
             }
             mh$.invokeExact(dec);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_dred_parse {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_INT,
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_INT,
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_dred_parse");
 
@@ -2352,8 +2350,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_dred_parse(OpusDREDDecoder *dred_dec, OpusDRED *dred, const unsigned char *data, opus_int32 len, opus_int32 max_dred_samples, opus_int32 sampling_rate, int *dred_end, int defer_processing)
+     * {@snippet lang = c
+     * : * int opus_dred_parse(OpusDREDDecoder *dred_dec, OpusDRED *dred, const unsigned char *data, opus_int32 len, opus_int32 max_dred_samples, opus_int32 sampling_rate, int *dred_end, int defer_processing)
      * }
      */
     public static FunctionDescriptor opus_dred_parse$descriptor() {
@@ -2362,8 +2360,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_dred_parse(OpusDREDDecoder *dred_dec, OpusDRED *dred, const unsigned char *data, opus_int32 len, opus_int32 max_dred_samples, opus_int32 sampling_rate, int *dred_end, int defer_processing)
+     * {@snippet lang = c
+     * : * int opus_dred_parse(OpusDREDDecoder *dred_dec, OpusDRED *dred, const unsigned char *data, opus_int32 len, opus_int32 max_dred_samples, opus_int32 sampling_rate, int *dred_end, int defer_processing)
      * }
      */
     public static MethodHandle opus_dred_parse$handle() {
@@ -2372,8 +2370,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_dred_parse(OpusDREDDecoder *dred_dec, OpusDRED *dred, const unsigned char *data, opus_int32 len, opus_int32 max_dred_samples, opus_int32 sampling_rate, int *dred_end, int defer_processing)
+     * {@snippet lang = c
+     * : * int opus_dred_parse(OpusDREDDecoder *dred_dec, OpusDRED *dred, const unsigned char *data, opus_int32 len, opus_int32 max_dred_samples, opus_int32 sampling_rate, int *dred_end, int defer_processing)
      * }
      */
     public static MemorySegment opus_dred_parse$address() {
@@ -2381,31 +2379,33 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_dred_parse(OpusDREDDecoder *dred_dec, OpusDRED *dred, const unsigned char *data, opus_int32 len, opus_int32 max_dred_samples, opus_int32 sampling_rate, int *dred_end, int defer_processing)
+     * {@snippet lang = c
+     * : * int opus_dred_parse(OpusDREDDecoder *dred_dec, OpusDRED *dred, const unsigned char *data, opus_int32 len, opus_int32 max_dred_samples, opus_int32 sampling_rate, int *dred_end, int defer_processing)
      * }
      */
-    public static int opus_dred_parse(MemorySegment dred_dec, MemorySegment dred, MemorySegment data, int len, int max_dred_samples, int sampling_rate, MemorySegment dred_end, int defer_processing) {
+    public static int opus_dred_parse(MemorySegment dred_dec, MemorySegment dred, MemorySegment data, int len,
+            int max_dred_samples, int sampling_rate, MemorySegment dred_end, int defer_processing) {
         var mh$ = opus_dred_parse.HANDLE;
         try {
             if (TRACE_DOWNCALLS) {
-                traceDowncall("opus_dred_parse", dred_dec, dred, data, len, max_dred_samples, sampling_rate, dred_end, defer_processing);
+                traceDowncall("opus_dred_parse", dred_dec, dred, data, len, max_dred_samples, sampling_rate, dred_end,
+                        defer_processing);
             }
-            return (int)mh$.invokeExact(dred_dec, dred, data, len, max_dred_samples, sampling_rate, dred_end, defer_processing);
+            return (int) mh$.invokeExact(dred_dec, dred, data, len, max_dred_samples, sampling_rate, dred_end,
+                    defer_processing);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_dred_process {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_dred_process");
 
@@ -2414,8 +2414,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_dred_process(OpusDREDDecoder *dred_dec, const OpusDRED *src, OpusDRED *dst)
+     * {@snippet lang = c
+     * : * int opus_dred_process(OpusDREDDecoder *dred_dec, const OpusDRED *src, OpusDRED *dst)
      * }
      */
     public static FunctionDescriptor opus_dred_process$descriptor() {
@@ -2424,8 +2424,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_dred_process(OpusDREDDecoder *dred_dec, const OpusDRED *src, OpusDRED *dst)
+     * {@snippet lang = c
+     * : * int opus_dred_process(OpusDREDDecoder *dred_dec, const OpusDRED *src, OpusDRED *dst)
      * }
      */
     public static MethodHandle opus_dred_process$handle() {
@@ -2434,8 +2434,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_dred_process(OpusDREDDecoder *dred_dec, const OpusDRED *src, OpusDRED *dst)
+     * {@snippet lang = c
+     * : * int opus_dred_process(OpusDREDDecoder *dred_dec, const OpusDRED *src, OpusDRED *dst)
      * }
      */
     public static MemorySegment opus_dred_process$address() {
@@ -2443,8 +2443,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_dred_process(OpusDREDDecoder *dred_dec, const OpusDRED *src, OpusDRED *dst)
+     * {@snippet lang = c
+     * : * int opus_dred_process(OpusDREDDecoder *dred_dec, const OpusDRED *src, OpusDRED *dst)
      * }
      */
     public static int opus_dred_process(MemorySegment dred_dec, MemorySegment src, MemorySegment dst) {
@@ -2453,23 +2453,22 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_dred_process", dred_dec, src, dst);
             }
-            return (int)mh$.invokeExact(dred_dec, src, dst);
+            return (int) mh$.invokeExact(dred_dec, src, dst);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_decoder_dred_decode {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_decoder_dred_decode");
 
@@ -2478,8 +2477,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_decoder_dred_decode(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, opus_int16 *pcm, opus_int32 frame_size)
+     * {@snippet lang = c
+     * : * int opus_decoder_dred_decode(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, opus_int16 *pcm, opus_int32 frame_size)
      * }
      */
     public static FunctionDescriptor opus_decoder_dred_decode$descriptor() {
@@ -2488,8 +2487,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_decoder_dred_decode(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, opus_int16 *pcm, opus_int32 frame_size)
+     * {@snippet lang = c
+     * : * int opus_decoder_dred_decode(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, opus_int16 *pcm, opus_int32 frame_size)
      * }
      */
     public static MethodHandle opus_decoder_dred_decode$handle() {
@@ -2498,8 +2497,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_decoder_dred_decode(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, opus_int16 *pcm, opus_int32 frame_size)
+     * {@snippet lang = c
+     * : * int opus_decoder_dred_decode(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, opus_int16 *pcm, opus_int32 frame_size)
      * }
      */
     public static MemorySegment opus_decoder_dred_decode$address() {
@@ -2507,33 +2506,33 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_decoder_dred_decode(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, opus_int16 *pcm, opus_int32 frame_size)
+     * {@snippet lang = c
+     * : * int opus_decoder_dred_decode(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, opus_int16 *pcm, opus_int32 frame_size)
      * }
      */
-    public static int opus_decoder_dred_decode(MemorySegment st, MemorySegment dred, int dred_offset, MemorySegment pcm, int frame_size) {
+    public static int opus_decoder_dred_decode(MemorySegment st, MemorySegment dred, int dred_offset, MemorySegment pcm,
+            int frame_size) {
         var mh$ = opus_decoder_dred_decode.HANDLE;
         try {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_decoder_dred_decode", st, dred, dred_offset, pcm, frame_size);
             }
-            return (int)mh$.invokeExact(st, dred, dred_offset, pcm, frame_size);
+            return (int) mh$.invokeExact(st, dred, dred_offset, pcm, frame_size);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_decoder_dred_decode24 {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_decoder_dred_decode24");
 
@@ -2542,8 +2541,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_decoder_dred_decode24(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, opus_int32 *pcm, opus_int32 frame_size)
+     * {@snippet lang = c
+     * : * int opus_decoder_dred_decode24(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, opus_int32 *pcm, opus_int32 frame_size)
      * }
      */
     public static FunctionDescriptor opus_decoder_dred_decode24$descriptor() {
@@ -2552,8 +2551,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_decoder_dred_decode24(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, opus_int32 *pcm, opus_int32 frame_size)
+     * {@snippet lang = c
+     * : * int opus_decoder_dred_decode24(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, opus_int32 *pcm, opus_int32 frame_size)
      * }
      */
     public static MethodHandle opus_decoder_dred_decode24$handle() {
@@ -2562,8 +2561,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_decoder_dred_decode24(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, opus_int32 *pcm, opus_int32 frame_size)
+     * {@snippet lang = c
+     * : * int opus_decoder_dred_decode24(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, opus_int32 *pcm, opus_int32 frame_size)
      * }
      */
     public static MemorySegment opus_decoder_dred_decode24$address() {
@@ -2571,33 +2570,33 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_decoder_dred_decode24(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, opus_int32 *pcm, opus_int32 frame_size)
+     * {@snippet lang = c
+     * : * int opus_decoder_dred_decode24(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, opus_int32 *pcm, opus_int32 frame_size)
      * }
      */
-    public static int opus_decoder_dred_decode24(MemorySegment st, MemorySegment dred, int dred_offset, MemorySegment pcm, int frame_size) {
+    public static int opus_decoder_dred_decode24(MemorySegment st, MemorySegment dred, int dred_offset,
+            MemorySegment pcm, int frame_size) {
         var mh$ = opus_decoder_dred_decode24.HANDLE;
         try {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_decoder_dred_decode24", st, dred, dred_offset, pcm, frame_size);
             }
-            return (int)mh$.invokeExact(st, dred, dred_offset, pcm, frame_size);
+            return (int) mh$.invokeExact(st, dred, dred_offset, pcm, frame_size);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_decoder_dred_decode_float {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_decoder_dred_decode_float");
 
@@ -2606,8 +2605,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_decoder_dred_decode_float(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, float *pcm, opus_int32 frame_size)
+     * {@snippet lang = c
+     * : * int opus_decoder_dred_decode_float(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, float *pcm, opus_int32 frame_size)
      * }
      */
     public static FunctionDescriptor opus_decoder_dred_decode_float$descriptor() {
@@ -2616,8 +2615,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_decoder_dred_decode_float(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, float *pcm, opus_int32 frame_size)
+     * {@snippet lang = c
+     * : * int opus_decoder_dred_decode_float(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, float *pcm, opus_int32 frame_size)
      * }
      */
     public static MethodHandle opus_decoder_dred_decode_float$handle() {
@@ -2626,8 +2625,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_decoder_dred_decode_float(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, float *pcm, opus_int32 frame_size)
+     * {@snippet lang = c
+     * : * int opus_decoder_dred_decode_float(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, float *pcm, opus_int32 frame_size)
      * }
      */
     public static MemorySegment opus_decoder_dred_decode_float$address() {
@@ -2635,34 +2634,34 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_decoder_dred_decode_float(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, float *pcm, opus_int32 frame_size)
+     * {@snippet lang = c
+     * : * int opus_decoder_dred_decode_float(OpusDecoder *st, const OpusDRED *dred, opus_int32 dred_offset, float *pcm, opus_int32 frame_size)
      * }
      */
-    public static int opus_decoder_dred_decode_float(MemorySegment st, MemorySegment dred, int dred_offset, MemorySegment pcm, int frame_size) {
+    public static int opus_decoder_dred_decode_float(MemorySegment st, MemorySegment dred, int dred_offset,
+            MemorySegment pcm, int frame_size) {
         var mh$ = opus_decoder_dred_decode_float.HANDLE;
         try {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_decoder_dred_decode_float", st, dred, dred_offset, pcm, frame_size);
             }
-            return (int)mh$.invokeExact(st, dred, dred_offset, pcm, frame_size);
+            return (int) mh$.invokeExact(st, dred, dred_offset, pcm, frame_size);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_packet_parse {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_packet_parse");
 
@@ -2671,8 +2670,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_packet_parse(const unsigned char *data, opus_int32 len, unsigned char *out_toc, const unsigned char *frames[48], opus_int16 size[48], int *payload_offset)
+     * {@snippet lang = c
+     * : * int opus_packet_parse(const unsigned char *data, opus_int32 len, unsigned char *out_toc, const unsigned char *frames[48], opus_int16 size[48], int *payload_offset)
      * }
      */
     public static FunctionDescriptor opus_packet_parse$descriptor() {
@@ -2681,8 +2680,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_packet_parse(const unsigned char *data, opus_int32 len, unsigned char *out_toc, const unsigned char *frames[48], opus_int16 size[48], int *payload_offset)
+     * {@snippet lang = c
+     * : * int opus_packet_parse(const unsigned char *data, opus_int32 len, unsigned char *out_toc, const unsigned char *frames[48], opus_int16 size[48], int *payload_offset)
      * }
      */
     public static MethodHandle opus_packet_parse$handle() {
@@ -2691,8 +2690,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_packet_parse(const unsigned char *data, opus_int32 len, unsigned char *out_toc, const unsigned char *frames[48], opus_int16 size[48], int *payload_offset)
+     * {@snippet lang = c
+     * : * int opus_packet_parse(const unsigned char *data, opus_int32 len, unsigned char *out_toc, const unsigned char *frames[48], opus_int16 size[48], int *payload_offset)
      * }
      */
     public static MemorySegment opus_packet_parse$address() {
@@ -2700,29 +2699,29 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_packet_parse(const unsigned char *data, opus_int32 len, unsigned char *out_toc, const unsigned char *frames[48], opus_int16 size[48], int *payload_offset)
+     * {@snippet lang = c
+     * : * int opus_packet_parse(const unsigned char *data, opus_int32 len, unsigned char *out_toc, const unsigned char *frames[48], opus_int16 size[48], int *payload_offset)
      * }
      */
-    public static int opus_packet_parse(MemorySegment data, int len, MemorySegment out_toc, MemorySegment frames, MemorySegment size, MemorySegment payload_offset) {
+    public static int opus_packet_parse(MemorySegment data, int len, MemorySegment out_toc, MemorySegment frames,
+            MemorySegment size, MemorySegment payload_offset) {
         var mh$ = opus_packet_parse.HANDLE;
         try {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_packet_parse", data, len, out_toc, frames, size, payload_offset);
             }
-            return (int)mh$.invokeExact(data, len, out_toc, frames, size, payload_offset);
+            return (int) mh$.invokeExact(data, len, out_toc, frames, size, payload_offset);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_packet_get_bandwidth {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_packet_get_bandwidth");
 
@@ -2731,8 +2730,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_packet_get_bandwidth(const unsigned char *data)
+     * {@snippet lang = c
+     * : * int opus_packet_get_bandwidth(const unsigned char *data)
      * }
      */
     public static FunctionDescriptor opus_packet_get_bandwidth$descriptor() {
@@ -2741,8 +2740,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_packet_get_bandwidth(const unsigned char *data)
+     * {@snippet lang = c
+     * : * int opus_packet_get_bandwidth(const unsigned char *data)
      * }
      */
     public static MethodHandle opus_packet_get_bandwidth$handle() {
@@ -2751,8 +2750,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_packet_get_bandwidth(const unsigned char *data)
+     * {@snippet lang = c
+     * : * int opus_packet_get_bandwidth(const unsigned char *data)
      * }
      */
     public static MemorySegment opus_packet_get_bandwidth$address() {
@@ -2760,8 +2759,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_packet_get_bandwidth(const unsigned char *data)
+     * {@snippet lang = c
+     * : * int opus_packet_get_bandwidth(const unsigned char *data)
      * }
      */
     public static int opus_packet_get_bandwidth(MemorySegment data) {
@@ -2770,20 +2769,19 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_packet_get_bandwidth", data);
             }
-            return (int)mh$.invokeExact(data);
+            return (int) mh$.invokeExact(data);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_packet_get_samples_per_frame {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_packet_get_samples_per_frame");
 
@@ -2792,8 +2790,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_packet_get_samples_per_frame(const unsigned char *data, opus_int32 Fs)
+     * {@snippet lang = c
+     * : * int opus_packet_get_samples_per_frame(const unsigned char *data, opus_int32 Fs)
      * }
      */
     public static FunctionDescriptor opus_packet_get_samples_per_frame$descriptor() {
@@ -2802,8 +2800,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_packet_get_samples_per_frame(const unsigned char *data, opus_int32 Fs)
+     * {@snippet lang = c
+     * : * int opus_packet_get_samples_per_frame(const unsigned char *data, opus_int32 Fs)
      * }
      */
     public static MethodHandle opus_packet_get_samples_per_frame$handle() {
@@ -2812,8 +2810,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_packet_get_samples_per_frame(const unsigned char *data, opus_int32 Fs)
+     * {@snippet lang = c
+     * : * int opus_packet_get_samples_per_frame(const unsigned char *data, opus_int32 Fs)
      * }
      */
     public static MemorySegment opus_packet_get_samples_per_frame$address() {
@@ -2821,8 +2819,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_packet_get_samples_per_frame(const unsigned char *data, opus_int32 Fs)
+     * {@snippet lang = c
+     * : * int opus_packet_get_samples_per_frame(const unsigned char *data, opus_int32 Fs)
      * }
      */
     public static int opus_packet_get_samples_per_frame(MemorySegment data, int Fs) {
@@ -2831,19 +2829,18 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_packet_get_samples_per_frame", data, Fs);
             }
-            return (int)mh$.invokeExact(data, Fs);
+            return (int) mh$.invokeExact(data, Fs);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_packet_get_nb_channels {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_packet_get_nb_channels");
 
@@ -2852,8 +2849,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_packet_get_nb_channels(const unsigned char *data)
+     * {@snippet lang = c
+     * : * int opus_packet_get_nb_channels(const unsigned char *data)
      * }
      */
     public static FunctionDescriptor opus_packet_get_nb_channels$descriptor() {
@@ -2862,8 +2859,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_packet_get_nb_channels(const unsigned char *data)
+     * {@snippet lang = c
+     * : * int opus_packet_get_nb_channels(const unsigned char *data)
      * }
      */
     public static MethodHandle opus_packet_get_nb_channels$handle() {
@@ -2872,8 +2869,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_packet_get_nb_channels(const unsigned char *data)
+     * {@snippet lang = c
+     * : * int opus_packet_get_nb_channels(const unsigned char *data)
      * }
      */
     public static MemorySegment opus_packet_get_nb_channels$address() {
@@ -2881,8 +2878,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_packet_get_nb_channels(const unsigned char *data)
+     * {@snippet lang = c
+     * : * int opus_packet_get_nb_channels(const unsigned char *data)
      * }
      */
     public static int opus_packet_get_nb_channels(MemorySegment data) {
@@ -2891,20 +2888,19 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_packet_get_nb_channels", data);
             }
-            return (int)mh$.invokeExact(data);
+            return (int) mh$.invokeExact(data);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_packet_get_nb_frames {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_packet_get_nb_frames");
 
@@ -2913,8 +2909,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_packet_get_nb_frames(const unsigned char packet[], opus_int32 len)
+     * {@snippet lang = c
+     * : * int opus_packet_get_nb_frames(const unsigned char packet[], opus_int32 len)
      * }
      */
     public static FunctionDescriptor opus_packet_get_nb_frames$descriptor() {
@@ -2923,8 +2919,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_packet_get_nb_frames(const unsigned char packet[], opus_int32 len)
+     * {@snippet lang = c
+     * : * int opus_packet_get_nb_frames(const unsigned char packet[], opus_int32 len)
      * }
      */
     public static MethodHandle opus_packet_get_nb_frames$handle() {
@@ -2933,8 +2929,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_packet_get_nb_frames(const unsigned char packet[], opus_int32 len)
+     * {@snippet lang = c
+     * : * int opus_packet_get_nb_frames(const unsigned char packet[], opus_int32 len)
      * }
      */
     public static MemorySegment opus_packet_get_nb_frames$address() {
@@ -2942,8 +2938,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_packet_get_nb_frames(const unsigned char packet[], opus_int32 len)
+     * {@snippet lang = c
+     * : * int opus_packet_get_nb_frames(const unsigned char packet[], opus_int32 len)
      * }
      */
     public static int opus_packet_get_nb_frames(MemorySegment packet, int len) {
@@ -2952,21 +2948,20 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_packet_get_nb_frames", packet, len);
             }
-            return (int)mh$.invokeExact(packet, len);
+            return (int) mh$.invokeExact(packet, len);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_packet_get_nb_samples {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_packet_get_nb_samples");
 
@@ -2975,8 +2970,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_packet_get_nb_samples(const unsigned char packet[], opus_int32 len, opus_int32 Fs)
+     * {@snippet lang = c
+     * : * int opus_packet_get_nb_samples(const unsigned char packet[], opus_int32 len, opus_int32 Fs)
      * }
      */
     public static FunctionDescriptor opus_packet_get_nb_samples$descriptor() {
@@ -2985,8 +2980,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_packet_get_nb_samples(const unsigned char packet[], opus_int32 len, opus_int32 Fs)
+     * {@snippet lang = c
+     * : * int opus_packet_get_nb_samples(const unsigned char packet[], opus_int32 len, opus_int32 Fs)
      * }
      */
     public static MethodHandle opus_packet_get_nb_samples$handle() {
@@ -2995,8 +2990,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_packet_get_nb_samples(const unsigned char packet[], opus_int32 len, opus_int32 Fs)
+     * {@snippet lang = c
+     * : * int opus_packet_get_nb_samples(const unsigned char packet[], opus_int32 len, opus_int32 Fs)
      * }
      */
     public static MemorySegment opus_packet_get_nb_samples$address() {
@@ -3004,8 +2999,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_packet_get_nb_samples(const unsigned char packet[], opus_int32 len, opus_int32 Fs)
+     * {@snippet lang = c
+     * : * int opus_packet_get_nb_samples(const unsigned char packet[], opus_int32 len, opus_int32 Fs)
      * }
      */
     public static int opus_packet_get_nb_samples(MemorySegment packet, int len, int Fs) {
@@ -3014,20 +3009,19 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_packet_get_nb_samples", packet, len, Fs);
             }
-            return (int)mh$.invokeExact(packet, len, Fs);
+            return (int) mh$.invokeExact(packet, len, Fs);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_packet_has_lbrr {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_packet_has_lbrr");
 
@@ -3036,8 +3030,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_packet_has_lbrr(const unsigned char packet[], opus_int32 len)
+     * {@snippet lang = c
+     * : * int opus_packet_has_lbrr(const unsigned char packet[], opus_int32 len)
      * }
      */
     public static FunctionDescriptor opus_packet_has_lbrr$descriptor() {
@@ -3046,8 +3040,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_packet_has_lbrr(const unsigned char packet[], opus_int32 len)
+     * {@snippet lang = c
+     * : * int opus_packet_has_lbrr(const unsigned char packet[], opus_int32 len)
      * }
      */
     public static MethodHandle opus_packet_has_lbrr$handle() {
@@ -3056,8 +3050,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_packet_has_lbrr(const unsigned char packet[], opus_int32 len)
+     * {@snippet lang = c
+     * : * int opus_packet_has_lbrr(const unsigned char packet[], opus_int32 len)
      * }
      */
     public static MemorySegment opus_packet_has_lbrr$address() {
@@ -3065,8 +3059,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_packet_has_lbrr(const unsigned char packet[], opus_int32 len)
+     * {@snippet lang = c
+     * : * int opus_packet_has_lbrr(const unsigned char packet[], opus_int32 len)
      * }
      */
     public static int opus_packet_has_lbrr(MemorySegment packet, int len) {
@@ -3075,21 +3069,20 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_packet_has_lbrr", packet, len);
             }
-            return (int)mh$.invokeExact(packet, len);
+            return (int) mh$.invokeExact(packet, len);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_decoder_get_nb_samples {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_decoder_get_nb_samples");
 
@@ -3098,8 +3091,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_decoder_get_nb_samples(const OpusDecoder *dec, const unsigned char packet[], opus_int32 len)
+     * {@snippet lang = c
+     * : * int opus_decoder_get_nb_samples(const OpusDecoder *dec, const unsigned char packet[], opus_int32 len)
      * }
      */
     public static FunctionDescriptor opus_decoder_get_nb_samples$descriptor() {
@@ -3108,8 +3101,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_decoder_get_nb_samples(const OpusDecoder *dec, const unsigned char packet[], opus_int32 len)
+     * {@snippet lang = c
+     * : * int opus_decoder_get_nb_samples(const OpusDecoder *dec, const unsigned char packet[], opus_int32 len)
      * }
      */
     public static MethodHandle opus_decoder_get_nb_samples$handle() {
@@ -3118,8 +3111,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_decoder_get_nb_samples(const OpusDecoder *dec, const unsigned char packet[], opus_int32 len)
+     * {@snippet lang = c
+     * : * int opus_decoder_get_nb_samples(const OpusDecoder *dec, const unsigned char packet[], opus_int32 len)
      * }
      */
     public static MemorySegment opus_decoder_get_nb_samples$address() {
@@ -3127,8 +3120,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_decoder_get_nb_samples(const OpusDecoder *dec, const unsigned char packet[], opus_int32 len)
+     * {@snippet lang = c
+     * : * int opus_decoder_get_nb_samples(const OpusDecoder *dec, const unsigned char packet[], opus_int32 len)
      * }
      */
     public static int opus_decoder_get_nb_samples(MemorySegment dec, MemorySegment packet, int len) {
@@ -3137,21 +3130,20 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_decoder_get_nb_samples", dec, packet, len);
             }
-            return (int)mh$.invokeExact(dec, packet, len);
+            return (int) mh$.invokeExact(dec, packet, len);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_pcm_soft_clip {
         public static final FunctionDescriptor DESC = FunctionDescriptor.ofVoid(
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_INT,
-            opus_h.C_POINTER
-        );
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_INT,
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_pcm_soft_clip");
 
@@ -3160,8 +3152,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * void opus_pcm_soft_clip(float *pcm, int frame_size, int channels, float *softclip_mem)
+     * {@snippet lang = c
+     * : * void opus_pcm_soft_clip(float *pcm, int frame_size, int channels, float *softclip_mem)
      * }
      */
     public static FunctionDescriptor opus_pcm_soft_clip$descriptor() {
@@ -3170,8 +3162,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * void opus_pcm_soft_clip(float *pcm, int frame_size, int channels, float *softclip_mem)
+     * {@snippet lang = c
+     * : * void opus_pcm_soft_clip(float *pcm, int frame_size, int channels, float *softclip_mem)
      * }
      */
     public static MethodHandle opus_pcm_soft_clip$handle() {
@@ -3180,8 +3172,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * void opus_pcm_soft_clip(float *pcm, int frame_size, int channels, float *softclip_mem)
+     * {@snippet lang = c
+     * : * void opus_pcm_soft_clip(float *pcm, int frame_size, int channels, float *softclip_mem)
      * }
      */
     public static MemorySegment opus_pcm_soft_clip$address() {
@@ -3189,8 +3181,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * void opus_pcm_soft_clip(float *pcm, int frame_size, int channels, float *softclip_mem)
+     * {@snippet lang = c
+     * : * void opus_pcm_soft_clip(float *pcm, int frame_size, int channels, float *softclip_mem)
      * }
      */
     public static void opus_pcm_soft_clip(MemorySegment pcm, int frame_size, int channels, MemorySegment softclip_mem) {
@@ -3201,15 +3193,15 @@ public class opus_h extends opus_h$shared {
             }
             mh$.invokeExact(pcm, frame_size, channels, softclip_mem);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_repacketizer_get_size {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT    );
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_repacketizer_get_size");
 
@@ -3218,8 +3210,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_repacketizer_get_size()
+     * {@snippet lang = c : * int opus_repacketizer_get_size()
      * }
      */
     public static FunctionDescriptor opus_repacketizer_get_size$descriptor() {
@@ -3228,8 +3219,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_repacketizer_get_size()
+     * {@snippet lang = c : * int opus_repacketizer_get_size()
      * }
      */
     public static MethodHandle opus_repacketizer_get_size$handle() {
@@ -3238,8 +3228,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_repacketizer_get_size()
+     * {@snippet lang = c : * int opus_repacketizer_get_size()
      * }
      */
     public static MemorySegment opus_repacketizer_get_size$address() {
@@ -3247,8 +3236,7 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_repacketizer_get_size()
+     * {@snippet lang = c : * int opus_repacketizer_get_size()
      * }
      */
     public static int opus_repacketizer_get_size() {
@@ -3257,19 +3245,18 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_repacketizer_get_size");
             }
-            return (int)mh$.invokeExact();
+            return (int) mh$.invokeExact();
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_repacketizer_init {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_POINTER,
-            opus_h.C_POINTER
-        );
+                opus_h.C_POINTER,
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_repacketizer_init");
 
@@ -3278,8 +3265,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * OpusRepacketizer *opus_repacketizer_init(OpusRepacketizer *rp)
+     * {@snippet lang = c
+     * : * OpusRepacketizer *opus_repacketizer_init(OpusRepacketizer *rp)
      * }
      */
     public static FunctionDescriptor opus_repacketizer_init$descriptor() {
@@ -3288,8 +3275,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * OpusRepacketizer *opus_repacketizer_init(OpusRepacketizer *rp)
+     * {@snippet lang = c
+     * : * OpusRepacketizer *opus_repacketizer_init(OpusRepacketizer *rp)
      * }
      */
     public static MethodHandle opus_repacketizer_init$handle() {
@@ -3298,8 +3285,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * OpusRepacketizer *opus_repacketizer_init(OpusRepacketizer *rp)
+     * {@snippet lang = c
+     * : * OpusRepacketizer *opus_repacketizer_init(OpusRepacketizer *rp)
      * }
      */
     public static MemorySegment opus_repacketizer_init$address() {
@@ -3307,8 +3294,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * OpusRepacketizer *opus_repacketizer_init(OpusRepacketizer *rp)
+     * {@snippet lang = c
+     * : * OpusRepacketizer *opus_repacketizer_init(OpusRepacketizer *rp)
      * }
      */
     public static MemorySegment opus_repacketizer_init(MemorySegment rp) {
@@ -3317,17 +3304,17 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_repacketizer_init", rp);
             }
-            return (MemorySegment)mh$.invokeExact(rp);
+            return (MemorySegment) mh$.invokeExact(rp);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_repacketizer_create {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_POINTER    );
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_repacketizer_create");
 
@@ -3336,8 +3323,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * OpusRepacketizer *opus_repacketizer_create()
+     * {@snippet lang = c : * OpusRepacketizer *opus_repacketizer_create()
      * }
      */
     public static FunctionDescriptor opus_repacketizer_create$descriptor() {
@@ -3346,8 +3332,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * OpusRepacketizer *opus_repacketizer_create()
+     * {@snippet lang = c : * OpusRepacketizer *opus_repacketizer_create()
      * }
      */
     public static MethodHandle opus_repacketizer_create$handle() {
@@ -3356,8 +3341,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * OpusRepacketizer *opus_repacketizer_create()
+     * {@snippet lang = c : * OpusRepacketizer *opus_repacketizer_create()
      * }
      */
     public static MemorySegment opus_repacketizer_create$address() {
@@ -3365,8 +3349,7 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * OpusRepacketizer *opus_repacketizer_create()
+     * {@snippet lang = c : * OpusRepacketizer *opus_repacketizer_create()
      * }
      */
     public static MemorySegment opus_repacketizer_create() {
@@ -3375,18 +3358,17 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_repacketizer_create");
             }
-            return (MemorySegment)mh$.invokeExact();
+            return (MemorySegment) mh$.invokeExact();
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_repacketizer_destroy {
         public static final FunctionDescriptor DESC = FunctionDescriptor.ofVoid(
-            opus_h.C_POINTER
-        );
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_repacketizer_destroy");
 
@@ -3395,8 +3377,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * void opus_repacketizer_destroy(OpusRepacketizer *rp)
+     * {@snippet lang = c : * void opus_repacketizer_destroy(OpusRepacketizer *rp)
      * }
      */
     public static FunctionDescriptor opus_repacketizer_destroy$descriptor() {
@@ -3405,8 +3386,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * void opus_repacketizer_destroy(OpusRepacketizer *rp)
+     * {@snippet lang = c : * void opus_repacketizer_destroy(OpusRepacketizer *rp)
      * }
      */
     public static MethodHandle opus_repacketizer_destroy$handle() {
@@ -3415,8 +3395,7 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * void opus_repacketizer_destroy(OpusRepacketizer *rp)
+     * {@snippet lang = c : * void opus_repacketizer_destroy(OpusRepacketizer *rp)
      * }
      */
     public static MemorySegment opus_repacketizer_destroy$address() {
@@ -3424,8 +3403,7 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * void opus_repacketizer_destroy(OpusRepacketizer *rp)
+     * {@snippet lang = c : * void opus_repacketizer_destroy(OpusRepacketizer *rp)
      * }
      */
     public static void opus_repacketizer_destroy(MemorySegment rp) {
@@ -3436,19 +3414,18 @@ public class opus_h extends opus_h$shared {
             }
             mh$.invokeExact(rp);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_repacketizer_cat {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_repacketizer_cat");
 
@@ -3457,8 +3434,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_repacketizer_cat(OpusRepacketizer *rp, const unsigned char *data, opus_int32 len)
+     * {@snippet lang = c
+     * : * int opus_repacketizer_cat(OpusRepacketizer *rp, const unsigned char *data, opus_int32 len)
      * }
      */
     public static FunctionDescriptor opus_repacketizer_cat$descriptor() {
@@ -3467,8 +3444,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_repacketizer_cat(OpusRepacketizer *rp, const unsigned char *data, opus_int32 len)
+     * {@snippet lang = c
+     * : * int opus_repacketizer_cat(OpusRepacketizer *rp, const unsigned char *data, opus_int32 len)
      * }
      */
     public static MethodHandle opus_repacketizer_cat$handle() {
@@ -3477,8 +3454,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_repacketizer_cat(OpusRepacketizer *rp, const unsigned char *data, opus_int32 len)
+     * {@snippet lang = c
+     * : * int opus_repacketizer_cat(OpusRepacketizer *rp, const unsigned char *data, opus_int32 len)
      * }
      */
     public static MemorySegment opus_repacketizer_cat$address() {
@@ -3486,8 +3463,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_repacketizer_cat(OpusRepacketizer *rp, const unsigned char *data, opus_int32 len)
+     * {@snippet lang = c
+     * : * int opus_repacketizer_cat(OpusRepacketizer *rp, const unsigned char *data, opus_int32 len)
      * }
      */
     public static int opus_repacketizer_cat(MemorySegment rp, MemorySegment data, int len) {
@@ -3496,23 +3473,22 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_repacketizer_cat", rp, data, len);
             }
-            return (int)mh$.invokeExact(rp, data, len);
+            return (int) mh$.invokeExact(rp, data, len);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_repacketizer_out_range {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_repacketizer_out_range");
 
@@ -3521,8 +3497,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * opus_int32 opus_repacketizer_out_range(OpusRepacketizer *rp, int begin, int end, unsigned char *data, opus_int32 maxlen)
+     * {@snippet lang = c
+     * : * opus_int32 opus_repacketizer_out_range(OpusRepacketizer *rp, int begin, int end, unsigned char *data, opus_int32 maxlen)
      * }
      */
     public static FunctionDescriptor opus_repacketizer_out_range$descriptor() {
@@ -3531,8 +3507,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * opus_int32 opus_repacketizer_out_range(OpusRepacketizer *rp, int begin, int end, unsigned char *data, opus_int32 maxlen)
+     * {@snippet lang = c
+     * : * opus_int32 opus_repacketizer_out_range(OpusRepacketizer *rp, int begin, int end, unsigned char *data, opus_int32 maxlen)
      * }
      */
     public static MethodHandle opus_repacketizer_out_range$handle() {
@@ -3541,8 +3517,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * opus_int32 opus_repacketizer_out_range(OpusRepacketizer *rp, int begin, int end, unsigned char *data, opus_int32 maxlen)
+     * {@snippet lang = c
+     * : * opus_int32 opus_repacketizer_out_range(OpusRepacketizer *rp, int begin, int end, unsigned char *data, opus_int32 maxlen)
      * }
      */
     public static MemorySegment opus_repacketizer_out_range$address() {
@@ -3550,29 +3526,29 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * opus_int32 opus_repacketizer_out_range(OpusRepacketizer *rp, int begin, int end, unsigned char *data, opus_int32 maxlen)
+     * {@snippet lang = c
+     * : * opus_int32 opus_repacketizer_out_range(OpusRepacketizer *rp, int begin, int end, unsigned char *data, opus_int32 maxlen)
      * }
      */
-    public static int opus_repacketizer_out_range(MemorySegment rp, int begin, int end, MemorySegment data, int maxlen) {
+    public static int opus_repacketizer_out_range(MemorySegment rp, int begin, int end, MemorySegment data,
+            int maxlen) {
         var mh$ = opus_repacketizer_out_range.HANDLE;
         try {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_repacketizer_out_range", rp, begin, end, data, maxlen);
             }
-            return (int)mh$.invokeExact(rp, begin, end, data, maxlen);
+            return (int) mh$.invokeExact(rp, begin, end, data, maxlen);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_repacketizer_get_nb_frames {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_repacketizer_get_nb_frames");
 
@@ -3581,8 +3557,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_repacketizer_get_nb_frames(OpusRepacketizer *rp)
+     * {@snippet lang = c
+     * : * int opus_repacketizer_get_nb_frames(OpusRepacketizer *rp)
      * }
      */
     public static FunctionDescriptor opus_repacketizer_get_nb_frames$descriptor() {
@@ -3591,8 +3567,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_repacketizer_get_nb_frames(OpusRepacketizer *rp)
+     * {@snippet lang = c
+     * : * int opus_repacketizer_get_nb_frames(OpusRepacketizer *rp)
      * }
      */
     public static MethodHandle opus_repacketizer_get_nb_frames$handle() {
@@ -3601,8 +3577,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_repacketizer_get_nb_frames(OpusRepacketizer *rp)
+     * {@snippet lang = c
+     * : * int opus_repacketizer_get_nb_frames(OpusRepacketizer *rp)
      * }
      */
     public static MemorySegment opus_repacketizer_get_nb_frames$address() {
@@ -3610,8 +3586,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_repacketizer_get_nb_frames(OpusRepacketizer *rp)
+     * {@snippet lang = c
+     * : * int opus_repacketizer_get_nb_frames(OpusRepacketizer *rp)
      * }
      */
     public static int opus_repacketizer_get_nb_frames(MemorySegment rp) {
@@ -3620,21 +3596,20 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_repacketizer_get_nb_frames", rp);
             }
-            return (int)mh$.invokeExact(rp);
+            return (int) mh$.invokeExact(rp);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_repacketizer_out {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_POINTER,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_POINTER,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_repacketizer_out");
 
@@ -3643,8 +3618,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * opus_int32 opus_repacketizer_out(OpusRepacketizer *rp, unsigned char *data, opus_int32 maxlen)
+     * {@snippet lang = c
+     * : * opus_int32 opus_repacketizer_out(OpusRepacketizer *rp, unsigned char *data, opus_int32 maxlen)
      * }
      */
     public static FunctionDescriptor opus_repacketizer_out$descriptor() {
@@ -3653,8 +3628,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * opus_int32 opus_repacketizer_out(OpusRepacketizer *rp, unsigned char *data, opus_int32 maxlen)
+     * {@snippet lang = c
+     * : * opus_int32 opus_repacketizer_out(OpusRepacketizer *rp, unsigned char *data, opus_int32 maxlen)
      * }
      */
     public static MethodHandle opus_repacketizer_out$handle() {
@@ -3663,8 +3638,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * opus_int32 opus_repacketizer_out(OpusRepacketizer *rp, unsigned char *data, opus_int32 maxlen)
+     * {@snippet lang = c
+     * : * opus_int32 opus_repacketizer_out(OpusRepacketizer *rp, unsigned char *data, opus_int32 maxlen)
      * }
      */
     public static MemorySegment opus_repacketizer_out$address() {
@@ -3672,8 +3647,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * opus_int32 opus_repacketizer_out(OpusRepacketizer *rp, unsigned char *data, opus_int32 maxlen)
+     * {@snippet lang = c
+     * : * opus_int32 opus_repacketizer_out(OpusRepacketizer *rp, unsigned char *data, opus_int32 maxlen)
      * }
      */
     public static int opus_repacketizer_out(MemorySegment rp, MemorySegment data, int maxlen) {
@@ -3682,21 +3657,20 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_repacketizer_out", rp, data, maxlen);
             }
-            return (int)mh$.invokeExact(rp, data, maxlen);
+            return (int) mh$.invokeExact(rp, data, maxlen);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_packet_pad {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_packet_pad");
 
@@ -3705,8 +3679,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_packet_pad(unsigned char *data, opus_int32 len, opus_int32 new_len)
+     * {@snippet lang = c
+     * : * int opus_packet_pad(unsigned char *data, opus_int32 len, opus_int32 new_len)
      * }
      */
     public static FunctionDescriptor opus_packet_pad$descriptor() {
@@ -3715,8 +3689,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_packet_pad(unsigned char *data, opus_int32 len, opus_int32 new_len)
+     * {@snippet lang = c
+     * : * int opus_packet_pad(unsigned char *data, opus_int32 len, opus_int32 new_len)
      * }
      */
     public static MethodHandle opus_packet_pad$handle() {
@@ -3725,8 +3699,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_packet_pad(unsigned char *data, opus_int32 len, opus_int32 new_len)
+     * {@snippet lang = c
+     * : * int opus_packet_pad(unsigned char *data, opus_int32 len, opus_int32 new_len)
      * }
      */
     public static MemorySegment opus_packet_pad$address() {
@@ -3734,8 +3708,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_packet_pad(unsigned char *data, opus_int32 len, opus_int32 new_len)
+     * {@snippet lang = c
+     * : * int opus_packet_pad(unsigned char *data, opus_int32 len, opus_int32 new_len)
      * }
      */
     public static int opus_packet_pad(MemorySegment data, int len, int new_len) {
@@ -3744,20 +3718,19 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_packet_pad", data, len, new_len);
             }
-            return (int)mh$.invokeExact(data, len, new_len);
+            return (int) mh$.invokeExact(data, len, new_len);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_packet_unpad {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_packet_unpad");
 
@@ -3766,8 +3739,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * opus_int32 opus_packet_unpad(unsigned char *data, opus_int32 len)
+     * {@snippet lang = c
+     * : * opus_int32 opus_packet_unpad(unsigned char *data, opus_int32 len)
      * }
      */
     public static FunctionDescriptor opus_packet_unpad$descriptor() {
@@ -3776,8 +3749,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * opus_int32 opus_packet_unpad(unsigned char *data, opus_int32 len)
+     * {@snippet lang = c
+     * : * opus_int32 opus_packet_unpad(unsigned char *data, opus_int32 len)
      * }
      */
     public static MethodHandle opus_packet_unpad$handle() {
@@ -3786,8 +3759,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * opus_int32 opus_packet_unpad(unsigned char *data, opus_int32 len)
+     * {@snippet lang = c
+     * : * opus_int32 opus_packet_unpad(unsigned char *data, opus_int32 len)
      * }
      */
     public static MemorySegment opus_packet_unpad$address() {
@@ -3795,8 +3768,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * opus_int32 opus_packet_unpad(unsigned char *data, opus_int32 len)
+     * {@snippet lang = c
+     * : * opus_int32 opus_packet_unpad(unsigned char *data, opus_int32 len)
      * }
      */
     public static int opus_packet_unpad(MemorySegment data, int len) {
@@ -3805,22 +3778,21 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_packet_unpad", data, len);
             }
-            return (int)mh$.invokeExact(data, len);
+            return (int) mh$.invokeExact(data, len);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_multistream_packet_pad {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_INT,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_INT,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_multistream_packet_pad");
 
@@ -3829,8 +3801,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * int opus_multistream_packet_pad(unsigned char *data, opus_int32 len, opus_int32 new_len, int nb_streams)
+     * {@snippet lang = c
+     * : * int opus_multistream_packet_pad(unsigned char *data, opus_int32 len, opus_int32 new_len, int nb_streams)
      * }
      */
     public static FunctionDescriptor opus_multistream_packet_pad$descriptor() {
@@ -3839,8 +3811,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * int opus_multistream_packet_pad(unsigned char *data, opus_int32 len, opus_int32 new_len, int nb_streams)
+     * {@snippet lang = c
+     * : * int opus_multistream_packet_pad(unsigned char *data, opus_int32 len, opus_int32 new_len, int nb_streams)
      * }
      */
     public static MethodHandle opus_multistream_packet_pad$handle() {
@@ -3849,8 +3821,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * int opus_multistream_packet_pad(unsigned char *data, opus_int32 len, opus_int32 new_len, int nb_streams)
+     * {@snippet lang = c
+     * : * int opus_multistream_packet_pad(unsigned char *data, opus_int32 len, opus_int32 new_len, int nb_streams)
      * }
      */
     public static MemorySegment opus_multistream_packet_pad$address() {
@@ -3858,8 +3830,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * int opus_multistream_packet_pad(unsigned char *data, opus_int32 len, opus_int32 new_len, int nb_streams)
+     * {@snippet lang = c
+     * : * int opus_multistream_packet_pad(unsigned char *data, opus_int32 len, opus_int32 new_len, int nb_streams)
      * }
      */
     public static int opus_multistream_packet_pad(MemorySegment data, int len, int new_len, int nb_streams) {
@@ -3868,21 +3840,20 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_multistream_packet_pad", data, len, new_len, nb_streams);
             }
-            return (int)mh$.invokeExact(data, len, new_len, nb_streams);
+            return (int) mh$.invokeExact(data, len, new_len, nb_streams);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
 
     private static class opus_multistream_packet_unpad {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            opus_h.C_INT,
-            opus_h.C_POINTER,
-            opus_h.C_INT,
-            opus_h.C_INT
-        );
+                opus_h.C_INT,
+                opus_h.C_POINTER,
+                opus_h.C_INT,
+                opus_h.C_INT);
 
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_multistream_packet_unpad");
 
@@ -3891,8 +3862,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Function descriptor for:
-     * {@snippet lang=c :
-     * opus_int32 opus_multistream_packet_unpad(unsigned char *data, opus_int32 len, int nb_streams)
+     * {@snippet lang = c
+     * : * opus_int32 opus_multistream_packet_unpad(unsigned char *data, opus_int32 len, int nb_streams)
      * }
      */
     public static FunctionDescriptor opus_multistream_packet_unpad$descriptor() {
@@ -3901,8 +3872,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Downcall method handle for:
-     * {@snippet lang=c :
-     * opus_int32 opus_multistream_packet_unpad(unsigned char *data, opus_int32 len, int nb_streams)
+     * {@snippet lang = c
+     * : * opus_int32 opus_multistream_packet_unpad(unsigned char *data, opus_int32 len, int nb_streams)
      * }
      */
     public static MethodHandle opus_multistream_packet_unpad$handle() {
@@ -3911,8 +3882,8 @@ public class opus_h extends opus_h$shared {
 
     /**
      * Address for:
-     * {@snippet lang=c :
-     * opus_int32 opus_multistream_packet_unpad(unsigned char *data, opus_int32 len, int nb_streams)
+     * {@snippet lang = c
+     * : * opus_int32 opus_multistream_packet_unpad(unsigned char *data, opus_int32 len, int nb_streams)
      * }
      */
     public static MemorySegment opus_multistream_packet_unpad$address() {
@@ -3920,8 +3891,8 @@ public class opus_h extends opus_h$shared {
     }
 
     /**
-     * {@snippet lang=c :
-     * opus_int32 opus_multistream_packet_unpad(unsigned char *data, opus_int32 len, int nb_streams)
+     * {@snippet lang = c
+     * : * opus_int32 opus_multistream_packet_unpad(unsigned char *data, opus_int32 len, int nb_streams)
      * }
      */
     public static int opus_multistream_packet_unpad(MemorySegment data, int len, int nb_streams) {
@@ -3930,93 +3901,101 @@ public class opus_h extends opus_h$shared {
             if (TRACE_DOWNCALLS) {
                 traceDowncall("opus_multistream_packet_unpad", data, len, nb_streams);
             }
-            return (int)mh$.invokeExact(data, len, nb_streams);
+            return (int) mh$.invokeExact(data, len, nb_streams);
         } catch (Error | RuntimeException ex) {
-           throw ex;
+            throw ex;
         } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
+            throw new AssertionError("should not reach here", ex$);
         }
     }
-    private static final int OPUS_BAD_ARG = (int)-1L;
+
+    private static final int OPUS_BAD_ARG = (int) -1L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_BAD_ARG -1
+     * {@snippet lang = c : * #define OPUS_BAD_ARG -1
      * }
      */
     public static int OPUS_BAD_ARG() {
         return OPUS_BAD_ARG;
     }
-    private static final int OPUS_BUFFER_TOO_SMALL = (int)-2L;
+
+    private static final int OPUS_BUFFER_TOO_SMALL = (int) -2L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_BUFFER_TOO_SMALL -2
+     * {@snippet lang = c : * #define OPUS_BUFFER_TOO_SMALL -2
      * }
      */
     public static int OPUS_BUFFER_TOO_SMALL() {
         return OPUS_BUFFER_TOO_SMALL;
     }
-    private static final int OPUS_INTERNAL_ERROR = (int)-3L;
+
+    private static final int OPUS_INTERNAL_ERROR = (int) -3L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_INTERNAL_ERROR -3
+     * {@snippet lang = c : * #define OPUS_INTERNAL_ERROR -3
      * }
      */
     public static int OPUS_INTERNAL_ERROR() {
         return OPUS_INTERNAL_ERROR;
     }
-    private static final int OPUS_INVALID_PACKET = (int)-4L;
+
+    private static final int OPUS_INVALID_PACKET = (int) -4L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_INVALID_PACKET -4
+     * {@snippet lang = c : * #define OPUS_INVALID_PACKET -4
      * }
      */
     public static int OPUS_INVALID_PACKET() {
         return OPUS_INVALID_PACKET;
     }
-    private static final int OPUS_UNIMPLEMENTED = (int)-5L;
+
+    private static final int OPUS_UNIMPLEMENTED = (int) -5L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_UNIMPLEMENTED -5
+     * {@snippet lang = c : * #define OPUS_UNIMPLEMENTED -5
      * }
      */
     public static int OPUS_UNIMPLEMENTED() {
         return OPUS_UNIMPLEMENTED;
     }
-    private static final int OPUS_INVALID_STATE = (int)-6L;
+
+    private static final int OPUS_INVALID_STATE = (int) -6L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_INVALID_STATE -6
+     * {@snippet lang = c : * #define OPUS_INVALID_STATE -6
      * }
      */
     public static int OPUS_INVALID_STATE() {
         return OPUS_INVALID_STATE;
     }
-    private static final int OPUS_ALLOC_FAIL = (int)-7L;
+
+    private static final int OPUS_ALLOC_FAIL = (int) -7L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_ALLOC_FAIL -7
+     * {@snippet lang = c : * #define OPUS_ALLOC_FAIL -7
      * }
      */
     public static int OPUS_ALLOC_FAIL() {
         return OPUS_ALLOC_FAIL;
     }
-    private static final int OPUS_AUTO = (int)-1000L;
+
+    private static final int OPUS_AUTO = (int) -1000L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_AUTO -1000
+     * {@snippet lang = c : * #define OPUS_AUTO -1000
      * }
      */
     public static int OPUS_AUTO() {
         return OPUS_AUTO;
     }
-    private static final int OPUS_BITRATE_MAX = (int)-1L;
+
+    private static final int OPUS_BITRATE_MAX = (int) -1L;
+
     /**
-     * {@snippet lang=c :
-     * #define OPUS_BITRATE_MAX -1
+     * {@snippet lang = c : * #define OPUS_BITRATE_MAX -1
      * }
      */
     public static int OPUS_BITRATE_MAX() {
         return OPUS_BITRATE_MAX;
     }
 }
-

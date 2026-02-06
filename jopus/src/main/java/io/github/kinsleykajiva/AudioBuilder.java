@@ -24,7 +24,7 @@ public class AudioBuilder {
     private InputFormat format;
 
     private enum InputFormat {
-        ALAW, ULAW, PCM
+        ALAW, ULAW, PCM, OPUS
     }
 
     AudioBuilder(byte[] data) {
@@ -50,6 +50,14 @@ public class AudioBuilder {
      */
     public AudioBuilder fromUlaw() {
         this.format = InputFormat.ULAW;
+        return this;
+    }
+
+    /**
+     * Specify input as Opus.
+     */
+    public AudioBuilder fromOpus() {
+        this.format = InputFormat.OPUS;
         return this;
     }
 
@@ -83,31 +91,82 @@ public class AudioBuilder {
      * Convert to Opus and return as Base64 string.
      */
     public String asBase64() {
+        return asOpusBase64();
+    }
+
+    /**
+     * Convert to Opus and return as Base64 string.
+     */
+    public String asOpusBase64() {
         byte[] data = getInputData();
 
         if (format == null) {
-            throw new IllegalStateException("Input format not specified. Call fromAlaw(), fromUlaw(), or fromPcm()");
+            throw new IllegalStateException(
+                    "Input format not specified. Call fromAlaw(), fromUlaw(), fromPcm() or fromOpus()");
+        }
+
+        if (format == InputFormat.OPUS) {
+            return Base64.getEncoder().encodeToString(data);
         }
 
         // Convert G.711 to PCM first if needed
-        byte[] pcmData;
-        if (format == InputFormat.ALAW) {
-            pcmData = G711Utils.aLawToPcm(data);
-        } else if (format == InputFormat.ULAW) {
-            pcmData = G711Utils.uLawToPcm(data);
-        } else {
-            pcmData = data;
-        }
+        byte[] pcmData = convertToPcm(data);
 
         // Encode to Opus using opusenc
         return encodeToOpusBase64(pcmData);
     }
 
     /**
+     * Convert to G.711 A-law and return as Base64 string.
+     */
+    public String asAlawBase64() {
+        return asG711Base64(true);
+    }
+
+    /**
+     * Convert to G.711 U-law and return as Base64 string.
+     */
+    public String asUlawBase64() {
+        return asG711Base64(false);
+    }
+
+    private String asG711Base64(boolean isAlaw) {
+        byte[] data = getInputData();
+
+        if (format == null) {
+            throw new IllegalStateException(
+                    "Input format not specified. Call fromAlaw(), fromUlaw(), fromPcm() or fromOpus()");
+        }
+
+        if (format == InputFormat.OPUS) {
+            // Opus -> G.711
+            return OpusCodec.convertOpusToG711(Base64.getEncoder().encodeToString(data), isAlaw);
+        }
+
+        byte[] pcmData = convertToPcm(data);
+        byte[] g711Data = isAlaw ? G711Utils.pcmToAlaw(pcmData) : G711Utils.pcmToUlaw(pcmData);
+        return Base64.getEncoder().encodeToString(g711Data);
+    }
+
+    private byte[] convertToPcm(byte[] data) {
+        if (format == InputFormat.ALAW) {
+            return G711Utils.aLawToPcm(data);
+        } else if (format == InputFormat.ULAW) {
+            return G711Utils.uLawToPcm(data);
+        } else if (format == InputFormat.OPUS) {
+            // Internal helper for Opus to PCM if needed, or we just rely on
+            // convertOpusToG711
+            // For now, let's just return what we have or throw if not supported here
+            throw new UnsupportedOperationException("Opus to PCM conversion not directly implemented in AudioBuilder");
+        }
+        return data; // already PCM
+    }
+
+    /**
      * Convert to Opus and save to file.
      */
     public void asFile(String outputPath) {
-        byte[] opusData = Base64.getDecoder().decode(asBase64());
+        byte[] opusData = Base64.getDecoder().decode(asOpusBase64());
 
         try (FileOutputStream fos = new FileOutputStream(outputPath)) {
             // Write as OGG Opus file

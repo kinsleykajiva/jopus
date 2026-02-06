@@ -1,5 +1,7 @@
 package io.github.kinsleykajiva.opus;
 
+import io.github.kinsleykajiva.G711Utils;
+
 import java.io.File;
 import java.lang.foreign.*;
 import java.lang.invoke.MethodHandle;
@@ -228,6 +230,122 @@ public class OpusCodec {
     }
 
     /**
+     * Converts a Base64 encoded Opus string to a Base64 encoded G.711 string.
+     * 
+     * @param base64Input Base64 encoded Opus audio (single packet or Ogg file).
+     * @param isALaw      True for A-law, False for u-law.
+     * @return Base64 encoded G.711 audio.
+     */
+    public static String convertOpusToG711(String base64Input, boolean isALaw) {
+        byte[] opusData = Base64.getDecoder().decode(base64Input);
+
+        // Check if it's an Ogg file (starts with 'OggS')
+        if (opusData.length > 4 && opusData[0] == 'O' && opusData[1] == 'g' && opusData[2] == 'g'
+                && opusData[3] == 'S') {
+            return decodeOggToG711(opusData, isALaw);
+        }
+
+        try (Arena arena = Arena.ofConfined()) {
+            MemorySegment errorPtr = arena.allocate(C_INT);
+            MemorySegment decoder = opus_decoder_create(SAMPLE_RATE, CHANNELS, errorPtr);
+
+            if (decoder.equals(MemorySegment.NULL)) {
+                throw new RuntimeException("Failed to create Opus decoder: Error code " + errorPtr.get(C_INT, 0));
+            }
+
+            // Max frame size for 120ms at 48kHz is 5760, but at 8kHz it's 960.
+            int maxFrameSize = 960;
+            MemorySegment pcmBuffer = arena.allocate(C_SHORT, maxFrameSize);
+            MemorySegment opusBuffer = arena.allocateFrom(C_CHAR, opusData);
+
+            int samplesDecoded = opus_decode(decoder, opusBuffer, opusData.length, pcmBuffer, maxFrameSize, 0);
+
+            if (samplesDecoded < 0) {
+                opus_decoder_destroy(decoder);
+                throw new RuntimeException("Opus decode error: " + samplesDecoded);
+            }
+
+            byte[] pcmBytes = new byte[samplesDecoded * 2];
+            for (int i = 0; i < samplesDecoded; i++) {
+                short s = pcmBuffer.getAtIndex(C_SHORT, i);
+                pcmBytes[i * 2] = (byte) (s & 0xFF);
+                pcmBytes[i * 2 + 1] = (byte) ((s >> 8) & 0xFF);
+            }
+
+            opus_decoder_destroy(decoder);
+
+            byte[] g711Data = isALaw ? G711Utils.pcmToAlaw(pcmBytes) : G711Utils.pcmToUlaw(pcmBytes);
+            return Base64.getEncoder().encodeToString(g711Data);
+        }
+    }
+
+    private static String decodeOggToG711(byte[] oggData, boolean isALaw) {
+        loadNativeLibraries();
+        try (Arena arena = Arena.ofConfined()) {
+            MemorySegment errorPtr = arena.allocate(C_INT);
+            MemorySegment oggPtr = arena.allocateFrom(C_CHAR, oggData);
+
+            MemorySegment of = io.github.kinsleykajiva.opusfile.opusfile_h.op_open_memory(oggPtr, oggData.length,
+                    errorPtr);
+            if (of.equals(MemorySegment.NULL)) {
+                throw new RuntimeException("Failed to open Ogg Opus from memory: Error " + errorPtr.get(C_INT, 0));
+            }
+
+            java.io.ByteArrayOutputStream pcmStream = new java.io.ByteArrayOutputStream();
+            // 8kHz * 2 channels * 10s buffer max per read? Let's use 16000 samples.
+            int bufSize = 16000;
+            MemorySegment pcmBuf = arena.allocate(C_SHORT, bufSize);
+
+            while (true) {
+                int samplesRead = io.github.kinsleykajiva.opusfile.opusfile_h.op_read(of, pcmBuf, bufSize,
+                        MemorySegment.NULL);
+                if (samplesRead <= 0)
+                    break;
+
+                for (int i = 0; i < samplesRead; i++) {
+                    short s = pcmBuf.getAtIndex(C_SHORT, i);
+                    pcmStream.write(s & 0xFF);
+                    pcmStream.write((s >> 8) & 0xFF);
+                }
+            }
+
+            io.github.kinsleykajiva.opusfile.opusfile_h.op_free(of);
+
+            byte[] pcmBytes = pcmStream.toByteArray();
+            byte[] g711Data = isALaw ? G711Utils.pcmToAlaw(pcmBytes) : G711Utils.pcmToUlaw(pcmBytes);
+            return Base64.getEncoder().encodeToString(g711Data);
+        }
+    }
+
+    /**
+     * Creates a new native Opus decoder.
+     * 
+     * @return MemorySegment pointer to the decoder
+     */
+    public static MemorySegment createDecoder() {
+        try (Arena arena = Arena.ofConfined()) {
+            MemorySegment errorPtr = arena.allocate(C_INT);
+            MemorySegment decoder = opus_decoder_create(SAMPLE_RATE, CHANNELS, errorPtr);
+
+            if (decoder.equals(MemorySegment.NULL)) {
+                throw new RuntimeException("Failed to create Opus decoder: Error code " + errorPtr.get(C_INT, 0));
+            }
+            return decoder;
+        }
+    }
+
+    /**
+     * Destroys a native Opus decoder.
+     * 
+     * @param decoder The decoder pointer to destroy
+     */
+    public static void destroyDecoder(MemorySegment decoder) {
+        if (decoder != null && !decoder.equals(MemorySegment.NULL)) {
+            opus_decoder_destroy(decoder);
+        }
+    }
+
+    /**
      * Creates a new native Opus encoder.
      * 
      * @return MemorySegment pointer to the encoder
@@ -339,6 +457,53 @@ public class OpusCodec {
         }
     }
 
+    /**
+     * Decodes a chunk of Opus data using a pre-existing decoder.
+     * Optimized for high-throughput streaming.
+     *
+     * @param decoder   The native decoder pointer
+     * @param opusData  Opus packet bytes
+     * @param outBuffer Pre-allocated output buffer for PCM (short array or byte
+     *                  array converted)
+     * @return The number of bytes written to outBuffer
+     */
+    public static int decodeChunk(MemorySegment decoder, byte[] opusData, byte[] outBuffer) {
+        int maxFrameSize = 960; // 120ms @ 8kHz
+
+        try (Arena arena = Arena.ofConfined()) {
+            MemorySegment opusNative = arena.allocateFrom(C_CHAR, opusData);
+            MemorySegment pcmNative = arena.allocate(C_SHORT, maxFrameSize);
+
+            int samplesDecoded = opus_decode(decoder, opusNative, opusData.length, pcmNative, maxFrameSize, 0);
+            if (samplesDecoded < 0) {
+                return samplesDecoded;
+            }
+
+            for (int i = 0; i < samplesDecoded; i++) {
+                short s = pcmNative.getAtIndex(C_SHORT, i);
+                outBuffer[i * 2] = (byte) (s & 0xFF);
+                outBuffer[i * 2 + 1] = (byte) ((s >> 8) & 0xFF);
+            }
+            return samplesDecoded * 2;
+        }
+    }
+
+    /**
+     * Converts Opus chunk to G.711 using a pooled/cached decoder.
+     */
+    public static int convertOpusChunk(MemorySegment decoder, byte[] opusData, boolean isALaw, byte[] outBuffer) {
+        byte[] pcmBuffer = new byte[1920]; // 960 samples * 2 bytes
+        int pcmLen = decodeChunk(decoder, opusData, pcmBuffer);
+        if (pcmLen < 0)
+            return pcmLen;
+
+        byte[] g711Data = isALaw ? G711Utils.pcmToAlaw(pcmBuffer) : G711Utils.pcmToUlaw(pcmBuffer);
+        // Only take the actual decoded length
+        int g711Len = pcmLen / 2;
+        System.arraycopy(g711Data, 0, outBuffer, 0, g711Len);
+        return g711Len;
+    }
+
     // --- Encoder Pool ---
 
     public static class OpusEncoderPool {
@@ -377,6 +542,47 @@ public class OpusCodec {
             MemorySegment encoder;
             while ((encoder = pool.poll()) != null) {
                 destroyEncoder(encoder);
+            }
+        }
+    }
+
+    // --- Decoder Pool ---
+
+    public static class OpusDecoderPool {
+        private final java.util.concurrent.BlockingQueue<MemorySegment> pool;
+        private final int capacity;
+
+        public OpusDecoderPool(int capacity) {
+            this.capacity = capacity;
+            this.pool = new java.util.concurrent.ArrayBlockingQueue<>(capacity);
+            initialize();
+        }
+
+        private void initialize() {
+            for (int i = 0; i < capacity; i++) {
+                pool.offer(createDecoder());
+            }
+        }
+
+        public MemorySegment borrowDecoder() {
+            try {
+                return pool.take();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                throw new RuntimeException("Interrupted while waiting for Opus decoder", e);
+            }
+        }
+
+        public void returnDecoder(MemorySegment decoder) {
+            if (decoder != null) {
+                pool.offer(decoder);
+            }
+        }
+
+        public void close() {
+            MemorySegment decoder;
+            while ((decoder = pool.poll()) != null) {
+                destroyDecoder(decoder);
             }
         }
     }

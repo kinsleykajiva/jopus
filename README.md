@@ -37,8 +37,8 @@ mvn clean install
 ```
 
 This builds:
-- `jopus/target/jopus-1.1.6.jar` - Core library (with bundled native libs)
-- `jopus-demo-app/target/jopus-demo-app-1.1.6.jar` - Demo application
+- `jopus/target/jopus-1.1.7.jar` - Core library (with bundled native libs)
+- `jopus-demo-app/target/jopus-demo-app-1.1.7.jar` - Demo application
 
 ### 3. Generate Bindings (Optional)
 
@@ -59,7 +59,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>io.github.kinsleykajiva</groupId>
     <artifactId>jopus</artifactId>
-    <version>1.1.6</version>
+    <version>1.1.7</version>
 </dependency>
 ```
 
@@ -80,6 +80,11 @@ AudioLib.convert(ulawData)
     .withSampleRate(8000)
     .withBitrate(16000)
     .asFile("output.opus");
+
+// Convert Opus Base64 to G.711 A-law Base64
+String alawBase64 = AudioLib.convert(opusBase64)
+    .fromOpus()
+    .asAlawBase64();
 ```
 
 ### Running the Demo
@@ -88,7 +93,9 @@ From the project root:
 
 ```bash
 # From project root after build
-java -cp "jopus-demo-app/target/jopus-demo-app-1.1.6.jar;jopus/target/jopus-1.1.6.jar" io.github.kinsleykajiva.demo.Main
+java -cp "jopus-demo-app/target/jopus-demo-app-1.1.7.jar;jopus/target/jopus-1.1.7.jar" io.github.kinsleykajiva.demo.Main
+# Run G.711 conversion tests
+java -cp "jopus-demo-app/target/jopus-demo-app-1.1.7.jar;jopus/target/jopus-1.1.7.jar" io.github.kinsleykajiva.demo.MainG711Conversion
 ```
 
 **Note**: Starting from version 1.0.2, native DLLs are bundled within the JAR and extracted automatically at runtime. Manual setup of the library path is no longer strictly required.
@@ -107,6 +114,7 @@ java -cp "jopus-demo-app/target/jopus-demo-app-1.1.6.jar;jopus/target/jopus-1.1.
 - `.fromAlaw()` - G.711 A-law input
 - `.fromUlaw()` - G.711 U-law input
 - `.fromPcm(int sampleRate, int channels)` - Raw PCM input
+- `.fromOpus()` - Opus input (Ogg file or raw packet)
 
 **Configuration:**
 - `.withSampleRate(int rate)` - Set sample rate (default: 8000)
@@ -114,7 +122,11 @@ java -cp "jopus-demo-app/target/jopus-demo-app-1.1.6.jar;jopus/target/jopus-1.1.
 
 **Output:**
 - `.asBase64()` - Returns Base64 encoded Opus
+- `.asAlawBase64()` - Returns Base64 encoded G.711 A-law
+- `.asUlawBase64()` - Returns Base64 encoded G.711 U-law
 - `.asFile(String path)` - Writes to Opus file
+- `.asAlawFile(String path)` - Writes to G.711 A-law file
+- `.asUlawFile(String path)` - Writes to G.711 U-law file
 
 ### G711Utils
 

@@ -30,7 +30,11 @@ public class OpusCodec {
     private static void loadNativeLibraries() {
         boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
         String extension = isWindows ? ".dll" : ".so";
-        String[] libs = { "ogg", "opus", "opusenc", "opusfile" };
+
+        // Define library list based on OS
+        String[] libs = isWindows
+                ? new String[] { "ogg", "opus", "opusenc", "opusfile" }
+                : new String[] { "ogg", "opus", "opusenc", "opusfile", "opusurl" };
 
         File tempDir = new File(System.getProperty("java.io.tmpdir"), "jopus-natives-" + System.nanoTime());
         if (!tempDir.mkdirs()) {
@@ -56,10 +60,14 @@ public class OpusCodec {
                             System.loadLibrary(libName);
                             continue;
                         } catch (UnsatisfiedLinkError e) {
+                            // Critical failure if core opus is missing
                             if (libName.equals("opus")) {
                                 throw new RuntimeException("Critical failure: Could not find " + fullLibName
                                         + " in resources or system path", e);
                             }
+                            // Other libs might be optional or already loaded as dependencies
+                            System.err.println("Warning: Could not find " + fullLibName
+                                    + " in resources, attempting to proceed...");
                             continue;
                         }
                     }

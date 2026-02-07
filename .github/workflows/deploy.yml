@@ -1,28 +1,28 @@
-name: Deploy Jopus-lib to Maven Central
-
+name: Publish package to the Maven Central Repository
 on:
   push:
     branches: [ master ]
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Set up JDK 24
+      - name: Set up Maven Central Repository
         uses: actions/setup-java@v4
         with:
           java-version: '24'
           distribution: 'temurin'
           server-id: central
-          server-username: ${{ secrets.GPG_USERNAME }}
-          server-password: ${{ secrets.GPG_PASSWORD }}
+          server-username: GPG_USERNAME
+          server-password: GPG_PASSWORD
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
-
-      - name: Publish to Maven Central
-        run: mvn clean deploy -B -DskipTests -Pgpg-signing -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+          gpg-passphrase: GPG_PASSPHRASE
+      - name: Set version
+        run: mvn versions:set -DnewVersion=${{ github.event.release.tag_name }}
+      - name: Publish package
+        run: mvn -P release --batch-mode deploy -DskipTests
         env:
           GPG_USERNAME: ${{ secrets.GPG_USERNAME }}
           GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}

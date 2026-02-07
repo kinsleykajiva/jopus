@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.kinsleykajiva</groupId>
   <artifactId>jopus-parent</artifactId>
-  <version>1.1.9</version>
+  <version>1.1.10</version>
   <packaging>pom</packaging>
   <name>Jopus Parent</name>
   <description>Parent POM for Jopus library and demo application</description>
@@ -35,7 +35,7 @@
     <maven.compiler.target>24</maven.compiler.target>
     <maven.compiler.source>24</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <revision>1.1.9</revision>
+    <revision>1.1.10</revision>
   </properties>
   <build>
     <pluginManagement>
@@ -135,6 +135,8 @@
         <configuration>
           <publishingServerId>central</publishingServerId>
           <tokenAuth>true</tokenAuth>
+          <autoPublish>true</autoPublish>
+          <waitUntil>published</waitUntil>
         </configuration>
       </plugin>
     </plugins>

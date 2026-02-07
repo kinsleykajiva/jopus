@@ -1,4 +1,4 @@
-name: Deploy Jopus to Maven Central
+name: Deploy Jopus-lib to Maven Central
 
 on:
   push:

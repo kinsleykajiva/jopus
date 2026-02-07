@@ -40,11 +40,11 @@ build/
 
 
 ### Native Dependencies (managed by init_deps.sh) ###
-opus-*/
-ogg/
-libopusenc/
-opusfile/
-opus-tools/
-install/
-jopus-natives-*/
+#opus-*/
+#ogg/
+#libopusenc/
+#opusfile/
+#opus-tools/
+#install/
+#jopus-natives-*/
 *.opus

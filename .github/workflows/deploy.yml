@@ -18,7 +18,7 @@ jobs:
           server-id: central
           server-username: GPG_USERNAME
           server-password: GPG_PASSWORD
-          gpg-private-key: ${{ secrets.SETTINGS_KEY }}
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: GPG_PASSPHRASE
 #          server-username: ${{ secrets.GPG_USERNAME }}
 #          server-password: ${{ secrets.GPG_PASSWORD }}

@@ -40,7 +40,7 @@
     </modules>
 
     <properties>
-        <revision>1.1.11</revision>
+        <revision>1.1.12</revision>
         <maven.compiler.source>24</maven.compiler.source>
         <maven.compiler.target>24</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

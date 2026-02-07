@@ -5,11 +5,11 @@
   <parent>
     <groupId>io.github.kinsleykajiva</groupId>
     <artifactId>jopus-parent</artifactId>
-    <version>1.1.10</version>
+    <version>1.1.12</version>
   </parent>
   <groupId>io.github.kinsleykajiva</groupId>
   <artifactId>jopus-demo-app</artifactId>
-  <version>1.1.10</version>
+  <version>1.1.12</version>
   <name>Jopus Demo Application</name>
   <description>Demo application for Jopus library</description>
   <licenses>

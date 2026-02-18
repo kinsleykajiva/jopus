@@ -35,7 +35,7 @@
     <maven.compiler.target>24</maven.compiler.target>
     <maven.compiler.source>24</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <revision>1.1.13</revision>
+    <revision>1.1.14</revision>
   </properties>
   <build>
     <pluginManagement>

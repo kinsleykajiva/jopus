@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jopus Advanced Benchmark Results</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 40px; background: #f8f9fa; color: #333; }
+        .card { background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 30px; }
+        .chart-container { position: relative; height: 500px; width: 100%; }
+        h1 { text-align: center; color: #2c3e50; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: right; }
+        th { background-color: #f2f2f2; }
+        .best { color: #27ae60; font-weight: bold; }
+        .header-row { text-align: left; }
+    </style>
+</head>
+<body>
+    <h1>Jopus: Critical Linker Optimization Analysis</h1>
+
+    <div class="card">
+        <div class="chart-container">
+            <canvas id="perfChart"></canvas>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Detailed Data (Average Time in Microseconds)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th class="header-row">Configuration</th>
+                    <th>Standard (Copy)</th>
+                    <th>Critical (Zero-Copy)</th>
+                    <th>Improvement</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>2.5ms-1ch-16kbps</td><td>48.75</td><td>75.48</td><td>0.65x</td></tr><tr><td>5.0ms-1ch-16kbps</td><td>71.02</td><td>65.49</td><td>1.08x</td></tr><tr><td>10.0ms-1ch-16kbps</td><td>263.61</td><td>231.59</td><td>1.14x</td></tr><tr><td>20.0ms-1ch-16kbps</td><td>415.12</td><td>413.57</td><td>1.00x</td></tr><tr><td>40.0ms-1ch-16kbps</td><td>946.20</td><td>830.06</td><td>1.14x</td></tr><tr><td>60.0ms-1ch-16kbps</td><td>1505.23</td><td>1518.41</td><td>0.99x</td></tr><tr><td>2.5ms-1ch-32kbps</td><td>57.32</td><td>49.84</td><td>1.15x</td></tr><tr><td>5.0ms-1ch-32kbps</td><td>77.35</td><td>72.16</td><td>1.07x</td></tr><tr><td>10.0ms-1ch-32kbps</td><td>263.61</td><td>255.11</td><td>1.03x</td></tr><tr><td>20.0ms-1ch-32kbps</td><td>576.01</td><td>571.00</td><td>1.01x</td></tr><tr><td>40.0ms-1ch-32kbps</td><td>976.43</td><td>816.19</td><td>1.20x</td></tr><tr><td>60.0ms-1ch-32kbps</td><td>1469.46</td><td>1540.52</td><td>0.95x</td></tr><tr><td>2.5ms-1ch-64kbps</td><td>56.61</td><td>52.34</td><td>1.08x</td></tr><tr><td>5.0ms-1ch-64kbps</td><td>76.40</td><td>84.19</td><td>0.91x</td></tr><tr><td>10.0ms-1ch-64kbps</td><td>252.24</td><td>236.46</td><td>1.07x</td></tr><tr><td>20.0ms-1ch-64kbps</td><td>1103.80</td><td>740.07</td><td>1.49x</td></tr><tr><td>40.0ms-1ch-64kbps</td><td>862.73</td><td>903.54</td><td>0.95x</td></tr><tr><td>60.0ms-1ch-64kbps</td><td>1382.00</td><td>1389.17</td><td>0.99x</td></tr><tr><td>2.5ms-2ch-16kbps</td><td>66.31</td><td>63.64</td><td>1.04x</td></tr><tr><td>5.0ms-2ch-16kbps</td><td>108.77</td><td>89.83</td><td>1.21x</td></tr><tr><td>10.0ms-2ch-16kbps</td><td>179.01</td><td>154.62</td><td>1.16x</td></tr><tr><td>20.0ms-2ch-16kbps</td><td>277.71</td><td>275.11</td><td>1.01x</td></tr><tr><td>40.0ms-2ch-16kbps</td><td>511.63</td><td>651.36</td><td>0.79x</td></tr><tr><td>60.0ms-2ch-16kbps</td><td>837.71</td><td>769.95</td><td>1.09x</td></tr><tr><td>2.5ms-2ch-32kbps</td><td>62.46</td><td>54.99</td><td>1.14x</td></tr><tr><td>5.0ms-2ch-32kbps</td><td>85.19</td><td>97.74</td><td>0.87x</td></tr><tr><td>10.0ms-2ch-32kbps</td><td>180.26</td><td>164.87</td><td>1.09x</td></tr><tr><td>20.0ms-2ch-32kbps</td><td>353.84</td><td>288.28</td><td>1.23x</td></tr><tr><td>40.0ms-2ch-32kbps</td><td>578.19</td><td>561.77</td><td>1.03x</td></tr><tr><td>60.0ms-2ch-32kbps</td><td>954.13</td><td>794.29</td><td>1.20x</td></tr><tr><td>2.5ms-2ch-64kbps</td><td>59.44</td><td>52.99</td><td>1.12x</td></tr><tr><td>5.0ms-2ch-64kbps</td><td>93.70</td><td>94.74</td><td>0.99x</td></tr><tr><td>10.0ms-2ch-64kbps</td><td>144.50</td><td>148.57</td><td>0.97x</td></tr><tr><td>20.0ms-2ch-64kbps</td><td>281.65</td><td>274.25</td><td>1.03x</td></tr><tr><td>40.0ms-2ch-64kbps</td><td>564.39</td><td>530.88</td><td>1.06x</td></tr><tr><td>60.0ms-2ch-64kbps</td><td>886.27</td><td>962.95</td><td>0.92x</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('perfChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2.5ms-1ch-16kbps','5.0ms-1ch-16kbps','10.0ms-1ch-16kbps','20.0ms-1ch-16kbps','40.0ms-1ch-16kbps','60.0ms-1ch-16kbps','2.5ms-1ch-32kbps','5.0ms-1ch-32kbps','10.0ms-1ch-32kbps','20.0ms-1ch-32kbps','40.0ms-1ch-32kbps','60.0ms-1ch-32kbps','2.5ms-1ch-64kbps','5.0ms-1ch-64kbps','10.0ms-1ch-64kbps','20.0ms-1ch-64kbps','40.0ms-1ch-64kbps','60.0ms-1ch-64kbps','2.5ms-2ch-16kbps','5.0ms-2ch-16kbps','10.0ms-2ch-16kbps','20.0ms-2ch-16kbps','40.0ms-2ch-16kbps','60.0ms-2ch-16kbps','2.5ms-2ch-32kbps','5.0ms-2ch-32kbps','10.0ms-2ch-32kbps','20.0ms-2ch-32kbps','40.0ms-2ch-32kbps','60.0ms-2ch-32kbps','2.5ms-2ch-64kbps','5.0ms-2ch-64kbps','10.0ms-2ch-64kbps','20.0ms-2ch-64kbps','40.0ms-2ch-64kbps','60.0ms-2ch-64kbps',],
+                datasets: [{
+                    label: 'Standard (µs)',
+                    data: [48.75,71.02,263.61,415.12,946.20,1505.23,57.32,77.35,263.61,576.01,976.43,1469.46,56.61,76.40,252.24,1103.80,862.73,1382.00,66.31,108.77,179.01,277.71,511.63,837.71,62.46,85.19,180.26,353.84,578.19,954.13,59.44,93.70,144.50,281.65,564.39,886.27,],
+                    borderColor: 'rgba(231, 76, 60, 1)',
+                    backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                    fill: true,
+                    tension: 0.1
+                }, {
+                    label: 'Critical (µs)',
+                    data: [75.48,65.49,231.59,413.57,830.06,1518.41,49.84,72.16,255.11,571.00,816.19,1540.52,52.34,84.19,236.46,740.07,903.54,1389.17,63.64,89.83,154.62,275.11,651.36,769.95,54.99,97.74,164.87,288.28,561.77,794.29,52.99,94.74,148.57,274.25,530.88,962.95,],
+                    borderColor: 'rgba(46, 204, 113, 1)',
+                    backgroundColor: 'rgba(46, 204, 113, 0.1)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: { display: true, text: 'Latency Comparison (Lower is Better)' },
+                    tooltip: { mode: 'index', intersect: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: { display: true, text: 'Microseconds (µs)' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

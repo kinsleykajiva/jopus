@@ -1074,6 +1074,9 @@ public class opus_h extends opus_h$shared {
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_encode");
 
         public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
+
+        public static final MethodHandle CRITICAL_HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC,
+                Linker.Option.critical(true));
     }
 
     /**
@@ -1119,6 +1122,31 @@ public class opus_h extends opus_h$shared {
                 traceDowncall("opus_encode", st, pcm, frame_size, data, max_data_bytes);
             }
             return (int) mh$.invokeExact(st, pcm, frame_size, data, max_data_bytes);
+        } catch (Error | RuntimeException ex) {
+            throw ex;
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+
+    /**
+     * Critical version of opus_encode that allows passing on-heap primitive arrays.
+     * Use with caution: the native function must be fast and must not call back
+     * into Java.
+     */
+    public static int opus_encode_critical(MemorySegment st, short[] pcm, int frame_size, byte[] data,
+            int max_data_bytes) {
+        var mh$ = opus_encode.CRITICAL_HANDLE;
+        try {
+            // Using MemorySegment.ofArray ensures efficient access.
+            // When combined with Linker.Option.critical(true), the linker may pass the heap
+            // address directly.
+            if (TRACE_DOWNCALLS) {
+                traceDowncall("opus_encode_critical", st, MemorySegment.ofArray(pcm), frame_size,
+                        MemorySegment.ofArray(data), max_data_bytes);
+            }
+            return (int) mh$.invokeExact(st, MemorySegment.ofArray(pcm), frame_size, MemorySegment.ofArray(data),
+                    max_data_bytes);
         } catch (Error | RuntimeException ex) {
             throw ex;
         } catch (Throwable ex$) {
@@ -1570,6 +1598,9 @@ public class opus_h extends opus_h$shared {
         public static final MemorySegment ADDR = SYMBOL_LOOKUP.findOrThrow("opus_decode");
 
         public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
+
+        public static final MethodHandle CRITICAL_HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC,
+                Linker.Option.critical(true));
     }
 
     /**
@@ -1615,6 +1646,30 @@ public class opus_h extends opus_h$shared {
                 traceDowncall("opus_decode", st, data, len, pcm, frame_size, decode_fec);
             }
             return (int) mh$.invokeExact(st, data, len, pcm, frame_size, decode_fec);
+        } catch (Error | RuntimeException ex) {
+            throw ex;
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+
+    /**
+     * Critical version of opus_decode that allows passing on-heap primitive arrays.
+     * Use with caution: the native function must be fast and must not call back
+     * into Java.
+     */
+    public static int opus_decode_critical(MemorySegment st, byte[] data, int len, short[] pcm, int frame_size,
+            int decode_fec) {
+        var mh$ = opus_decode.CRITICAL_HANDLE;
+        try {
+            if (TRACE_DOWNCALLS) {
+                traceDowncall("opus_decode_critical", st,
+                        (data == null ? MemorySegment.NULL : MemorySegment.ofArray(data)), len,
+                        MemorySegment.ofArray(pcm), frame_size, decode_fec);
+            }
+            // Handle null data (packet loss concealment)
+            MemorySegment dataSeg = (data == null) ? MemorySegment.NULL : MemorySegment.ofArray(data);
+            return (int) mh$.invokeExact(st, dataSeg, len, MemorySegment.ofArray(pcm), frame_size, decode_fec);
         } catch (Error | RuntimeException ex) {
             throw ex;
         } catch (Throwable ex$) {
